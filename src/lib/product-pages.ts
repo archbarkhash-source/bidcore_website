@@ -96,6 +96,14 @@ export const productHref = (slug: ProductSlug) => `/products/${slug}`;
 const explore = (label: string): Cta => ({ label, href: "#capabilities" });
 const pricing: Cta = { label: "View Pricing", href: "/pricing" };
 const demo: Cta = { label: "Request a Demo", href: "/request-demo" };
+/** Only Tender Connect has a free trial; every other product goes through Request a Demo, with the product pre-selected on the form. */
+const DEMO_PRODUCT: Partial<Record<ProductKey, string>> = {
+  "tender-management": "Tender Management",
+  "project-management": "Project Management",
+  procurement: "Procurement Management",
+  "site-management": "Site Operations",
+};
+const demoFor = (key: ProductKey): Cta => ({ label: "Request a Demo", href: `/request-demo?product=${encodeURIComponent(DEMO_PRODUCT[key] ?? "")}` });
 const tenderConnectLive: Cta = { label: "See Tender Connect", href: productHref("tender-connect") };
 
 /** How the free allowance really works (backend/tender_entitlements.py: 7-day company-level trial, then the Tender Connect plan). One place to change if that rule changes. */
@@ -116,16 +124,13 @@ const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
 };
 
 const COMING_SOON_NOTE = (name: string, key: ProductKey): ProductPage["access"] => ({
-  heading: "Start with a 7-day free trial",
-  body: `Sign up for a BidcoreAI account to try ${name} with a 7-day free trial, no credit card required. Pricing is shown after you sign up.`,
+  heading: "See it in a live demo",
+  body: `Request a demo and a Bidcore team member will show you ${name} and share the pricing. The 7-day free trial is for Tender Connect (Starter Lite).`,
   rows: [
-    ["Free trial", "7 days, no credit card"],
-    ["Pricing", "Shown after you sign up"],
+    ["Live demo", "Pick a date and time (IST)"],
+    ["Pricing", "Shared in the demo"],
   ],
-  ctas: [
-    { label: "Sign Up", href: signUpHref(key) },
-    { label: "View Plans", href: "/pricing" },
-  ],
+  ctas: [demoFor(key), { label: "View Plans", href: "/pricing" }],
 });
 
 export const PRODUCT_PAGES: ProductPage[] = [
@@ -368,7 +373,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     ctas: {
       primary: explore("Explore Tender Management"),
-      secondary: { label: "Sign Up", href: signUpHref("tender-management") },
+      secondary: demoFor("tender-management"),
       tertiary: pricing,
     },
     valueProps: [
@@ -469,7 +474,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Sign up for a BidcoreAI account to start a 7-day free trial, no credit card required. Pricing is shown after you sign up.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
       },
       {
         q: "Does it guarantee that I will win a tender?",
@@ -486,8 +491,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     finalCta: {
       heading: "Prepare better bids, starting with Tender Connect",
-      body: "Sign up for a BidcoreAI account to start your 7-day free trial, no credit card required.",
-      ctas: [{ label: "Sign Up", href: signUpHref("tender-management") }, tenderConnectLive, demo],
+      body: "Request a demo and a Bidcore team member will walk you through it.",
+      ctas: [demoFor("tender-management"), tenderConnectLive],
     },
   },
 
@@ -511,7 +516,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     ctas: {
       primary: explore("Explore Project Management"),
-      secondary: { label: "Sign Up", href: signUpHref("project-management") },
+      secondary: demoFor("project-management"),
       tertiary: pricing,
     },
     valueProps: [
@@ -619,7 +624,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Sign up for a BidcoreAI account to start a 7-day free trial, no credit card required. Pricing is shown after you sign up.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
       },
       {
         q: "Which cost models are supported?",
@@ -636,8 +641,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     finalCta: {
       heading: "Plan the project from the same numbers you bid with",
-      body: "Sign up for a BidcoreAI account to start your 7-day free trial, no credit card required.",
-      ctas: [{ label: "Sign Up", href: signUpHref("project-management") }, tenderConnectLive, demo],
+      body: "Request a demo and a Bidcore team member will walk you through it.",
+      ctas: [demoFor("project-management"), tenderConnectLive],
     },
   },
 
@@ -656,7 +661,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     atAGlance: ["Purchase orders from draft to closed", "Procurement log with supplier and lead time", "Change orders against the budget", "Vendor quote references"],
     ctas: {
       primary: explore("Explore Procurement Management"),
-      secondary: { label: "Sign Up", href: signUpHref("procurement") },
+      secondary: demoFor("procurement"),
       tertiary: pricing,
     },
     valueProps: [
@@ -738,7 +743,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Sign up for a BidcoreAI account to start a 7-day free trial, no credit card required. Pricing is shown after you sign up.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
       },
       {
         q: "Can I compare supplier quotations?",
@@ -751,8 +756,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     finalCta: {
       heading: "Start with Tender Connect and grow into procurement",
-      body: "Sign up for a BidcoreAI account to start your 7-day free trial, no credit card required.",
-      ctas: [{ label: "Sign Up", href: signUpHref("procurement") }, tenderConnectLive, demo],
+      body: "Request a demo and a Bidcore team member will walk you through it.",
+      ctas: [demoFor("procurement"), tenderConnectLive],
     },
   },
 
@@ -771,7 +776,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     atAGlance: ["Day-level resource planning with conflicts", "Work packages and work orders", "Subcontractor capacity", "Daily progress reports"],
     ctas: {
       primary: explore("Explore Site Operations"),
-      secondary: { label: "Sign Up", href: signUpHref("site-management") },
+      secondary: demoFor("site-management"),
       tertiary: pricing,
     },
     valueProps: [
@@ -867,7 +872,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Sign up for a BidcoreAI account to start a 7-day free trial, no credit card required. Pricing is shown after you sign up.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
       },
       {
         q: "Can a subcontractor see my work packages?",
@@ -880,8 +885,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ],
     finalCta: {
       heading: "Run the site from the same plan",
-      body: "Sign up for a BidcoreAI account to start your 7-day free trial, no credit card required.",
-      ctas: [{ label: "Sign Up", href: signUpHref("site-management") }, tenderConnectLive, demo],
+      body: "Request a demo and a Bidcore team member will walk you through it.",
+      ctas: [demoFor("site-management"), tenderConnectLive],
     },
   },
 ];

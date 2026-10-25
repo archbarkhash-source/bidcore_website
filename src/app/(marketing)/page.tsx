@@ -365,9 +365,15 @@ function Software() {
                   <Link href={p.href} className="inline-flex items-center gap-1 text-brand-navy hover:text-brand-accent">
                     Learn more <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                  <Link href={signUpHref(p.key)} className="text-brand-accent hover:underline">
-                    Start free trial
-                  </Link>
+                  {p.key === "tender-connect" ? (
+                    <Link href={signUpHref(p.key)} className="text-brand-accent hover:underline">
+                      Start free trial
+                    </Link>
+                  ) : (
+                    <Link href={`/request-demo?product=${encodeURIComponent(p.name)}`} className="text-brand-accent hover:underline">
+                      Request a demo
+                    </Link>
+                  )}
                 </div>
               </div>
             );
