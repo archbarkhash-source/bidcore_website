@@ -394,7 +394,7 @@ function TenderDiscovery({ ok, tenders, publish }: { ok: boolean; tenders: Tende
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Find Your Next Project Opportunity</h2>
-            <p className="mt-2 max-w-2xl text-slate-600">Explore public tender opportunities and discover projects relevant to your business.</p>
+            <p className="mt-2 max-w-2xl text-slate-600">Public tenders are tender packages that EPC companies and general contractors publish openly to receive more quotations. Explore them and find projects relevant to your business.</p>
           </div>
           <div className="flex flex-wrap gap-3">
             <Link href="/tenders" className="rounded-sm bg-brand-navy px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-brand-navy-light">

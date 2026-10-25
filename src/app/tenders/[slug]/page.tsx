@@ -167,7 +167,7 @@ export default async function TenderPage({ params }: { params: Promise<{ slug: s
               )}
               <p className="pt-1 text-xs text-slate-500">
                 {t.submission_mode === "external"
-                  ? "This tender is submitted on the official portal. Bidcore helps you prepare the quotation; you submit it there."
+                  ? "This tender is submitted outside Bidcore. Bidcore helps you prepare the quotation; you submit it the way the publisher asks."
                   : "Submit your quotation through Bidcore Tender Connect."}
               </p>
               <div className="border-t border-slate-100 pt-3 text-center text-sm text-slate-500">

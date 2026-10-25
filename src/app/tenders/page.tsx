@@ -11,7 +11,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Find Construction Tenders on Bidcore",
   description:
-    "Discover construction tenders, review project requirements, prepare quotations, and connect with opportunities through Bidcore Tender Connect.",
+    "Public tenders on Bidcore are tender packages that EPC companies and general contractors publish openly to receive more quotations; they are not government tenders. Browse them and submit your quotation.",
   alternates: { canonical: "/tenders" },
 };
 
@@ -68,8 +68,8 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">Public Tenders</p>
           <h1 className="mt-1 text-3xl font-bold text-brand-navy sm:text-4xl">Find Construction Tenders on Bidcore</h1>
-          <p className="mt-2 max-w-2xl text-slate-600">
-            Discover construction tenders, review project requirements, prepare quotations, and connect with opportunities through Bidcore.
+          <p className="mt-2 max-w-3xl text-slate-600">
+            Public tenders are tender packages that EPC companies and general contractors publish openly to receive more quotations — they are not government tenders.
           </p>
         </div>
       </section>

@@ -235,7 +235,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         icon: FileText,
         title: "Structured Quotation Submission",
         problem: "Quotations sent as ad-hoc files are hard to check and compare.",
-        body: "Prepare item-wise rates against the tender's BOQ, attach supporting documents and submit. For tenders that close on a government portal, prepare here and submit on the official portal yourself, then mark it submitted.",
+        body: "Prepare item-wise rates against the tender's BOQ, attach supporting documents and submit. If the publisher asks for quotations to be submitted outside Bidcore, prepare here, submit as the publisher asks, then mark it submitted.",
         status: "live",
       },
       {
@@ -330,8 +330,8 @@ export const PRODUCT_PAGES: ProductPage[] = [
         a: "Yes. A private tender goes only to the companies you invite and never appears on Bidcore.in. You can also publish a package publicly to reach more contractors.",
       },
       {
-        q: "What about tenders that close on a government portal?",
-        a: "Prepare the complete quotation in Bidcore, submit it on the official portal yourself, then mark it as submitted. Bidcore cannot see the external portal, so it only records the submission after you confirm it.",
+        q: "What if a tender is submitted outside Bidcore?",
+        a: "Prepare the complete quotation in Bidcore, submit it the way the publisher asks, then mark it as submitted. Bidcore cannot see anything outside the platform, so it only records the submission after you confirm it.",
       },
     ],
     finalCta: {

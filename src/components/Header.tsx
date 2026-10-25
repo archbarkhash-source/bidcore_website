@@ -50,7 +50,11 @@ const EXPLORE_GROUPS: NavGroup[] = [
   },
   {
     heading: "Help",
-    links: [{ label: "Help Center", href: "/help" }],
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Help Center", href: "/help" },
+      { label: "FAQ", href: "/faq" },
+    ],
   },
 ];
 
@@ -103,9 +107,9 @@ export default function Header() {
     <>
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center gap-5 px-4 py-3.5 sm:px-6">
-        <Link href="/" className="flex shrink-0 items-center gap-1 text-lg font-bold text-brand-navy">
+        <Link href="/" className="flex shrink-0 items-center gap-2 text-2xl font-bold tracking-tight text-brand-navy">
           {/* eslint-disable-next-line @next/next/no-img-element -- plain img avoids Next's image-optimization cache while this asset is still being iterated on */}
-          <img src="/images/favicon.png" alt="Bidcore" className="h-4 w-4 rounded-md" />
+          <img src="/images/favicon.png" alt="Bidcore" className="h-8 w-8 rounded-lg" />
           Bidcore
         </Link>
 
@@ -136,7 +140,7 @@ export default function Header() {
               </a>
               <Link
                 href={signUpHref("tender-connect", { intent: "publish" })}
-                className="hidden whitespace-nowrap rounded-full border border-brand-navy px-4 py-2 text-sm font-semibold text-brand-navy transition hover:bg-brand-navy hover:text-white lg:inline-block"
+                className="hidden whitespace-nowrap rounded-md border border-brand-navy px-4 py-2 text-sm font-semibold text-brand-navy transition hover:bg-brand-navy hover:text-white lg:inline-block"
               >
                 Publish a tender
               </Link>
@@ -155,7 +159,7 @@ export default function Header() {
               </span>
               <button
                 onClick={signOut}
-                className="hidden rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-brand-navy hover:text-brand-navy sm:inline-block"
+                className="hidden rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-brand-navy hover:text-brand-navy sm:inline-block"
               >
                 Sign Out
               </button>
@@ -163,7 +167,7 @@ export default function Header() {
           )}
           <Link
             href="/request-demo"
-            className="hidden whitespace-nowrap rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-orange-400 lg:inline-block"
+            className="hidden whitespace-nowrap rounded-md bg-orange-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-orange-400 lg:inline-block"
           >
             Request a Demo
           </Link>
