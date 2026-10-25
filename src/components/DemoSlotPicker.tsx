@@ -25,9 +25,9 @@ export default function DemoSlotPicker() {
       <input type="hidden" name="preferredTime" value={time} />
 
       <div className="rounded-lg border border-slate-300 bg-white p-4">
-        <div className="grid items-center gap-5 sm:grid-cols-[6.5rem_minmax(0,1fr)]">
+        <div className="grid items-stretch gap-4 sm:grid-cols-[5.5rem_minmax(0,1fr)]">
           {/* the date card */}
-          <div className="flex h-28 w-full flex-col items-center justify-center rounded-lg border-2 border-orange-400 bg-orange-50 px-2 text-center sm:w-26" aria-live="polite">
+          <div className="flex min-h-28 w-full flex-col items-center justify-center rounded-lg border-2 border-orange-400 bg-orange-50 px-2 text-center" aria-live="polite">
             <span className="text-xs font-bold tracking-wider text-orange-700">{dayName}</span>
             <span className="text-3xl font-bold leading-none text-brand-navy">{d}</span>
             <span className="mt-1 text-xs font-medium text-slate-600">
@@ -61,7 +61,7 @@ export default function DemoSlotPicker() {
               </p>
             )}
             <p className="mt-1 text-xs text-slate-500">
-              Suggested: Tuesday every week, {formatTime12(DEMO_DEFAULT_TIME)} – {formatTime12(DEMO_SUGGEST_END)} IST
+              Suggested: Tuesdays, {formatTime12(DEMO_DEFAULT_TIME)} – {formatTime12(DEMO_SUGGEST_END)} IST
             </p>
           </div>
         </div>

@@ -98,24 +98,38 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
             ))}
           </select>
         </Field>
-        <Field label="Interested in">
-          <select name="interest" defaultValue={initialInterest && DEMO_INTERESTS.includes(initialInterest) ? initialInterest : ""} className={inputClass}>
-            <option value="">Select a product</option>
-            {DEMO_INTERESTS.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
-        </Field>
       </div>
-      <div>
-        <span className="text-sm font-medium text-slate-700">
-          Pick a date &amp; time <span className="text-brand-accent">*</span>
-        </span>
-        <p className="mt-1 text-sm text-slate-600">Choose any day from tomorrow. All times are Indian Standard Time (IST).</p>
-        <div className="mt-3">
-          <DemoSlotPicker />
+      {/* the product and the biggest challenge on the left, the demo slot on the right, so both columns line up */}
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="flex flex-col gap-5">
+          <Field label="Interested in">
+            <select name="interest" defaultValue={initialInterest && DEMO_INTERESTS.includes(initialInterest) ? initialInterest : ""} className={inputClass}>
+              <option value="">Select a product</option>
+              {DEMO_INTERESTS.map((r) => (
+                <option key={r} value={r}>
+                  {r}
+                </option>
+              ))}
+            </select>
+          </Field>
+          <label className="flex flex-1 flex-col">
+            <span className="text-sm font-medium text-slate-700">Your biggest challenge</span>
+            <textarea
+              name="challenge"
+              maxLength={1000}
+              className={`${inputClass} mt-1.5 min-h-28 flex-1 resize-none`}
+              placeholder="For example: finding the right tenders, pricing a BOQ quickly, or keeping site costs under control."
+            />
+          </label>
+        </div>
+        <div>
+          <span className="text-sm font-medium text-slate-700">
+            Pick a date &amp; time <span className="text-brand-accent">*</span>
+          </span>
+          <p className="mt-1 text-sm text-slate-600">Choose any day from tomorrow. All times are Indian Standard Time (IST).</p>
+          <div className="mt-3">
+            <DemoSlotPicker />
+          </div>
         </div>
       </div>
       <Field label="Anything you would like us to know">

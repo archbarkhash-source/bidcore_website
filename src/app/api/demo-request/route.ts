@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
   const role = clean(body.role, 80);
   const interest = clean(body.interest, 80);
   const message = clean(body.message, 2000);
+  const challenge = clean(body.challenge, 1000);
   const preferredDate = clean(body.preferredDate, 10);
   const preferredTime = clean(body.preferredTime, 5);
   const country = clean(body.country, 80);
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
     ["Company", company],
     ["I am a", role || "-"],
     ["Interested in", interest || "-"],
+    ["Biggest challenge", challenge || "-"],
     ["Demo slot (IST)", slotLabel],
     ["Message", message || "-"],
   ];
