@@ -20,11 +20,11 @@ export default function DemoSlotPicker() {
   const timeOk = isDemoTime(time);
 
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="relative">
       <input type="hidden" name="preferredDate" value={date} />
       <input type="hidden" name="preferredTime" value={time} />
 
-      <div className="flex flex-1 flex-col justify-between rounded-lg border border-slate-300 bg-white p-4">
+      <div className="rounded-lg border border-slate-300 bg-white p-4">
         <div className="grid items-stretch gap-4 sm:grid-cols-[5.5rem_minmax(0,1fr)]">
           {/* the date card */}
           <div className="flex min-h-28 w-full flex-col items-center justify-center rounded-lg border-2 border-orange-400 bg-orange-50 px-2 text-center" aria-live="polite">
@@ -78,9 +78,16 @@ export default function DemoSlotPicker() {
           </button>
         </div>
       </div>
+      {/* the calendar opens over the form instead of pushing it down; picking a day closes it */}
       {showCalendar && (
-        <div className="mt-2">
-          <DemoCalendar value={date} onChange={setDate} />
+        <div className="absolute left-0 top-full z-30 mt-2 w-full max-w-sm shadow-2xl">
+          <DemoCalendar
+            value={date}
+            onChange={(iso) => {
+              setDate(iso);
+              setShowCalendar(false);
+            }}
+          />
         </div>
       )}
     </div>

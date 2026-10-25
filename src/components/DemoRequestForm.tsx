@@ -109,24 +109,12 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
           ))}
         </select>
       </Field>
-      {/* the biggest challenge and the demo slot side by side: same top, same height */}
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-        <label className="flex flex-col">
-          <span className="text-sm font-medium text-slate-700">Your biggest challenge</span>
-          <textarea
-            name="challenge"
-            maxLength={1000}
-            className={`${inputClass} mt-1.5 min-h-40 flex-1 resize-none`}
-            placeholder="For example: finding the right tenders, pricing a BOQ quickly, or keeping site costs under control."
-          />
-        </label>
-        <div className="flex flex-col">
-          <span className="text-sm font-medium text-slate-700">
-            Pick a date &amp; time <span className="text-brand-accent">*</span>
-          </span>
-          <div className="mt-1.5 flex flex-1 flex-col">
-            <DemoSlotPicker />
-          </div>
+      <div>
+        <span className="text-sm font-medium text-slate-700">
+          Pick a date &amp; time <span className="text-brand-accent">*</span>
+        </span>
+        <div className="mt-1.5">
+          <DemoSlotPicker />
         </div>
       </div>
       <Field label="Anything you would like us to know">
