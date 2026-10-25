@@ -8,7 +8,9 @@ export const DEMO_MAX_DAYS_AHEAD = 90;
 /** Demo times are always Indian Standard Time (IST, UTC+5:30): the first and last start, on the hour or half hour. */
 export const DEMO_TIME_MIN = "10:00";
 export const DEMO_TIME_MAX = "17:30";
-export const DEMO_DEFAULT_TIME = "11:00";
+export const DEMO_DEFAULT_TIME = "15:30";
+/** The suggested slot is one hour long. */
+export const DEMO_SUGGEST_END = "16:30";
 
 const DAY_MS = 24 * 3600 * 1000;
 
@@ -18,10 +20,14 @@ export const istTodayIso = () => new Date(Date.now() + 5.5 * 3600 * 1000).toISOS
 /** A local calendar date as YYYY-MM-DD. */
 export const toIsoDate = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
-/** The first demo date: the day after `todayIso`. */
+/** The suggested demo day, every week: the first Tuesday after `todayIso`. Any other day can still be chosen. */
+export const DEMO_SUGGEST_DAY = 2;
 export function nextDemoDateIso(todayIso: string): string {
   const [y, m, d] = todayIso.split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
+  const t = new Date(Date.UTC(y, m - 1, d));
+  do t.setUTCDate(t.getUTCDate() + 1);
+  while (t.getUTCDay() !== DEMO_SUGGEST_DAY);
+  return t.toISOString().slice(0, 10);
 }
 
 /** Is `iso` (YYYY-MM-DD) a valid calendar date that is from tomorrow on, after `todayIso` and within the allowed range? Pure, so the server can check what the calendar offered. */
