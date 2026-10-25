@@ -113,7 +113,7 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
         <span className="text-sm font-medium text-slate-700">
           Pick a date &amp; time <span className="text-brand-accent">*</span>
         </span>
-        <p className="mt-1 text-sm text-slate-600">Live demos are on Tuesday and Friday. All times are Indian Standard Time (IST).</p>
+        <p className="mt-1 text-sm text-slate-600">Choose any day from tomorrow. All times are Indian Standard Time (IST).</p>
         <div className="mt-3">
           <DemoSlotPicker />
         </div>

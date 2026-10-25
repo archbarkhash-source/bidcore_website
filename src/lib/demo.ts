@@ -2,9 +2,7 @@
 export const DEMO_ROLES = ["EPC / General Contractor", "Subcontractor", "Developer / Owner", "Consultant / PMC", "Supplier / Manufacturer", "Other"];
 export const DEMO_INTERESTS = ["Tender Connect", "Tender Management", "Project Management", "Procurement Management", "Site Operations", "Marketplace", "Custom solutions / integration", "Not sure yet"];
 
-/** Live demos are given on these weekdays (0 = Sunday): Tuesday and Friday. */
-export const DEMO_DAYS = [2, 5];
-/** How far ahead a demo date can be chosen. */
+/** How far ahead a demo date can be chosen (any day from tomorrow on). */
 export const DEMO_MAX_DAYS_AHEAD = 90;
 
 /** Demo times are always Indian Standard Time (IST, UTC+5:30): the first and last start, on the hour or half hour. */
@@ -20,22 +18,18 @@ export const istTodayIso = () => new Date(Date.now() + 5.5 * 3600 * 1000).toISOS
 /** A local calendar date as YYYY-MM-DD. */
 export const toIsoDate = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 
-/** The first demo day (Tuesday or Friday) after `todayIso`. */
+/** The first demo date: the day after `todayIso`. */
 export function nextDemoDateIso(todayIso: string): string {
   const [y, m, d] = todayIso.split("-").map(Number);
-  const t = new Date(Date.UTC(y, m - 1, d));
-  do t.setUTCDate(t.getUTCDate() + 1);
-  while (!DEMO_DAYS.includes(t.getUTCDay()));
-  return t.toISOString().slice(0, 10);
+  return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
 }
 
-/** Is `iso` (YYYY-MM-DD) a valid calendar date that is a demo day, after `todayIso` and within the allowed range? Pure, so the server can check what the calendar offered. */
+/** Is `iso` (YYYY-MM-DD) a valid calendar date that is from tomorrow on, after `todayIso` and within the allowed range? Pure, so the server can check what the calendar offered. */
 export function isDemoDate(iso: string, todayIso: string): boolean {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
   const [y, m, d] = iso.split("-").map(Number);
   const date = new Date(Date.UTC(y, m - 1, d));
   if (date.getUTCFullYear() !== y || date.getUTCMonth() !== m - 1 || date.getUTCDate() !== d) return false; // e.g. 2026-02-31
-  if (!DEMO_DAYS.includes(date.getUTCDay())) return false;
   const [ty, tm, td] = todayIso.split("-").map(Number);
   const diff = Math.round((date.getTime() - Date.UTC(ty, tm - 1, td)) / DAY_MS);
   return diff >= 1 && diff <= DEMO_MAX_DAYS_AHEAD;

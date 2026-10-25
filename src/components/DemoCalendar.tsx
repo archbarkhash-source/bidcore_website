@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DEMO_DAYS, DEMO_MAX_DAYS_AHEAD, istTodayIso, toIsoDate } from "@/lib/demo";
+import { DEMO_MAX_DAYS_AHEAD, istTodayIso, toIsoDate } from "@/lib/demo";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -13,7 +13,7 @@ const istToday = () => {
   return new Date(y, m - 1, d);
 };
 
-/** A month calendar where only the live-demo days (Tuesday and Friday, from tomorrow on) can be picked. Controlled: the parent holds the chosen date (YYYY-MM-DD). */
+/** A month calendar where any day from tomorrow on can be picked. Controlled: the parent holds the chosen date (YYYY-MM-DD). */
 export default function DemoCalendar({ value, onChange }: { value: string; onChange: (iso: string) => void }) {
   const [today] = useState(istToday);
   const [view, setView] = useState(() => {
@@ -57,17 +57,15 @@ export default function DemoCalendar({ value, onChange }: { value: string; onCha
       </div>
 
       <div className="mt-3 grid grid-cols-7 gap-1 text-center text-[11px] font-medium text-slate-500">
-        {WEEKDAYS.map((d, i) => (
-          <span key={d} className={DEMO_DAYS.includes(i) ? "text-brand-navy" : ""}>
-            {d}
-          </span>
+        {WEEKDAYS.map((d) => (
+          <span key={d}>{d}</span>
         ))}
       </div>
       <div className="mt-1 grid grid-cols-7 gap-1">
         {cells.map((d, i) => {
           if (!d) return <span key={`b${i}`} />;
           const iso = toIsoDate(d);
-          const enabled = DEMO_DAYS.includes(d.getDay()) && d >= first && d <= last;
+          const enabled = d >= first && d <= last;
           const selected = iso === value;
           return (
             <button
@@ -90,7 +88,7 @@ export default function DemoCalendar({ value, onChange }: { value: string; onCha
           );
         })}
       </div>
-      <p className="mt-3 text-xs text-slate-500">Tuesdays and Fridays are available.</p>
+      <p className="mt-3 text-xs text-slate-500">Any day from tomorrow is available.</p>
     </div>
   );
 }

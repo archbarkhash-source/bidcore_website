@@ -16,7 +16,7 @@ export default async function RequestDemoPage({ searchParams }: { searchParams: 
         See how BidcoreAI works for EPC contractors and subcontractors. Tell us a little about your company and the Bidcore team will get in touch.
       </p>
       <p className="mt-3 inline-block rounded-md bg-orange-50 px-3 py-2 text-sm font-medium text-slate-800 ring-1 ring-orange-200">
-        A Bidcore team member is ready to give you a live demo on Tuesday or Friday, at a time you choose (IST).
+        A Bidcore team member is ready to give you a live demo on the date and time you choose (IST).
       </p>
       <div className="mt-8">
         <DemoRequestForm initialInterest={product} />

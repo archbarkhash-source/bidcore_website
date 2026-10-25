@@ -84,7 +84,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I request a demo?",
-    a: "Use the Request a Demo form and pick a date. A Bidcore team member is ready to give you a live demo on Tuesday or Friday.",
+    a: "Use the Request a Demo form and pick a date and time (IST). A Bidcore team member is ready to give you a live demo.",
     link: { label: "Request a demo", href: "/request-demo" },
   },
   {

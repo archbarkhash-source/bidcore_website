@@ -50,9 +50,9 @@ export async function POST(req: NextRequest) {
   if (role && !DEMO_ROLES.includes(role)) return NextResponse.json({ error: "Choose who you are from the list.", field: "role" }, { status: 400 });
   if (interest && !DEMO_INTERESTS.includes(interest)) return NextResponse.json({ error: "Choose a product from the list.", field: "interest" }, { status: 400 });
 
-  // The slot is a date (a Tuesday or Friday from tomorrow, by India's calendar) and a start time in IST.
+  // The slot is a date (any day from tomorrow, by India's calendar) and a start time in IST.
   if (!preferredDate || !isDemoDate(preferredDate, istTodayIso())) {
-    return NextResponse.json({ error: "Live demos are on Tuesdays and Fridays. Choose one of those dates.", field: "preferredDate" }, { status: 400 });
+    return NextResponse.json({ error: "Choose a demo date from tomorrow, within the next 90 days.", field: "preferredDate" }, { status: 400 });
   }
   if (!isDemoTime(preferredTime)) {
     return NextResponse.json({ error: "Choose a demo time between 10:00 AM and 5:30 PM IST, on the hour or half hour.", field: "preferredTime" }, { status: 400 });

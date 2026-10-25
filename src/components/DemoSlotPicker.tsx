@@ -8,7 +8,7 @@ import { DEMO_DEFAULT_TIME, DEMO_TIME_MAX, DEMO_TIME_MIN, formatSlotIst, formatT
 const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const DAYS_SHORT = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-// "Pick a date & time": the next demo day is selected for you, you set a time in IST, and "Find another date" opens the calendar.
+// "Pick a date & time": tomorrow is selected for you, you set a time in IST, and "Find another date" opens the calendar.
 // Every time on this page is Indian Standard Time (IST, UTC+5:30); nothing is converted to the visitor's own time zone.
 export default function DemoSlotPicker() {
   const [date, setDate] = useState(() => nextDemoDateIso(istTodayIso()));
