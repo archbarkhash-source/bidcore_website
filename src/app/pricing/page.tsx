@@ -1,0 +1,41 @@
+import type { Metadata } from "next";
+import PricingPlans from "@/components/PricingPlans";
+
+export const metadata: Metadata = {
+  title: "Plans | Bidcore",
+  description:
+    "Bidcore software plans: Starter Lite (Tender Connect) at ₹5,000 a month, Starter, Pro and Enterprise. Every plan starts with a 7-day free trial, no credit card.",
+  alternates: { canonical: "/pricing" },
+};
+
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bidcore.in";
+
+// Only Starter Lite's price is shown on the website (a fixed figure, not read from the BidcoreAI plans API); a visitor signs up for the 7-day free trial, no credit card,
+// to see the other plans' pricing.
+export default function PricingPage() {
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold text-brand-navy sm:text-4xl">Plans</h1>
+        <p className="mt-3 text-xl font-semibold leading-snug text-brand-navy">
+          AI-Powered End-to-End Construction Solutions
+          <br />
+          On One Integrated Platform
+        </p>
+        <p className="mx-auto mt-3 max-w-xl text-slate-600">
+          Browsing tenders and companies is free. Every plan starts with a 7-day free trial, no credit card required. Sign up to see pricing for the other plans.
+        </p>
+      </div>
+      <div className="mt-10">
+        <PricingPlans />
+      </div>
+      <p className="mt-10 text-center text-sm text-slate-600">
+        Questions about plans? Contact us at{" "}
+        <a href={`mailto:${CONTACT_EMAIL}`} className="font-medium text-brand-accent hover:underline">
+          {CONTACT_EMAIL}
+        </a>
+        .
+      </p>
+    </div>
+  );
+}

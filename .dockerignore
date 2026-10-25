@@ -1,0 +1,15 @@
+node_modules
+.next
+.next-*
+.git
+.github
+.env
+.env.*
+!.env.example
+src/generated
+legacy-backup
+docs
+*.log
+npm-debug.log*
+Dockerfile
+.dockerignore

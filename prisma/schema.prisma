@@ -1,0 +1,454 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Fixed set of business types a company can be classified as. Kept as a
+// plain string (not a Prisma enum) so new types don't require a migration —
+// validated against COMPANY_TYPES in src/lib/data.ts at the app layer.
+
+model State {
+  id   String @id @default(cuid())
+  slug String @unique
+  name String
+
+  cities    City[]
+  companies Company[]
+
+  @@map("states")
+}
+
+model City {
+  id      String @id @default(cuid())
+  slug    String
+  name    String
+  stateId String
+  state   State  @relation(fields: [stateId], references: [id], onDelete: Cascade)
+
+  companies Company[]
+
+  @@unique([stateId, slug])
+  @@map("cities")
+}
+
+model Company {
+  id       String  @id @default(cuid())
+  slug     String
+  name     String
+  stateId  String
+  state    State   @relation(fields: [stateId], references: [id], onDelete: Cascade)
+  // Registry-imported companies only carry a registered address, so the city
+  // link is optional; cityName is the display text either way.
+  cityId   String?
+  city     City?   @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  cityName String?
+
+  // Official company-register details (Ministry of Corporate Affairs).
+  cin                String?   @unique
+  companyStatus      String?
+  listedStatus       String?
+  roc                String?
+  registrationNumber String?
+  companyCategory    String?
+  companySubCategory String?
+  companyClass       String?
+  incorporationDate  DateTime?
+
+  type               String
+  specializations    String[] @default([])
+  sizeRange          String?
+  operatingLocations String[] @default([])
+  website            String?
+  phone              String?
+  email              String?
+  about              String?
+  address            String?
+  founded            Int?
+  projectCount       Int?
+  verified           Boolean  @default(false)
+  claimed            Boolean  @default(false)
+
+  // Companies with neither a website nor a company-domain email are kept for
+  // audit but excluded from the directory (active = false).
+  active         Boolean @default(true)
+  excludedReason String?
+
+  // Set when a member with a matching company-domain email claims the profile.
+  claimedById String?
+  claimedAt   DateTime?
+
+  // ── Marketplace (see docs/marketplace.md) ──────────────────────────────────────────────────────────────────────────
+  // Definitions are deliberately separate and never interchangeable:
+  //   sourceType          where the record came from: registry (MCA import) | imported (admin bulk import) | member (self-registered) | admin
+  //   claimed/claimedById a representative proved control (company-domain e-mail) or an admin approved a claim
+  //   verificationStatus  an admin reviewed evidence and set "verified" (the legacy `verified` flag above is NOT used by the marketplace)
+  //   featured            editorial placement chosen by an admin (not paid, not verification)
+  //   marketplaceStatus   public visibility: unlisted (default) | pending | published | rejected | suspended
+  displayName        String?
+  logoUrl            String?
+  gstin              String?
+  pinCode            String?
+  industries         String[]  @default([])
+  capabilities       String[]  @default([])
+  certifications     String[]  @default([])
+  projectExperience  String?
+  sourceType         String    @default("registry")
+  sourceNote         String?
+  importBatchId      String?
+  contactPublic      Boolean   @default(false)
+  notifyEnquiries    Boolean   @default(true)
+  marketplaceStatus  String    @default("unlisted")
+  marketplaceSlug    String?   @unique
+  publishedAt        DateTime?
+  featured           Boolean   @default(false)
+  verificationStatus String    @default("unverified")
+  verifiedAt         DateTime?
+  verifiedBasis      String?
+  moderationNote     String?
+  normalizedName     String?
+  domain             String?
+
+  listings  MarketplaceListing[]
+  enquiries MarketplaceEnquiry[]
+  claims    CompanyClaim[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([stateId, slug])
+  @@index([active])
+  @@index([type])
+  @@index([stateId, type])
+  @@index([cityId])
+  @@index([name])
+  @@index([marketplaceStatus])
+  @@index([gstin])
+  @@index([domain])
+  @@index([normalizedName])
+  @@map("companies")
+}
+
+// Registered members. Signup is restricted to business-domain emails and
+// unlocks contact details across the directory.
+model User {
+  id          String   @id @default(cuid())
+  name        String
+  email       String   @unique
+  phone       String
+  role        String
+  companyName String
+  city        String?
+  createdAt   DateTime @default(now())
+
+  tenderTrialStartedAt DateTime?
+
+  @@map("users")
+}
+
+// One pending email-verification code per address. The code itself is never
+// stored — only an HMAC of it — and the signup details ride along until the
+// code is confirmed.
+model SignupOtp {
+  email      String   @id
+  codeHash   String
+  payload    Json
+  expiresAt  DateTime
+  attempts   Int      @default(0)
+  lastSentAt DateTime
+
+  @@map("signup_otps")
+}
+
+// Records whose copy to the BidcoreAI India database (contractor_db) has not gone through yet: a member, or a Professionals / Equipment listing.
+// One row per item (`key`, e.g. member:<id> / listing:<id>) - the newest state wins. Retried by /api/contractor-sync/retry; see src/lib/contractor-sync.ts.
+// A saved search that emails the member when a matching public tender is
+// published — the bidcore.in equivalent of a SAM.gov saved-search alert.
+// No sign-up is required: the unsubscribe token in every email is the only
+// management surface, so there is no login-gated "my alerts" page (yet).
+model TenderAlert {
+  id             String    @id @default(cuid())
+  email          String
+  token          String    @unique @default(cuid())
+  keywords       String?
+  state          String?
+  city           String?
+  category       String?
+  active         Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  lastNotifiedAt DateTime?
+
+  @@index([email])
+  @@index([active])
+  @@map("tender_alerts")
+}
+
+model ContractorSyncOutbox {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  path      String
+  payload   Json
+  attempts  Int      @default(0)
+  lastError String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contractor_sync_outbox")
+}
+
+// The company card a member adds from www.bidcore.in ("Add your company info"). Saved here first, then copied (signed) to the BidcoreAI India database
+// (contractor_db.contractor_profiles) and its Contractor_db copy. It is shown publicly only once the company has an active Bidcore subscription.
+model MemberCompany {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  companyName String
+  companyType String?
+  state       String?
+  city        String?
+  trades      String[] @default([])
+  website     String?
+  about       String?
+  listed      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("member_companies")
+}
+
+// A person (site engineer, QA engineer, surveyor ...) or an equipment owner listed under Explore on www.bidcore.in so general contractors and subcontractors
+// can find them. Saved here first, then copied (signed) to the BidcoreAI India database and its Contractor_db copy. The contact details are shown only to
+// signed-in members.
+model MemberListing {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  userId           String
+  kind             String // professional | equipment
+  role             String?
+  name             String
+  headline         String?
+  about            String?
+  state            String?
+  city             String?
+  skills           String[] @default([])
+  experienceYears  Int?
+  availability     String?
+  equipmentDetails String?
+  phone            String?
+  email            String?
+  listed           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([userId, kind])
+  @@index([kind, listed])
+  @@map("member_listings")
+}
+
+// ══ Marketplace ═══════════════════════════════════════════════════════════════════════════════════════════════════════
+// Created in the same database as the registry `Company` table: a marketplace company IS a Company row (no second company table, no second account system).
+
+// Admin-managed, hierarchical. `attributes` is the category-specific specification schema:
+// [{ key, label, type: "text"|"number"|"select", unit?, options?: string[] }]
+model MarketplaceCategory {
+  id          String                @id @default(cuid())
+  slug        String                @unique
+  name        String
+  description String?
+  kind        String                @default("both") // product | service | both
+  parentId    String?
+  parent      MarketplaceCategory?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: SetNull)
+  children    MarketplaceCategory[] @relation("CategoryTree")
+  sortOrder   Int                   @default(0)
+  active      Boolean               @default(true)
+  attributes  Json                  @default("[]")
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  listings MarketplaceListing[]
+
+  @@index([parentId])
+  @@map("marketplace_categories")
+}
+
+// One table for products and services (kind) so moderation, enquiries and search are shared.
+model MarketplaceListing {
+  id               String               @id @default(cuid())
+  slug             String               @unique
+  kind             String // product | service
+  companyId        String
+  company          Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  categoryId       String?
+  category         MarketplaceCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  title            String
+  brand            String?
+  shortDescription String?
+  description      String?
+  specs            Json                 @default("{}") // values for the category's attribute schema
+  applications     String[]             @default([])
+  variants         String[]             @default([])
+  unit             String?
+  moq              String?
+  priceMode        String               @default("on_request") // on_request | indicative
+  priceText        String?
+  supplyLocations  String[]             @default([])
+  availability     String?
+  images           String[]             @default([])
+  documents        Json                 @default("[]") // [{ name, url }]
+  // service-specific
+  scope            String?
+  projectTypes     String[]             @default([])
+  industries       String[]             @default([])
+  capabilities     String[]             @default([])
+  certifications   String[]             @default([])
+  pricingBasis     String?
+  // lifecycle
+  status           String               @default("draft") // draft | pending | published | rejected | archived
+  rejectionReason  String?
+  publishedAt      DateTime?
+  expiresAt        DateTime?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  enquiries MarketplaceEnquiry[]
+
+  @@index([kind, status])
+  @@index([companyId])
+  @@index([categoryId])
+  @@map("marketplace_listings")
+}
+
+model MarketplaceEnquiry {
+  id           String              @id @default(cuid())
+  ref          String              @unique // quoted to the buyer
+  kind         String // product | service | company
+  companyId    String
+  company      Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  listingId    String?
+  listing      MarketplaceListing? @relation(fields: [listingId], references: [id], onDelete: SetNull)
+  userId       String?
+  buyerName    String
+  buyerCompany String?
+  buyerEmail   String
+  buyerPhone   String?
+  quantity     String?
+  unit         String?
+  location     String?
+  projectType  String?
+  timeline     String?
+  message      String
+  status       String              @default("new") // new | responded | in_discussion | converted | closed | spam
+  flagged      Boolean             @default(false)
+  flagReason   String?
+  ipHash       String?
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  respondedAt  DateTime?
+
+  events EnquiryEvent[]
+
+  @@index([companyId, status])
+  @@index([buyerEmail, createdAt])
+  @@index([ipHash, createdAt])
+  @@map("marketplace_enquiries")
+}
+
+model EnquiryEvent {
+  id        String             @id @default(cuid())
+  enquiryId String
+  enquiry   MarketplaceEnquiry @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  type      String // created | status | response | moderation
+  actor     String // buyer | supplier | admin | system
+  actorId   String?
+  body      String?
+  createdAt DateTime           @default(now())
+
+  @@index([enquiryId])
+  @@map("enquiry_events")
+}
+
+model CompanyClaim {
+  id            String    @id @default(cuid())
+  companyId     String
+  company       Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  userId        String
+  method        String // domain | manual
+  roleAtCompany String?
+  evidence      String?
+  status        String    @default("pending") // pending | approved | rejected
+  reviewedById  String?
+  reviewNote    String?
+  createdAt     DateTime  @default(now())
+  reviewedAt    DateTime?
+
+  @@index([status])
+  @@index([companyId])
+  @@map("company_claims")
+}
+
+// Abuse reports, correction requests and removal requests about a company or a listing.
+model MarketplaceReport {
+  id             String    @id @default(cuid())
+  targetType     String // company | listing
+  targetId       String
+  reason         String // incorrect_info | removal_request | spam | abuse | other
+  detail         String?
+  reporterEmail  String?
+  status         String    @default("open") // open | resolved | dismissed
+  resolutionNote String?
+  createdAt      DateTime  @default(now())
+  resolvedAt     DateTime?
+
+  @@index([status])
+  @@map("marketplace_reports")
+}
+
+// Only events the site actually records (a page-view beacon, an enquiry). The dashboard shows nothing else.
+model MarketplaceEvent {
+  id        String   @id @default(cuid())
+  type      String // company_view | listing_view | enquiry
+  companyId String?
+  listingId String?
+  createdAt DateTime @default(now())
+
+  @@index([companyId, type, createdAt])
+  @@index([listingId, type, createdAt])
+  @@map("marketplace_events")
+}
+
+model MarketplaceAudit {
+  id         String   @id @default(cuid())
+  entityType String
+  entityId   String
+  action     String
+  actorId    String?
+  actorEmail String?
+  detail     Json?
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+  @@index([createdAt])
+  @@map("marketplace_audit")
+}
+
+model ImportBatch {
+  id         String   @id @default(cuid())
+  filename   String?
+  sourceNote String
+  actorEmail String?
+  total      Int      @default(0)
+  created    Int      @default(0)
+  skipped    Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  @@map("import_batches")
+}

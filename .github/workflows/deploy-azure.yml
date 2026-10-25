@@ -1,0 +1,49 @@
+name: Deploy bidcore.in to Azure Container Apps
+
+# On every push to main: build the image in Azure Container Registry from this commit, then roll the Container App to it.
+# One-time setup: (1) add the repository secret AZURE_CREDENTIALS (a service principal for the resource group), then
+# (2) add the repository variable AZURE_DEPLOY_ENABLED = true. Until then the job is skipped instead of failing.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-azure
+  cancel-in-progress: false
+
+env:
+  ACR_NAME: bidcoreaiacr
+  IMAGE: bidcore-in-website
+  RESOURCE_GROUP: ollama-rg
+  CONTAINER_APP: bidcore-in-website
+
+jobs:
+  deploy:
+    if: ${{ vars.AZURE_DEPLOY_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Build the image in ACR
+        run: |
+          az acr build \
+            --registry "$ACR_NAME" \
+            --image "$IMAGE:${{ github.sha }}" \
+            --image "$IMAGE:latest" \
+            --build-arg NEXT_PUBLIC_APP_URL=https://app.bidcoreai.com \
+            --build-arg NEXT_PUBLIC_US_SITE_URL=https://www.bidcoreai.com \
+            --build-arg NEXT_PUBLIC_CONTACT_EMAIL=info@bidcore.in \
+            --build-arg SITE_URL=https://www.bidcore.in \
+            .
+
+      - name: Roll the Container App to this image
+        run: |
+          az containerapp update \
+            --name "$CONTAINER_APP" \
+            --resource-group "$RESOURCE_GROUP" \
+            --image "$ACR_NAME.azurecr.io/$IMAGE:${{ github.sha }}"
