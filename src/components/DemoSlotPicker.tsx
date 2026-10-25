@@ -20,11 +20,11 @@ export default function DemoSlotPicker() {
   const timeOk = isDemoTime(time);
 
   return (
-    <div>
+    <div className="flex flex-1 flex-col">
       <input type="hidden" name="preferredDate" value={date} />
       <input type="hidden" name="preferredTime" value={time} />
 
-      <div className="rounded-lg border border-slate-300 bg-white p-4">
+      <div className="flex flex-1 flex-col justify-between rounded-lg border border-slate-300 bg-white p-4">
         <div className="grid items-stretch gap-4 sm:grid-cols-[5.5rem_minmax(0,1fr)]">
           {/* the date card */}
           <div className="flex min-h-28 w-full flex-col items-center justify-center rounded-lg border-2 border-orange-400 bg-orange-50 px-2 text-center" aria-live="polite">
