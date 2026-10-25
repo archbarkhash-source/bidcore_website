@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarDays } from "lucide-react";
 import DemoCalendar from "@/components/DemoCalendar";
 import { DEMO_DEFAULT_TIME, DEMO_SUGGEST_END, DEMO_TIME_MAX, DEMO_TIME_MIN, formatSlotIst, formatTime12, isDemoTime, istTodayIso, nextDemoDateIso } from "@/lib/demo";
@@ -14,13 +14,31 @@ export default function DemoSlotPicker() {
   const [date, setDate] = useState(() => nextDemoDateIso(istTodayIso()));
   const [time, setTime] = useState(DEMO_DEFAULT_TIME);
   const [showCalendar, setShowCalendar] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+
+  // The calendar closes when you click or tap anywhere outside it, or press Escape.
+  useEffect(() => {
+    if (!showCalendar) return;
+    const onDown = (e: MouseEvent | TouchEvent) => {
+      if (root.current && !root.current.contains(e.target as Node)) setShowCalendar(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setShowCalendar(false);
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("touchstart", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("touchstart", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [showCalendar]);
 
   const [y, m, d] = date.split("-").map(Number);
   const dayName = DAYS_SHORT[new Date(Date.UTC(y, m - 1, d)).getUTCDay()];
   const timeOk = isDemoTime(time);
 
   return (
-    <div className="relative">
+    <div ref={root} className="relative">
       <input type="hidden" name="preferredDate" value={date} />
       <input type="hidden" name="preferredTime" value={time} />
 
