@@ -17,7 +17,7 @@ export default function QualificationForm() {
         <h2 className="text-lg font-semibold text-emerald-800">Qualification submitted.</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-emerald-700">
           We&apos;ll review your details and reflect them on your company profile. A fuller
-          qualification workflow — licenses, financials, safety record — rolls out with{" "}
+          qualification workflow, covering licenses, financials and safety record, rolls out with{" "}
           <Link href="/bid-board" className="text-brand-accent hover:underline">
             Bid Board
           </Link>
@@ -82,7 +82,7 @@ export default function QualificationForm() {
             <textarea
               rows={3}
               className={inputClass}
-              placeholder="Project name, location, value — one per line"
+              placeholder="Project name, location and value, one per line"
             />
           </Field>
         </div>

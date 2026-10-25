@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Briefcase, Building2, Wrench } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Explore Bidcore — Companies, Professionals and Equipment",
+  title: "Explore Bidcore: Companies, Professionals and Equipment",
   description: "Find construction companies, site engineers, QA engineers, surveyors and equipment owners across India.",
   alternates: { canonical: "/explore" },
 };
@@ -26,7 +26,7 @@ const CARDS = [
   {
     icon: Wrench,
     title: "Equipment",
-    body: "Excavators, cranes, mixers, survey instruments — from owners and rental companies.",
+    body: "Excavators, cranes, mixers and survey instruments from owners and rental companies.",
     href: "/equipment",
     add: { label: "Add your equipment", href: "/add-listing?kind=equipment" },
   },

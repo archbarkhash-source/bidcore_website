@@ -11,7 +11,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "Find Construction Tenders on Bidcore",
   description:
-    "Public tenders on Bidcore are tender packages that EPC companies and general contractors publish openly to receive more quotations; they are not government tenders. Browse them and submit your quotation.",
+    "General contractors and EPC companies publish tenders publicly on Bidcore to get more quotes for their tender packages. These are not government tenders. Browse them and submit your quotation.",
   alternates: { canonical: "/tenders" },
 };
 
@@ -69,7 +69,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-600">Public Tenders</p>
           <h1 className="mt-1 text-3xl font-bold text-brand-navy sm:text-4xl">Find Construction Tenders on Bidcore</h1>
           <p className="mt-2 max-w-3xl text-slate-600">
-            Public tenders are tender packages that EPC companies and general contractors publish openly to receive more quotations — they are not government tenders.
+            General contractors: publish tenders publicly to get more quotes for your tender packages. These are not government tenders.
           </p>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
             <div className="rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="text-lg font-semibold text-brand-navy">Prepare and submit quotations</h2>
               <p className="mt-1 text-sm text-slate-500">
-                Browsing is free. Every plan starts with a 7-day free trial — no credit card required — then a monthly or yearly plan.
+                Browsing is free. Every plan starts with a 7-day free trial with no credit card required, and then continues on a monthly or yearly plan.
               </p>
               <Link
                 href={signUpHref("tender-connect")}

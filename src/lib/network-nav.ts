@@ -1,4 +1,4 @@
-import { Boxes, Building2, Cable, Compass, HardHat, Landmark, Truck, UserRoundCog, Wrench, type LucideIcon } from "lucide-react";
+import { Boxes, Building2, Cable, HardHat, Landmark, Truck, UserRoundCog, Wrench, type LucideIcon } from "lucide-react";
 
 // Navigation and homepage shortcuts into the Marketplace (src/app/marketplace/*). Category slugs are the marketplace's own (DEFAULT_CATEGORIES in
 // lib/marketplace/constants.ts) - no second taxonomy is defined here. Business types are the `type` filter of /marketplace/companies.
@@ -28,7 +28,6 @@ export const COMPANY_SHORTCUTS: NetworkCategory[] = [
   { label: "Contractors", blurb: "General, civil, building and infrastructure contractors", href: "/marketplace/categories/construction-contractors", icon: HardHat },
   { label: "Suppliers", blurb: "Material and product suppliers", href: "/marketplace/companies?type=Supplier", icon: Truck },
   { label: "Manufacturers", blurb: "Manufacturers of construction products", href: "/marketplace/companies?type=Manufacturer", icon: Building2 },
-  { label: "Consultants", blurb: "Engineering and construction consultants", href: "/marketplace/categories/engineering-consultancy", icon: Compass },
   { label: "Equipment Providers", blurb: "Rental and equipment companies", href: "/marketplace/categories/equipment-rental", icon: Wrench },
   { label: "Service Providers", blurb: "Testing, inspection, surveying and other services", href: "/marketplace/services", icon: UserRoundCog },
 ];

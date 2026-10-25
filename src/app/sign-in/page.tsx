@@ -7,7 +7,7 @@ const COPY: Record<SignUpIntent, { title: string; body: React.ReactNode }> = {
     title: "Add Your Company Details",
     body: (
       <>
-        Free — no payment. Verify your email and mobile number with one-time codes, then list your company on Bidcore and manage its profile — discover companies today, and
+        Free, with no payment. Verify your email and mobile number with one-time codes, then list your company on Bidcore and manage its profile. You can discover companies today, and
         qualify for{" "}
         <Link href="/bid-board" className="text-brand-accent hover:underline">
           Bid Board
@@ -20,13 +20,13 @@ const COPY: Record<SignUpIntent, { title: string; body: React.ReactNode }> = {
     title: "Add Your Details to View Contacts",
     body: (
       <>
-        Free — no payment and no credit card. Add your contact details and verify your email and
+        Free, with no payment and no credit card. Add your contact details and verify your email and
         mobile number with one-time codes to see contact details across the Bidcore directory.
       </>
     ),
   },
   tender: {
-    title: "Start Free — No Credit Card",
+    title: "Start Free, No Credit Card",
     body: (
       <>
         Verify your email, then continue to create your BidcoreAI account. You get a 7-day free
@@ -41,7 +41,7 @@ const PUBLISH_COPY = {
   title: "Publish Your Tender on Bidcore",
   body: (
     <>
-      Verify your email, then create your BidcoreAI account. Once you are in, add your tender to a package, choose Public Tender and publish — it appears on
+      Verify your email, then create your BidcoreAI account. Once you are in, add your tender to a package, choose Public Tender and publish, and it appears on
       Bidcore.in and in Opportunities for every Tender Connect user. No credit card required.
     </>
   ),

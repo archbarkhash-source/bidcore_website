@@ -182,7 +182,7 @@ export default function NearMeFinder() {
         <div className="mt-6">
           <p className="text-sm text-slate-500">
             {results.length} result{results.length === 1 ? "" : "s"} loaded within {radiusKm} km,
-            live from Google — not yet part of the verified Bidcore network.
+            live from Google and are not yet part of the verified Bidcore network.
           </p>
           <div className="mt-3 space-y-3">
             {results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((place) => (
@@ -211,7 +211,7 @@ export default function NearMeFinder() {
             ))}
             {results.length === 0 && (
               <p className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6 text-center text-sm text-slate-500">
-                No results nearby — try a larger radius or a different category.
+                No results nearby. Try a larger radius or a different category.
               </p>
             )}
           </div>

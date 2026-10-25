@@ -118,7 +118,7 @@ export default function TenderInviteForm({ companyName }: { companyName?: string
           placeholder="https://drive.google.com/... (Google Drive, OneDrive, Dropbox)"
         />
         <p className="mt-1.5 text-xs text-slate-500">
-          Files too heavy to attach? Paste a shared link instead — make sure the link is
+          Files too heavy to attach? Paste a shared link instead, and make sure the link is
           viewable by anyone with it.
         </p>
       </Field>

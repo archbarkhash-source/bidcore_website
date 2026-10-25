@@ -55,13 +55,13 @@ function buildDigestEmail(to: string, token: string, tenders: Tender[]) {
   const rows = tenders
     .map((t) => {
       const href = `${SITE_URL}/tenders/${t.slug}`;
-      const where = t.location ? ` — ${t.location}` : "";
+      const where = t.location ? `${t.organization ? ", " : ""}${t.location}` : "";
       const value = formatValue(t.value_inr);
       return `<li style="margin-bottom:12px"><a href="${href}" style="color:#171a20;font-weight:600;text-decoration:none">${t.title}</a><br><span style="color:#64748b;font-size:13px">${t.organization ?? ""}${where}${value ? ` · ${value}` : ""} · Closes ${formatDate(t.closing_date)}</span></li>`;
     })
     .join("");
   const textRows = tenders
-    .map((t) => `- ${t.title} (${t.organization ?? "—"}${t.location ? `, ${t.location}` : ""}) — ${SITE_URL}/tenders/${t.slug}`)
+    .map((t) => `- ${t.title} (${t.organization ?? "organisation not stated"}${t.location ? `, ${t.location}` : ""}): ${SITE_URL}/tenders/${t.slug}`)
     .join("\n");
 
   return {

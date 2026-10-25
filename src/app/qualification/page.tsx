@@ -7,7 +7,7 @@ export default function QualificationPage() {
         Add Your Company Qualification
       </h1>
       <p className="mt-2 text-slate-600">
-        Licenses, certifications and track record — the details that let developers and GCs
+        Licenses, certifications and track record are the details that let developers and GCs
         qualify your company for invitations to bid.
       </p>
 

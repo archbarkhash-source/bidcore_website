@@ -51,7 +51,7 @@ export const KIND_META: Record<ListingKind, { plural: string; singular: string; 
     path: "/equipment",
     roleLabel: "Equipment type",
     roles: EQUIPMENT_TYPES,
-    blurb: "Equipment owners and rental companies — excavators, cranes, mixers, survey instruments and more.",
+    blurb: "Equipment owners and rental companies with excavators, cranes, mixers, survey instruments and more.",
   },
 };
 

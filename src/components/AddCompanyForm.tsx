@@ -173,7 +173,7 @@ export default function AddCompanyForm() {
       </div>
 
       <label className="block text-sm font-medium text-slate-700">
-        Trades / specializations <span className="font-normal text-slate-400">— separated by commas</span>
+        Trades / specializations <span className="font-normal text-slate-400">(separated by commas)</span>
         <input className={input} value={card.trades} onChange={(e) => set("trades", e.target.value)} placeholder="Civil, MEP, Roads & Highways" />
       </label>
 

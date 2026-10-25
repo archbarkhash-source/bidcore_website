@@ -4,7 +4,7 @@ import ListingBrowse from "@/components/ListingBrowse";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Construction Equipment on Bidcore — Owners and Rental Companies",
+  title: "Construction Equipment on Bidcore: Owners and Rental Companies",
   description: "Find excavators, cranes, mixers, survey instruments and other construction equipment from owners and rental companies across India.",
   alternates: { canonical: "/equipment" },
 };

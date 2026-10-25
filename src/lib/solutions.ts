@@ -35,11 +35,11 @@ export const SOLUTIONS: Solution[] = [
     slug: "epc-contractors",
     name: "EPC Contractors",
     summary: "Read tenders, price bids, source subcontractors and run the project.",
-    metaTitle: "Construction Software for EPC Contractors | Bidcore",
-    metaDescription: "Bidcore for EPC contractors in India: tender analysis and Go / No-Go, estimating, subcontractor sourcing, project planning, procurement and site operations.",
+    metaTitle: "Construction Software for EPC Contractors | BidcoreAI",
+    metaDescription: "BidcoreAI for EPC contractors in India: tender analysis and Go / No-Go, estimating, subcontractor sourcing, project planning, procurement and site operations.",
     headline: "Bid, source and deliver EPC projects on one platform",
     intro:
-      "EPC work runs from a tender notice through estimating, subcontractor packages, procurement and site execution. Bidcore connects those steps for Indian EPC contractors, so the numbers and documents do not have to be rebuilt at each stage.",
+      "EPC work runs from a tender notice through estimating, subcontractor packages, procurement and site execution. BidcoreAI connects those steps for Indian EPC contractors, so the numbers and documents do not have to be rebuilt at each stage.",
     items: [
       {
         title: "Read the tender and decide whether to bid",
@@ -67,7 +67,7 @@ export const SOLUTIONS: Solution[] = [
         link: { label: "Procurement and Site Operations", href: SITE },
       },
       {
-        title: "Find suppliers, manufacturers and consultants",
+        title: "Find suppliers and manufacturers",
         body: "Search the marketplace for companies, products and services across India.",
         link: { label: "Marketplace", href: "/marketplace" },
       },
@@ -77,11 +77,11 @@ export const SOLUTIONS: Solution[] = [
     slug: "general-contractors",
     name: "General Contractors",
     summary: "Source subcontractors, price work and keep projects on track.",
-    metaTitle: "Construction Software for General Contractors | Bidcore",
-    metaDescription: "Bidcore for general contractors in India: publish tender packages, compare subcontractor quotations, estimate, schedule and manage projects.",
+    metaTitle: "Construction Software for General Contractors | BidcoreAI",
+    metaDescription: "BidcoreAI for general contractors in India: publish tender packages, compare subcontractor quotations, estimate, schedule and manage projects.",
     headline: "Source subcontractors, price work and run projects in one place",
     intro:
-      "General contractors spend their time on packages: scoping them, finding the right subcontractors, comparing quotations and then tracking the work. Bidcore puts those steps in one workflow.",
+      "General contractors spend their time on packages: scoping them, finding the right subcontractors, comparing quotations and then tracking the work. BidcoreAI puts those steps in one workflow.",
     items: [
       {
         title: "Publish work packages",
@@ -119,11 +119,11 @@ export const SOLUTIONS: Solution[] = [
     slug: "design-build-contractors",
     name: "Design-Build Contractors",
     summary: "Estimate and plan early, and source specialists for the whole package.",
-    metaTitle: "Construction Software for Design-Build Contractors | Bidcore",
-    metaDescription: "Bidcore for design-build contractors in India: early estimating, WBS and scheduling, sourcing specialist subcontractors and consultants, and cost control.",
+    metaTitle: "Construction Software for Design-Build Contractors | BidcoreAI",
+    metaDescription: "BidcoreAI for design-build contractors in India: early estimating, WBS and scheduling, sourcing specialist subcontractors, and cost control.",
     headline: "Estimate, plan and source from concept to construction",
     intro:
-      "Design-build work asks you to price and plan early, then bring in specialist trades and consultants. Bidcore supports the estimating, sourcing, planning and delivery side of that work.",
+      "Design-build work asks you to price and plan early, then bring in specialist trades. BidcoreAI supports the estimating, sourcing, planning and delivery side of that work.",
     items: [
       {
         title: "Price early",
@@ -141,8 +141,8 @@ export const SOLUTIONS: Solution[] = [
         link: { label: "Tender Connect", href: TC },
       },
       {
-        title: "Find consultants and suppliers",
-        body: "Search the marketplace for consultants, architects, suppliers and manufacturers.",
+        title: "Find suppliers and manufacturers",
+        body: "Search the marketplace for suppliers, manufacturers and equipment providers.",
         link: { label: "Marketplace", href: "/marketplace" },
       },
       {
@@ -156,17 +156,17 @@ export const SOLUTIONS: Solution[] = [
         link: { label: "Project Management", href: PM },
       },
     ],
-    note: "Bidcore supports the estimating, sourcing, planning and delivery side of design-build. It is not design or modelling software.",
+    note: "BidcoreAI supports the estimating, sourcing, planning and delivery side of design-build. It is not design or modelling software.",
   },
   {
     slug: "subcontractors",
     name: "Subcontractors",
     summary: "Find work, quote with confidence and run your jobs.",
-    metaTitle: "Construction Software for Subcontractors | Bidcore",
-    metaDescription: "Bidcore for subcontractors in India: discover public tenders, receive invitations, check eligibility, submit quotations and plan crews and jobs.",
+    metaTitle: "Construction Software for Subcontractors | BidcoreAI",
+    metaDescription: "BidcoreAI for subcontractors in India: discover public tenders, receive invitations, check eligibility, submit quotations and plan crews and jobs.",
     headline: "Find work, win bids and run your jobs",
     intro:
-      "Subcontractors need a steady flow of relevant tenders, a quick way to quote, and a clear view of their own crews and jobs. Bidcore covers each of those.",
+      "Subcontractors need a steady flow of relevant tenders, a quick way to quote, and a clear view of their own crews and jobs. BidcoreAI covers each of those.",
     items: [
       {
         title: "Discover tenders",

@@ -48,7 +48,7 @@ export async function GET(req: NextRequest) {
     if (data.status === "INVALID_REQUEST" && pageToken) {
       // The next_page_token can take a couple of seconds to activate.
       return NextResponse.json(
-        { error: "Next page isn't ready yet — try again in a moment." },
+        { error: "Next page isn't ready yet, so please try again in a moment." },
         { status: 429 },
       );
     }

@@ -14,9 +14,9 @@ import { getProductPage } from "@/lib/product-pages";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Bidcore — Construction Software, Company Network and Marketplace for India",
+  title: "Bidcore: Construction Software, Company Network and Marketplace for India",
   description:
-    "Estimate and manage projects with construction software, discover companies and suppliers, promote your products and services, and find public tenders — one platform for construction businesses in India.",
+    "Estimate and manage projects with construction software, discover companies and suppliers, promote your products and services, and find public tenders, all on one platform for construction businesses in India.",
   alternates: { canonical: "/" },
 };
 
@@ -71,8 +71,8 @@ function Hero() {
             On One Integrated Platform
           </p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            Bidcore helps construction businesses estimate and manage projects, discover companies and suppliers, promote their products and services, and connect with
-            business opportunities—all in one platform.
+            BidcoreAI helps construction businesses estimate and manage projects, discover companies and suppliers, promote their products and services, and connect with
+            business opportunities, all in one platform.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -113,7 +113,7 @@ const VALUE_PROPS = [
   {
     icon: Building2,
     title: "Find the Right Connections.",
-    body: "Discover contractors, suppliers, manufacturers, consultants, and service providers, including eligible public business contact information.",
+    body: "Discover contractors, suppliers, manufacturers, and service providers, including eligible public business contact information.",
     cta: { label: "Find Companies", href: "/marketplace/companies" },
   },
   {
@@ -232,7 +232,7 @@ function Directory({ companies }: { companies: Contractor[] }) {
     <section className="bg-[#F6F7F9]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Discover the Construction Business Network</h2>
-        <p className="mt-2 max-w-2xl text-slate-600">Find contractors, suppliers, manufacturers, consultants and service providers for your next project.</p>
+        <p className="mt-2 max-w-2xl text-slate-600">Find contractors, suppliers, manufacturers and service providers for your next project.</p>
 
         <form action="/marketplace/companies" method="get" role="search" className="mt-6 flex max-w-xl flex-col gap-2 sm:flex-row">
           <div className="relative flex-1">
@@ -374,7 +374,7 @@ function Software() {
           })}
         </div>
         <p className="mt-6 text-sm text-slate-500">
-          Software products are Bidcore&apos;s own tools — separate from the third-party products listed in the Marketplace.{" "}
+          Software products are BidcoreAI&apos;s own tools, which are separate from the third-party products listed in the Marketplace.{" "}
           <Link href="/pricing" className="font-medium text-brand-accent hover:underline">
             See the plans
           </Link>
@@ -441,7 +441,7 @@ function ListYourBusiness() {
               List Your Business <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <p className="mt-4 max-w-lg text-xs leading-relaxed text-slate-400">A profile is marked claimed or verified only after the business claims it and Bidcore verifies it — never automatically.</p>
+          <p className="mt-4 max-w-lg text-xs leading-relaxed text-slate-400">A profile is marked claimed or verified only after the business claims it and Bidcore verifies it, and never automatically.</p>
         </div>
         <ul className="space-y-3 rounded-lg border border-white/15 bg-white/5 p-6 text-sm">
           {LIST_BENEFITS.map((b) => (

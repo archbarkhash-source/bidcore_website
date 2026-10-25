@@ -5,7 +5,7 @@ export default function ConnectionsPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <h1 className="text-2xl font-bold text-slate-900">My Connections</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Build your construction network — connect directly with verified companies.
+        Build your construction network and connect directly with verified companies.
       </p>
 
       <div className="mt-6 rounded-lg border border-dashed border-slate-300 bg-white px-6 py-16 text-center">

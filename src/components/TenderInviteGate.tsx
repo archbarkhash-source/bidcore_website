@@ -39,7 +39,7 @@ export default function TenderInviteGate({
     return (
       <GateCard
         title="Tender Connect is a members feature"
-        body="Sign up to publish tenders and invite contractors to bid — your first tender invite is free."
+        body="Sign up to publish tenders and invite contractors to bid. Your first tender invite is free."
       >
         <Link
           href={signUpHref("tender-connect", companySlug ? { company: companySlug } : undefined)}

@@ -22,7 +22,7 @@ export default function ContractorsPage({
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <h1 className="text-2xl font-bold text-slate-900">Contractors</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Find contractors across India — general, civil, structural, MEP and more.
+        Find contractors across India, including general, civil, structural and MEP contractors.
       </p>
 
       <div className="mt-6">

@@ -6,9 +6,9 @@ import { SITE_URL } from "@/lib/bidcore-api";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Bidcore Tender Connect — Find Construction Tenders in India",
+  title: "BidcoreAI Tender Connect: Find Construction Tenders in India",
   description:
-    "Find public construction tenders, prepare quotations and submit them with Bidcore Tender Connect.",
+    "Find public construction tenders, prepare quotations and submit them with BidcoreAI Tender Connect.",
   icons: {
     icon: { url: "/images/favicon.png", type: "image/png" },
   },

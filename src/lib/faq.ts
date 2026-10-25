@@ -10,12 +10,12 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: "What is Bidcore?",
-    a: "Bidcore brings construction software, public tenders, a company directory and a marketplace for products and services together in one platform for construction businesses in India.",
+    a: "Bidcore brings BidcoreAI construction software, public tenders, a company directory and a marketplace for products and services together in one platform for construction businesses in India.",
     link: { label: "Explore the platform", href: "/products" },
   },
   {
     q: "What are public tenders on Bidcore?",
-    a: "A public tender on Bidcore is a tender package that an EPC company or general contractor publishes openly so that more companies can send quotations for it. Public tenders are not government tenders. You can search them by state, city, category and keywords, check your eligibility, prepare item-wise quotations against the tender's BOQ and submit them.",
+    a: "General contractors and EPC companies publish tenders publicly to get more quotes for their tender packages. These are not government tenders. If you are a subcontractor or supplier, you can search them by state, city, category and keywords, check your eligibility, prepare item-wise quotations against the tender's BOQ and submit them.",
     link: { label: "Browse public tenders", href: "/tenders" },
   },
   {
@@ -24,18 +24,18 @@ export const FAQ: FaqItem[] = [
     link: { label: "About Tender Management", href: "/products/tender-management" },
   },
   {
-    q: "Can I use Bidcore for private tenders?",
+    q: "Can I use BidcoreAI for private tenders?",
     a: "Yes. A general contractor can send a work package privately to the companies it invites; a private tender goes only to those companies and never appears on Bidcore.in. The same package can also be published as a public tender to reach more contractors. A tender package must belong to a project before it can be published or sent.",
     link: { label: "About Tender Connect", href: "/products/tender-connect" },
   },
   {
-    q: "Does Bidcore help with the project itself after I win?",
+    q: "Does BidcoreAI help with the project itself after I win?",
     a: "Yes. BidcoreAI Project Management covers the WBS, productivity-based scheduling, budget and cost control, daily progress reports and schedule risk. Procurement Management covers purchase orders, a procurement log and change orders. Site Operations covers resource planning, work packages and subcontractor capacity. Each product page lists what is available and what is still planned.",
     link: { label: "See all software products", href: "/products" },
   },
   {
     q: "Who is Bidcore for?",
-    a: "EPC contractors, general contractors, design-build contractors and subcontractors, and the suppliers, manufacturers and consultants who work with them. Companies that already use other software can also talk to us about a custom solution that integrates it with BidcoreAI.",
+    a: "EPC contractors, general contractors, design-build contractors and subcontractors, and the suppliers and manufacturers who work with them. Companies that already use other software can also talk to us about a custom solution that integrates it with BidcoreAI.",
     link: { label: "Solutions for your business", href: "/solutions" },
   },
   {
@@ -45,7 +45,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "What is the Bidcore Marketplace?",
-    a: "The Marketplace is where construction businesses promote their products and services and where buyers find them: suppliers, manufacturers, equipment providers, consultants and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
+    a: "The Marketplace is where construction businesses promote their products and services and where buyers find them: suppliers, manufacturers, equipment providers and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
     link: { label: "Open the Marketplace", href: "/marketplace" },
   },
   {
@@ -55,7 +55,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I find services or service providers?",
-    a: "Open the Explore menu and choose Find Services for consultants, testing and inspection, surveying and other construction services, or Find Companies to search businesses directly. Open a listing and use Send enquiry to contact the provider.",
+    a: "Open the Explore menu and choose Find Services for testing and inspection, surveying and other construction services, or Find Companies to search businesses directly. Open a listing and use Send enquiry to contact the provider.",
     link: { label: "Find services", href: "/marketplace/services" },
   },
   {
@@ -89,6 +89,6 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Is there a version of BidcoreAI for the United States?",
-    a: "Yes. This site, Bidcore.in, is the India version. Use the country selector in the top bar and choose US to go to the BidcoreAI website for the United States.",
+    a: "Yes. BidcoreAI software is used in both India and the United States. This site, Bidcore.in, serves India. Use the country selector in the top bar and choose US to go to the BidcoreAI website for the United States.",
   },
 ];

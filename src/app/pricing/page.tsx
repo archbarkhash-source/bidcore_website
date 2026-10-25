@@ -4,7 +4,7 @@ import PricingPlans from "@/components/PricingPlans";
 export const metadata: Metadata = {
   title: "Plans | Bidcore",
   description:
-    "Bidcore software plans: Starter Lite (Tender Connect) at ₹5,000 a month, Starter, Pro and Enterprise. Every plan starts with a 7-day free trial, no credit card.",
+    "BidcoreAI software plans: Starter Lite (Tender Connect) at ₹5,000 a month, Starter, Pro and Enterprise. Every plan starts with a 7-day free trial, no credit card.",
   alternates: { canonical: "/pricing" },
 };
 

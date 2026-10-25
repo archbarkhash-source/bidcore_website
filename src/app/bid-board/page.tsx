@@ -49,7 +49,7 @@ export default function BidBoardPage() {
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-slate-600">
             Once the company network reaches critical mass, Bid Board connects GCs, developers
-            and subcontractors through invitation-to-bid workflows — built on the same verified
+            and subcontractors through invitation-to-bid workflows, built on the same verified
             profiles you find today.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

@@ -5,7 +5,7 @@ import { SOLUTIONS } from "@/lib/solutions";
 
 export const metadata: Metadata = {
   title: "Solutions for EPC, General, Design-Build Contractors and Subcontractors | Bidcore",
-  description: "How Bidcore helps EPC contractors, general contractors, design-build contractors and subcontractors in India: tendering, estimating, planning and project delivery.",
+  description: "How BidcoreAI helps EPC contractors, general contractors, design-build contractors and subcontractors in India: tendering, estimating, planning and project delivery.",
   alternates: { canonical: "/solutions" },
 };
 
@@ -15,7 +15,7 @@ export default function SolutionsIndex() {
       <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">Solutions</p>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl">Solutions for every kind of contractor</h1>
       <p className="mt-3 max-w-2xl text-slate-600">
-        Bidcore provides solutions to EPC contractors, general contractors, design-build contractors and subcontractors, and custom solutions that integrate your existing products
+        BidcoreAI provides solutions to EPC contractors, general contractors, design-build contractors and subcontractors, and custom solutions that integrate your existing products
         with BidcoreAI. Choose yours to see how it helps.
       </p>
       <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2">

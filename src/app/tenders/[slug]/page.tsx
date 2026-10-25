@@ -65,7 +65,7 @@ export default async function TenderPage({ params }: { params: Promise<{ slug: s
       {t.amendment_count > 0 && (
         <p className="mt-2 inline-block rounded-md bg-amber-50 px-3 py-1 text-sm text-amber-800">
           Amended {t.amendment_count} time{t.amendment_count === 1 ? "" : "s"}
-          {t.amended_at ? ` — last on ${formatDate(t.amended_at)}` : ""}. Check the latest details before you quote.
+          {t.amended_at ? `, last on ${formatDate(t.amended_at)}` : ""}. Check the latest details before you quote.
         </p>
       )}
 
@@ -141,7 +141,7 @@ export default async function TenderPage({ params }: { params: Promise<{ slug: s
                 Sign up to BidcoreAI Tender Connect to submit the quote
               </p>
               <p className="text-sm text-slate-500">
-                Review eligibility, prepare your pricing and submit — your 7-day free trial covers quotations, no
+                Review eligibility, prepare your pricing and submit. Your 7-day free trial covers quotations, with no
                 credit card required.
               </p>
               <Link
@@ -167,8 +167,8 @@ export default async function TenderPage({ params }: { params: Promise<{ slug: s
               )}
               <p className="pt-1 text-xs text-slate-500">
                 {t.submission_mode === "external"
-                  ? "This tender is submitted outside Bidcore. Bidcore helps you prepare the quotation; you submit it the way the publisher asks."
-                  : "Submit your quotation through Bidcore Tender Connect."}
+                  ? "This tender is submitted outside BidcoreAI. BidcoreAI helps you prepare the quotation; you submit it the way the publisher asks."
+                  : "Submit your quotation through BidcoreAI Tender Connect."}
               </p>
               <div className="border-t border-slate-100 pt-3 text-center text-sm text-slate-500">
                 Already a Tender Connect member?{" "}
@@ -232,7 +232,7 @@ function BidFormSection({ form, next }: { form: TenderBidForm; next: string }) {
         href={signUpHref("tender-connect", { next, intent: "quote" })}
         className="mt-3 inline-block rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent-light"
       >
-        Sign Up to Bidcore Tender Connect to Submit a Quote
+        Sign Up to BidcoreAI Tender Connect to Submit a Quote
       </Link>
     </section>
   );

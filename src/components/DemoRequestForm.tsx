@@ -54,7 +54,7 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
     return (
       <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-8 text-center">
         <CheckCircle2 className="mx-auto h-8 w-8 text-emerald-600" />
-        <h2 className="mt-3 text-lg font-semibold text-emerald-800">Thank you — your request has been sent.</h2>
+        <h2 className="mt-3 text-lg font-semibold text-emerald-800">Thank you, your request has been sent.</h2>
         <p className="mx-auto mt-2 max-w-md text-sm text-emerald-700">The Bidcore team will contact you on the email or phone number you gave.</p>
         <Link href="/" className="mt-5 inline-block rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent-light">
           Back to home

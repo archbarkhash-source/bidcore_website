@@ -49,7 +49,7 @@ const EXPLORE_GROUPS: NavGroup[] = [
     ],
   },
   {
-    heading: "Help",
+    heading: "About & Support",
     links: [
       { label: "About Us", href: "/about" },
       { label: "Help Center", href: "/help" },

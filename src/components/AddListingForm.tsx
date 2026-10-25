@@ -214,13 +214,13 @@ export default function AddListingForm({ initialKind }: { initialKind: ListingKi
             <input inputMode="numeric" className={input + bad("experienceYears")} value={form.experienceYears} onChange={(e) => set("experienceYears", e.target.value.replace(/\D/g, ""))} />
           </label>
           <label className="block text-sm font-medium text-slate-700">
-            Skills <span className="font-normal text-slate-400">— separated by commas</span>
+            Skills <span className="font-normal text-slate-400">(separated by commas)</span>
             <input className={input} value={form.skills} onChange={(e) => set("skills", e.target.value)} placeholder="Billing, Shuttering, AutoCAD" />
           </label>
         </div>
       ) : (
         <label className="block text-sm font-medium text-slate-700">
-          What you have <span className="font-normal text-slate-400">— make, model, capacity, quantity</span>
+          What you have <span className="font-normal text-slate-400">(make, model, capacity, quantity)</span>
           <input className={input} value={form.equipmentDetails} onChange={(e) => set("equipmentDetails", e.target.value)} placeholder="2 × JCB 3DX, 1 × 20 t tipper" maxLength={300} />
         </label>
       )}

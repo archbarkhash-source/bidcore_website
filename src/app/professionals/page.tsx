@@ -4,7 +4,7 @@ import ListingBrowse from "@/components/ListingBrowse";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Professionals on Bidcore — Site Engineers, QA Engineers, Surveyors",
+  title: "Professionals on Bidcore: Site Engineers, QA Engineers, Surveyors",
   description: "Find site engineers, QA / QC engineers, surveyors and other construction professionals open to work across India.",
   alternates: { canonical: "/professionals" },
 };

@@ -28,7 +28,7 @@ export default function MyCompanyPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Your Company Profile</h1>
           <p className="mt-1 text-sm text-slate-500">
-            {company.name} — {city}, {state?.name}
+            {company.name}, {city}, {state?.name}
           </p>
         </div>
         <Link

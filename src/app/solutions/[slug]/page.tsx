@@ -57,7 +57,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <h2 className="text-3xl font-bold tracking-tight text-brand-navy">{s.custom ? s.custom.itemsHeading : `How Bidcore helps ${s.name}`}</h2>
+        <h2 className="text-3xl font-bold tracking-tight text-brand-navy">{s.custom ? s.custom.itemsHeading : `How BidcoreAI helps ${s.name}`}</h2>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {s.items.map((item) => (
             <div key={item.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
@@ -117,7 +117,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
       <section className="bg-brand-navy text-white">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 sm:px-6 md:flex-row md:items-center">
-          <h2 className="max-w-xl text-2xl font-bold tracking-tight sm:text-3xl">See how Bidcore fits the way you work</h2>
+          <h2 className="max-w-xl text-2xl font-bold tracking-tight sm:text-3xl">See how BidcoreAI fits the way you work</h2>
           <div className="flex flex-wrap gap-3">
             <Link href="/request-demo" className="rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
               Request a Demo

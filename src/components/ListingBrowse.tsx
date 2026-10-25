@@ -115,7 +115,7 @@ export default async function ListingBrowse({ kind, searchParams }: { kind: List
           ) : rows.length === 0 ? (
             <div className="rounded-lg border border-slate-200 bg-white p-8 text-center">
               <p className="font-medium text-slate-800">No {meta.plural.toLowerCase()} match these filters yet.</p>
-              <p className="mt-1 text-sm text-slate-500">Be the first to list {kind === "equipment" ? "your equipment" : "yourself"} — it is free.</p>
+              <p className="mt-1 text-sm text-slate-500">Be the first to list {kind === "equipment" ? "your equipment" : "yourself"}. It is free.</p>
               <Link href={`/add-listing?kind=${kind}`} className="mt-4 inline-block rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-white hover:bg-brand-accent-light">
                 Add your {kind === "equipment" ? "equipment" : "profile"}
               </Link>
