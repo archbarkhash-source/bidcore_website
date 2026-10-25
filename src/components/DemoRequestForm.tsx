@@ -3,8 +3,9 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { CheckCircle2 } from "lucide-react";
-import DemoCalendar from "@/components/DemoCalendar";
+import DemoSlotPicker from "@/components/DemoSlotPicker";
 import { DEMO_INTERESTS, DEMO_ROLES } from "@/lib/demo";
+import { COUNTRIES } from "@/lib/roles";
 
 const inputClass =
   "w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10";
@@ -78,6 +79,15 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
         <Field label="Company" required>
           <input required name="company" type="text" autoComplete="organization" className={inputClass} placeholder="Your company" />
         </Field>
+        <Field label="Country" required>
+          <select required name="country" defaultValue="India" className={inputClass}>
+            {COUNTRIES.map((c) => (
+              <option key={c.code} value={c.label}>
+                {c.label}
+              </option>
+            ))}
+          </select>
+        </Field>
         <Field label="I am a">
           <select name="role" defaultValue="" className={inputClass}>
             <option value="">Select who you are</option>
@@ -100,10 +110,12 @@ export default function DemoRequestForm({ initialInterest }: { initialInterest?:
         </Field>
       </div>
       <div>
-        <span className="text-sm font-medium text-slate-700">Preferred demo date</span>
-        <p className="mt-1 text-sm text-slate-600">Choose the day you would like your live demo. Tuesday and Friday are available.</p>
-        <div className="mt-2">
-          <DemoCalendar />
+        <span className="text-sm font-medium text-slate-700">
+          Pick a date &amp; time <span className="text-brand-accent">*</span>
+        </span>
+        <p className="mt-1 text-sm text-slate-600">Live demos are on Tuesday and Friday. All times are Indian Standard Time (IST).</p>
+        <div className="mt-3">
+          <DemoSlotPicker />
         </div>
       </div>
       <Field label="Anything you would like us to know">

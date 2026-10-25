@@ -7,8 +7,27 @@ export const DEMO_DAYS = [2, 5];
 /** How far ahead a demo date can be chosen. */
 export const DEMO_MAX_DAYS_AHEAD = 90;
 
+/** Demo times are always Indian Standard Time (IST, UTC+5:30): the first and last start, on the hour or half hour. */
+export const DEMO_TIME_MIN = "10:00";
+export const DEMO_TIME_MAX = "17:30";
+export const DEMO_DEFAULT_TIME = "11:00";
+
+const DAY_MS = 24 * 3600 * 1000;
+
+/** Today's date in India as YYYY-MM-DD. Computed from UTC arithmetic so the server and every browser agree, whatever their own time zone. */
+export const istTodayIso = () => new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
+
 /** A local calendar date as YYYY-MM-DD. */
 export const toIsoDate = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+
+/** The first demo day (Tuesday or Friday) after `todayIso`. */
+export function nextDemoDateIso(todayIso: string): string {
+  const [y, m, d] = todayIso.split("-").map(Number);
+  const t = new Date(Date.UTC(y, m - 1, d));
+  do t.setUTCDate(t.getUTCDate() + 1);
+  while (!DEMO_DAYS.includes(t.getUTCDay()));
+  return t.toISOString().slice(0, 10);
+}
 
 /** Is `iso` (YYYY-MM-DD) a valid calendar date that is a demo day, after `todayIso` and within the allowed range? Pure, so the server can check what the calendar offered. */
 export function isDemoDate(iso: string, todayIso: string): boolean {
@@ -18,7 +37,23 @@ export function isDemoDate(iso: string, todayIso: string): boolean {
   if (date.getUTCFullYear() !== y || date.getUTCMonth() !== m - 1 || date.getUTCDate() !== d) return false; // e.g. 2026-02-31
   if (!DEMO_DAYS.includes(date.getUTCDay())) return false;
   const [ty, tm, td] = todayIso.split("-").map(Number);
-  const dayMs = 24 * 3600 * 1000;
-  const diff = Math.round((date.getTime() - Date.UTC(ty, tm - 1, td)) / dayMs);
+  const diff = Math.round((date.getTime() - Date.UTC(ty, tm - 1, td)) / DAY_MS);
   return diff >= 1 && diff <= DEMO_MAX_DAYS_AHEAD;
 }
+
+/** A valid start time (HH:MM, 24-hour, IST): on the hour or half hour, between the first and last start. */
+export const isDemoTime = (t: string) => /^([01]\d|2[0-3]):(00|30)$/.test(t) && t >= DEMO_TIME_MIN && t <= DEMO_TIME_MAX;
+
+/** "13:30" -> "1:30 PM" */
+export function formatTime12(t: string): string {
+  const [h, m] = t.split(":").map(Number);
+  return `${((h + 11) % 12) + 1}:${String(m).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`;
+}
+
+/** "Friday, 30 October 2026" for a YYYY-MM-DD date. */
+export function formatDateLong(iso: string): string {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+}
+
+/** "Friday, 30 October 2026, 11:00 AM IST" */
+export const formatSlotIst = (iso: string, t: string) => `${formatDateLong(iso)}, ${formatTime12(t)} IST`;

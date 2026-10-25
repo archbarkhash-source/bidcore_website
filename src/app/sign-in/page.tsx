@@ -30,8 +30,8 @@ const COPY: Record<SignUpIntent, { title: string; body: React.ReactNode }> = {
     body: (
       <>
         Verify your email, then continue to create your BidcoreAI account. You get a 7-day free
-        trial of your plan, no credit card required; after that you choose a monthly or
-        yearly plan.
+        trial of Tender Connect (Starter Lite), no credit card required; after that you choose a
+        monthly or yearly plan.
       </>
     ),
   },

@@ -70,7 +70,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Is browsing free, and what does it cost to use the software?",
-    a: "Browsing tenders and companies is free. Every software plan starts with a 7-day free trial and needs no credit card. You can see plan details on the Plans page and pricing after you sign up.",
+    a: "Browsing tenders and companies is free. Starter Lite (Tender Connect) starts with a 7-day free trial and needs no credit card. You can see plan details on the Plans page, and request a demo to see the pricing of Starter and Pro.",
     link: { label: "View plans", href: "/pricing" },
   },
   {

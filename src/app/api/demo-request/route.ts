@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isValidEmail } from "@/lib/email-domain";
 import { sendMail } from "@/lib/mail";
-import { DEMO_INTERESTS, DEMO_ROLES, isDemoDate } from "@/lib/demo";
+import { DEMO_INTERESTS, DEMO_ROLES, formatSlotIst, isDemoDate, isDemoTime, istTodayIso } from "@/lib/demo";
+import { COUNTRIES } from "@/lib/roles";
 import { allow } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
@@ -9,8 +10,10 @@ export const dynamic = "force-dynamic";
 const clean = (v: unknown, max = 500) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c] as string);
 
-// "Request a Demo": the details go by e-mail to the Bidcore team (TO_EMAIL, else the public contact address). Nothing is stored here and no confirmation is sent
-// to the requester, so the form cannot be used to mail third parties.
+// "Request a Demo": the details go by e-mail to the demo inbox (DEMO_TO_EMAIL, default barkha@bidcoreai.com, the same address the BidcoreAI website uses). The mail names
+// the visitor's country as they chose it on the form and the demo slot in IST. Nothing is stored here and no confirmation is sent to the requester, so the form cannot
+// be used to mail third parties.
+const DEMO_INBOX = "barkha@bidcoreai.com";
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
   try {
@@ -35,45 +38,45 @@ export async function POST(req: NextRequest) {
   const interest = clean(body.interest, 80);
   const message = clean(body.message, 2000);
   const preferredDate = clean(body.preferredDate, 10);
+  const preferredTime = clean(body.preferredTime, 5);
+  const country = clean(body.country, 80);
 
-  if (!name || !email || !phone || !company) {
-    return NextResponse.json({ error: "Name, work email, phone and company are required." }, { status: 400 });
+  if (!name || !email || !phone || !company || !country) {
+    return NextResponse.json({ error: "Name, work email, phone, company and country are required." }, { status: 400 });
   }
+  if (!COUNTRIES.some((c) => c.label === country)) return NextResponse.json({ error: "Choose your country from the list.", field: "country" }, { status: 400 });
   if (!isValidEmail(email)) return NextResponse.json({ error: "Enter a valid email address.", field: "email" }, { status: 400 });
   if (phone.replace(/\D/g, "").length < 10) return NextResponse.json({ error: "Enter a valid phone number.", field: "phone" }, { status: 400 });
   if (role && !DEMO_ROLES.includes(role)) return NextResponse.json({ error: "Choose who you are from the list.", field: "role" }, { status: 400 });
   if (interest && !DEMO_INTERESTS.includes(interest)) return NextResponse.json({ error: "Choose a product from the list.", field: "interest" }, { status: 400 });
 
-  // Today's date in India (the team's calendar), not the server's time zone.
-  const todayIst = new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
-  if (preferredDate && !isDemoDate(preferredDate, todayIst)) {
+  // The slot is a date (a Tuesday or Friday from tomorrow, by India's calendar) and a start time in IST.
+  if (!preferredDate || !isDemoDate(preferredDate, istTodayIso())) {
     return NextResponse.json({ error: "Live demos are on Tuesdays and Fridays. Choose one of those dates.", field: "preferredDate" }, { status: 400 });
   }
-  const preferredLabel = preferredDate
-    ? new Date(`${preferredDate}T00:00:00Z`).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })
-    : "";
-
-  const to = process.env.TO_EMAIL || process.env.NEXT_PUBLIC_CONTACT_EMAIL;
-  if (!to) {
-    console.error("[demo-request] no TO_EMAIL / NEXT_PUBLIC_CONTACT_EMAIL configured");
-    return NextResponse.json({ error: "We couldn't send your request right now. Please email us instead." }, { status: 503 });
+  if (!isDemoTime(preferredTime)) {
+    return NextResponse.json({ error: "Choose a demo time between 10:00 AM and 5:30 PM IST, on the hour or half hour.", field: "preferredTime" }, { status: 400 });
   }
+  const slotLabel = formatSlotIst(preferredDate, preferredTime);
+
+  const to = process.env.DEMO_TO_EMAIL || DEMO_INBOX;
 
   const rows: [string, string][] = [
     ["Name", name],
+    ["Country", `${country} (chosen by the visitor on the form)`],
     ["Work email", email],
     ["Phone", phone],
     ["Company", company],
     ["I am a", role || "-"],
     ["Interested in", interest || "-"],
-    ["Preferred demo date", preferredLabel || "-"],
+    ["Demo slot (IST)", slotLabel],
     ["Message", message || "-"],
   ];
   try {
     await sendMail({
       to,
       replyTo: email,
-      subject: `Demo request: ${company} (${interest || "not specified"})`,
+      subject: `Demo request from ${country}: ${company} (${interest || "not specified"})`,
       text: rows.map(([k, v]) => `${k}: ${v}`).join("\n"),
       html: `<h2>Demo request</h2><table cellpadding="6">${rows.map(([k, v]) => `<tr><td><b>${esc(k)}</b></td><td>${esc(v).replace(/\n/g, "<br>")}</td></tr>`).join("")}</table>`,
     });

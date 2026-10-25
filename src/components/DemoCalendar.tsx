@@ -2,20 +2,26 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { DEMO_DAYS, DEMO_MAX_DAYS_AHEAD, toIsoDate } from "@/lib/demo";
+import { DEMO_DAYS, DEMO_MAX_DAYS_AHEAD, istTodayIso, toIsoDate } from "@/lib/demo";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-const startOfDay = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+/** The calendar's "today" is India's date, so it matches what the server accepts. A local-midnight Date that carries that calendar day. */
+const istToday = () => {
+  const [y, m, d] = istTodayIso().split("-").map(Number);
+  return new Date(y, m - 1, d);
+};
 
-/** A month calendar where only the live-demo days (Tuesday and Friday, from tomorrow on) can be picked. Writes the choice into the form as `preferredDate` (YYYY-MM-DD). */
-export default function DemoCalendar() {
-  const [today] = useState(() => startOfDay(new Date()));
-  const [view, setView] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
-  const [picked, setPicked] = useState("");
+/** A month calendar where only the live-demo days (Tuesday and Friday, from tomorrow on) can be picked. Controlled: the parent holds the chosen date (YYYY-MM-DD). */
+export default function DemoCalendar({ value, onChange }: { value: string; onChange: (iso: string) => void }) {
+  const [today] = useState(istToday);
+  const [view, setView] = useState(() => {
+    const [y, m] = (value || toIsoDate(istToday())).split("-").map(Number);
+    return new Date(y, m - 1, 1);
+  });
 
-  const first = new Date(today.getTime() + 24 * 3600 * 1000); // earliest day: tomorrow
+  const first = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1); // earliest day: tomorrow
   const last = new Date(today.getFullYear(), today.getMonth(), today.getDate() + DEMO_MAX_DAYS_AHEAD);
   const canGoBack = view > new Date(today.getFullYear(), today.getMonth(), 1);
   const canGoForward = new Date(view.getFullYear(), view.getMonth() + 1, 1) <= last;
@@ -24,13 +30,8 @@ export default function DemoCalendar() {
   const daysInMonth = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
   const cells: (Date | null)[] = [...Array(lead).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => new Date(view.getFullYear(), view.getMonth(), i + 1))];
 
-  const pickedLabel = picked
-    ? new Date(`${picked}T00:00:00`).toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })
-    : "";
-
   return (
     <div className="rounded-md border border-slate-300 bg-white p-4">
-      <input type="hidden" name="preferredDate" value={picked} />
       <div className="flex items-center justify-between">
         <button
           type="button"
@@ -67,13 +68,13 @@ export default function DemoCalendar() {
           if (!d) return <span key={`b${i}`} />;
           const iso = toIsoDate(d);
           const enabled = DEMO_DAYS.includes(d.getDay()) && d >= first && d <= last;
-          const selected = iso === picked;
+          const selected = iso === value;
           return (
             <button
               key={iso}
               type="button"
               disabled={!enabled}
-              onClick={() => setPicked(selected ? "" : iso)}
+              onClick={() => onChange(iso)}
               aria-pressed={selected}
               aria-label={`${d.toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}${enabled ? "" : " (not available)"}`}
               className={`h-9 rounded-md text-sm transition ${
@@ -89,19 +90,7 @@ export default function DemoCalendar() {
           );
         })}
       </div>
-
-      <p className="mt-3 text-xs text-slate-500" aria-live="polite">
-        {picked ? (
-          <>
-            Selected: <span className="font-semibold text-slate-800">{pickedLabel}</span>{" "}
-            <button type="button" onClick={() => setPicked("")} className="font-medium text-brand-accent hover:underline">
-              Clear
-            </button>
-          </>
-        ) : (
-          "Tuesdays and Fridays are available. Pick a date, or leave it blank and we will suggest one."
-        )}
-      </p>
+      <p className="mt-3 text-xs text-slate-500">Tuesdays and Fridays are available.</p>
     </div>
   );
 }

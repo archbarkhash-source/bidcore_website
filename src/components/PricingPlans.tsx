@@ -63,7 +63,8 @@ const PLANS: Plan[] = [
   },
 ];
 
-// Plans and what they include. Starter Lite shows its price; for every other plan, sign up for the 7-day free trial (no credit card) to see pricing.
+// Plans and what they include. Starter Lite shows its price and is the one plan with a free trial and a Start Free Trial button; Starter and Pro go through Request a Demo,
+// and Enterprise through Request for pricing.
 export default function PricingPlans() {
   return (
     <div>
@@ -87,9 +88,9 @@ export default function PricingPlans() {
                     <span className="text-sm text-slate-500">{plan.price.per}</span>
                   </>
                 ) : (
-                  <span className="text-lg font-bold text-brand-navy">{enterprise ? "Request for pricing" : "Sign up to see pricing"}</span>
+                  <span className="text-lg font-bold text-brand-navy">{enterprise ? "Request for pricing" : "Request a demo to see pricing"}</span>
                 )}
-                {!enterprise && <p className="mt-1 text-xs text-slate-500">7-day free trial · No credit card required</p>}
+                {plan.key === "tender_connect" && <p className="mt-1 text-xs text-slate-500">7-day free trial · No credit card required</p>}
               </div>
 
               <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
@@ -117,10 +118,10 @@ export default function PricingPlans() {
                 </a>
               ) : (
                 <Link
-                  href={signUpHref("tender-connect")}
+                  href={`/request-demo?product=${encodeURIComponent(plan.key === "starter" ? "Tender Management" : "Project Management")}`}
                   className="mt-6 block rounded-full bg-brand-accent px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-brand-accent-light"
                 >
-                  Start Free Trial
+                  Request a Demo
                 </Link>
               )}
             </div>

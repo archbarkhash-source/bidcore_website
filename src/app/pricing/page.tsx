@@ -4,14 +4,14 @@ import PricingPlans from "@/components/PricingPlans";
 export const metadata: Metadata = {
   title: "Plans | Bidcore",
   description:
-    "BidcoreAI software plans: Starter Lite (Tender Connect) at ₹5,000 a month, Starter, Pro and Enterprise. Every plan starts with a 7-day free trial, no credit card.",
+    "BidcoreAI software plans: Starter Lite (Tender Connect) at ₹5,000 a month, Starter, Pro and Enterprise. Starter Lite starts with a 7-day free trial, no credit card. Request a demo for Starter and Pro.",
   alternates: { canonical: "/pricing" },
 };
 
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "info@bidcore.in";
 
-// Only Starter Lite's price is shown on the website (a fixed figure, not read from the BidcoreAI plans API); a visitor signs up for the 7-day free trial, no credit card,
-// to see the other plans' pricing.
+// Only Starter Lite's price is shown on the website (a fixed figure, not read from the BidcoreAI plans API). Starter Lite is the one plan with a 7-day free trial; a visitor
+// requests a demo to see the pricing of Starter and Pro.
 export default function PricingPage() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
@@ -23,7 +23,7 @@ export default function PricingPage() {
           On One Integrated Platform
         </p>
         <p className="mx-auto mt-3 max-w-xl text-slate-600">
-          Browsing tenders and companies is free. Every plan starts with a 7-day free trial, no credit card required. Sign up to see pricing for the other plans.
+          Browsing tenders and companies is free. Starter Lite starts with a 7-day free trial, no credit card required. Request a demo to see pricing for Starter, Pro and Enterprise.
         </p>
       </div>
       <div className="mt-10">
