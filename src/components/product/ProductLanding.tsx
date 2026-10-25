@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ChevronRight } from "lucide-react";
 import { BiddersBoardGraphic } from "@/components/graphics/TenderConnectGraphics";
+import { ProcurementGraphic, ProjectGraphic, SiteGraphic, TenderManagementGraphic } from "@/components/graphics/ProductGraphics";
 import type { Capability, Cta, FeatureStatus, ProductPage, Workflow } from "@/lib/product-pages";
 
 // Shared landing page for every BidcoreAI product. Content lives in lib/product-pages.ts; the site header and footer come from the root layout.
@@ -76,6 +77,14 @@ function Hero({ page }: { page: ProductPage }) {
           <img src={page.screenshot.src} alt={page.screenshot.alt} className="w-full rounded-lg border border-white/15 shadow-xl" />
         ) : page.visual === "tender-connect" ? (
           <BiddersBoardGraphic />
+        ) : page.visual === "tender-management" ? (
+          <TenderManagementGraphic />
+        ) : page.visual === "project-management" ? (
+          <ProjectGraphic />
+        ) : page.visual === "procurement-management" ? (
+          <ProcurementGraphic />
+        ) : page.visual === "site-management" ? (
+          <SiteGraphic />
         ) : (
           <div className="rounded-lg border border-white/15 bg-white/5 p-6">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-400">At a glance</p>

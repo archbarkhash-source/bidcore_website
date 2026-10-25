@@ -75,7 +75,7 @@ export interface ProductPage {
   /** Add a real product screenshot here (in /public/images) to show it in the hero. Leave unset until one exists. */
   screenshot?: { src: string; alt: string };
   /** A product illustration shown in the hero when there is no screenshot. */
-  visual?: "tender-connect";
+  visual?: "tender-connect" | "tender-management" | "project-management" | "procurement-management" | "site-management";
   ctas: { primary: Cta; secondary?: Cta; tertiary?: Cta };
   valueProps: { title: string; body: string }[];
   audiences: { title: string; points: string[] }[];
@@ -355,6 +355,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
   // ────────────────────────────────────────────────────────────────────────────────────────── Tender Management
   {
     slug: "tender-management",
+    visual: "tender-management",
     key: "tender-management",
     name: "BidcoreAI Tender Management",
     availability: "coming-soon",
@@ -499,6 +500,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
   // ───────────────────────────────────────────────────────────────────────────────────────── Project Management
   {
     slug: "project-management",
+    visual: "project-management",
     key: "project-management",
     name: "BidcoreAI Project Management",
     availability: "coming-soon",
@@ -649,6 +651,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
   // ────────────────────────────────────────────────────────────────────────────────────── Procurement Management
   {
     slug: "procurement-management",
+    visual: "procurement-management",
     key: "procurement",
     name: "BidcoreAI Procurement Management",
     availability: "coming-soon",
@@ -764,6 +767,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
   // ───────────────────────────────────────────────────────────────────────────────────────────── Site Operations
   {
     slug: "site-management",
+    visual: "site-management",
     key: "site-management",
     name: "BidcoreAI Site Operations",
     availability: "coming-soon",

@@ -3,18 +3,18 @@ import { CalendarClock, FileSpreadsheet, FileText, Mail, UserPlus } from "lucide
 // Product illustrations for Tender Connect. They are drawings of the screens' structure (tabs, bidder rows, quotation columns, opportunity stages), not screenshots,
 // and use only neutral labels - no real company names, tenders, prices or statistics. Replace with real screenshots when they exist.
 
-function Bar({ w, className = "" }: { w: string; className?: string }) {
+export function Bar({ w, className = "" }: { w: string; className?: string }) {
   return <div className={`h-2.5 rounded-full bg-slate-200 ${className}`} style={{ width: w }} />;
 }
 
-type Tone = "green" | "amber" | "slate" | "blue";
-function Pill({ children, tone }: { children: React.ReactNode; tone: Tone }) {
+export type Tone = "green" | "amber" | "slate" | "blue";
+export function Pill({ children, tone }: { children: React.ReactNode; tone: Tone }) {
   const t = { green: "bg-emerald-50 text-emerald-700", amber: "bg-amber-50 text-amber-700", slate: "bg-slate-100 text-slate-500", blue: "bg-blue-50 text-blue-700" }[tone];
   return <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-medium ${t}`}>{children}</span>;
 }
 
 // A small card floating around the main panel, in the style of the product tour graphics: filled for messages, outlined for documents and dates.
-function Float({ icon: Icon, title, sub, filled, className }: { icon: typeof Mail; title: string; sub: string; filled?: boolean; className: string }) {
+export function Float({ icon: Icon, title, sub, filled, className }: { icon: typeof Mail; title: string; sub: string; filled?: boolean; className: string }) {
   return (
     <div
       className={`absolute hidden items-center gap-2 rounded-md border px-3 py-2 shadow-lg sm:flex ${
@@ -30,7 +30,7 @@ function Float({ icon: Icon, title, sub, filled, className }: { icon: typeof Mai
   );
 }
 
-function Frame({ children }: { children: React.ReactNode }) {
+export function Frame({ children }: { children: React.ReactNode }) {
   return (
     <div aria-hidden className="relative mx-auto w-full max-w-[34rem] px-2 py-8 sm:px-8">
       {children}
