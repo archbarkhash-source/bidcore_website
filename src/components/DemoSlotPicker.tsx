@@ -81,19 +81,16 @@ export default function DemoSlotPicker() {
             <p className="mt-1 text-xs text-slate-500">
               Suggested: Tuesdays, {formatTime12(DEMO_DEFAULT_TIME)} – {formatTime12(DEMO_SUGGEST_END)} IST
             </p>
+            <button
+              type="button"
+              onClick={() => setShowCalendar((v) => !v)}
+              aria-expanded={showCalendar}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-brand-accent hover:underline"
+            >
+              <CalendarDays className="h-4 w-4" />
+              Find another date and time
+            </button>
           </div>
-        </div>
-
-        <div className="mt-4 border-t border-slate-200 pt-3">
-          <button
-            type="button"
-            onClick={() => setShowCalendar((v) => !v)}
-            aria-expanded={showCalendar}
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-brand-accent hover:underline"
-          >
-            <CalendarDays className="h-4 w-4" />
-            Find another date
-          </button>
         </div>
       </div>
       {/* the calendar opens over the form instead of pushing it down; picking a day closes it */}
