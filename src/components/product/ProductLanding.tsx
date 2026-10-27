@@ -33,7 +33,7 @@ function CtaLink({ cta, variant }: { cta: Cta; variant: "solid" | "outline" | "d
     dark: "bg-brand-accent text-white hover:bg-brand-accent-light",
     "ghost-dark": "border border-slate-300 text-brand-navy hover:border-slate-400",
   }[variant];
-  const cls = `inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold uppercase tracking-wider transition ${styles}`;
+  const cls = `w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold uppercase tracking-wider transition ${styles}`;
   const external = /^https?:\/\//.test(cta.href) || cta.href.startsWith("#");
   // Sign-up, sign-in and in-page anchors are full navigations / hash jumps; everything else is a client-side link.
   return external ? (

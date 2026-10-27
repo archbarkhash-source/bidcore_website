@@ -25,14 +25,14 @@ export default function LiveDemoPage() {
             Watch the BidcoreAI India training and demo videos: publishing and pricing tenders, estimating with Indian cost data, planning and running the project.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/request-demo" className="inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
+            <Link href="/request-demo" className="w-full justify-center sm:w-auto inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
               Book a live demo <ArrowRight className="h-4 w-4" />
             </Link>
             <a
               href={PLAYLIST_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10"
+              className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10"
             >
               Open on YouTube <ExternalLink className="h-4 w-4" />
             </a>

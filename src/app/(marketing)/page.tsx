@@ -76,13 +76,13 @@ function Hero() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link href="/request-demo" className="inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
+            <Link href="/request-demo" className="w-full justify-center sm:w-auto inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
               Request a Demo <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/products" className="inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+            <Link href="/products" className="w-full justify-center sm:w-auto inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
               Explore Bidcore
             </Link>
-            <Link href="/live-demo" className="inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+            <Link href="/live-demo" className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
               <PlayCircle className="h-4 w-4" /> Watch Live Demo
             </Link>
           </div>
@@ -210,7 +210,7 @@ function Audiences({ publish }: { publish: string }) {
                     <Link
                       key={c.label}
                       href={c.href}
-                      className={`inline-flex items-center rounded-sm px-5 py-3 text-sm font-semibold uppercase tracking-wider transition ${
+                      className={`w-full justify-center sm:w-auto inline-flex items-center rounded-sm px-5 py-3 text-sm font-semibold uppercase tracking-wider transition ${
                         c.solid ? "bg-white text-brand-navy hover:bg-slate-200" : "border border-white/70 text-white hover:bg-white/10"
                       }`}
                     >
@@ -446,7 +446,7 @@ function ListYourBusiness() {
             Create your company profile, showcase your products and services, and help contractors and procurement teams discover your business.
           </p>
           <div className="mt-7">
-            <Link href={LIST_URL} className="inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
+            <Link href={LIST_URL} className="w-full justify-center sm:w-auto inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
               List Your Business <ArrowRight className="h-4 w-4" />
             </Link>
           </div>

@@ -34,10 +34,10 @@ export default function ProductsIndex() {
               .
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
-              <Link href="/request-demo" className="inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wider text-brand-navy transition hover:bg-slate-200">
+              <Link href="/request-demo" className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wider text-brand-navy transition hover:bg-slate-200">
                 Request a Demo
               </Link>
-              <a href={signUpHref("tender-connect")} className="inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+              <a href={signUpHref("tender-connect")} className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
                 Start free with Tender Connect
               </a>
             </div>

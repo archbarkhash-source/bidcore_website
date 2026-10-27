@@ -25,10 +25,10 @@ export function SolutionHero({
         <h1 className="mt-4 max-w-3xl text-balance text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">{headline}</h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">{intro}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href={primary.href} className="inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
+          <Link href={primary.href} className="w-full justify-center sm:w-auto inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400">
             {primary.label} <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link href={secondary.href} className="inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+          <Link href={secondary.href} className="w-full justify-center sm:w-auto inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
             {secondary.label}
           </Link>
         </div>
