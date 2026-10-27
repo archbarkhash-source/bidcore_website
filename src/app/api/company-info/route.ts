@@ -57,6 +57,9 @@ export async function POST(req: NextRequest) {
     .filter(Boolean)
     .slice(0, 15);
   const listed = body.listed !== false;
+  // The point of contact for tender invites. Their e-mail and mobile are the member's own, verified by one-time codes.
+  const contactName = clean(body.contactName, 120) || null;
+  const designation = clean(body.designation, 100) || null;
 
   if (!companyName) return NextResponse.json({ error: "Enter your company name.", field: "companyName" }, { status: 400 });
   if (companyType && !COMPANY_TYPES.includes(companyType as (typeof COMPANY_TYPES)[number]))
@@ -83,7 +86,8 @@ export async function POST(req: NextRequest) {
   }
 
   const synced = await pushContractor({
-    ...payloadFor({ id: user.id, email: user.email, companyName, role: companyType ?? user.role, city }),
+    ...payloadFor({ id: user.id, email: user.email, companyName, role: companyType ?? user.role, city, name: contactName ?? user.name, phone: user.phone }),
+    contact_designation: designation,
     state,
     trades,
     website,

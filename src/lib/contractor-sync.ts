@@ -18,6 +18,9 @@ export interface SyncPayload {
   trades?: string[];
   website?: string | null;
   about?: string | null;
+  contact_name?: string | null; // who to contact at the company: shown to signed-in BidcoreAI users inviting tenderers, never on the public site
+  contact_designation?: string | null; // that person's designation (Managing Partner, Estimator ...); sent with the contact
+  phone?: string | null;
   listed?: boolean;
 }
 
@@ -48,6 +51,8 @@ interface MemberLike {
   companyName: string;
   role: string;
   city: string | null;
+  name?: string | null;
+  phone?: string | null;
 }
 
 export const payloadFor = (u: MemberLike): SyncPayload => ({
@@ -56,6 +61,8 @@ export const payloadFor = (u: MemberLike): SyncPayload => ({
   company_name: u.companyName,
   company_type: u.role,
   city: u.city,
+  contact_name: u.name ?? null,
+  phone: u.phone ?? null,
 });
 
 async function post(path: string, payload: object): Promise<{ ok: boolean; error?: string }> {

@@ -51,6 +51,7 @@ export default function Footer() {
         { label: "Pricing", href: "/pricing" },
         { label: "Start Free Trial", href: signUpHref("tender-connect") },
         { label: "Request a Demo", href: "/request-demo" },
+        { label: "Watch Live Demo", href: "/live-demo" },
         { label: "Contact sales", href: `mailto:${contactEmail}?subject=${encodeURIComponent("Sales enquiry")}` },
       ],
     },
@@ -82,6 +83,8 @@ export default function Footer() {
         { label: "Help Center", href: "/help" },
         { label: "Contact us", href: `mailto:${contactEmail}` },
         { label: "FAQ", href: "/faq" },
+        // The BidcoreAI (India) Training Videos playlist on YouTube.
+        { label: "Indian Training Videos", href: "https://www.youtube.com/playlist?list=PLNOjSgwlR1aM" },
       ],
     },
   ];
@@ -127,7 +130,7 @@ export default function Footer() {
               {col.links.map((l) => (
                 <li key={l.label}>
                   {isExternal(l.href) ? (
-                    <a href={l.href} className={linkClass}>
+                    <a href={l.href} className={linkClass} {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                       {l.label}
                     </a>
                   ) : (

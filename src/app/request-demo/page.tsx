@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import DemoRequestForm from "@/components/DemoRequestForm";
 
 export const metadata: Metadata = {
@@ -17,6 +18,13 @@ export default async function RequestDemoPage({ searchParams }: { searchParams: 
       </p>
       <p className="mt-3 inline-block rounded-md bg-orange-50 px-3 py-2 text-sm font-medium text-slate-800 ring-1 ring-orange-200">
         A Bidcore team member is ready to give you a live demo on the date and time you choose (IST).
+      </p>
+      <p className="mt-3 text-sm text-slate-600">
+        Want a look first?{" "}
+        <Link href="/live-demo" className="font-medium text-brand-accent hover:underline">
+          Watch the live demo videos
+        </Link>
+        .
       </p>
       <div className="mt-8">
         <DemoRequestForm initialInterest={product} />

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Building2, CheckCircle2, Cpu, MapPin, Search, ShoppingBag } from "lucide-react";
+import { ArrowRight, Building2, CheckCircle2, Cpu, MapPin, PlayCircle, Search, ShoppingBag } from "lucide-react";
 import TenderCard from "@/components/TenderCard";
 import { BiddersBoardGraphic, OpportunityBoardGraphic, QuotationCompareGraphic } from "@/components/graphics/TenderConnectGraphics";
 import { getContractors, getTenders, type Contractor, type Tender } from "@/lib/bidcore-api";
@@ -81,6 +81,9 @@ function Hero() {
             </Link>
             <Link href="/products" className="inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
               Explore Bidcore
+            </Link>
+            <Link href="/live-demo" className="inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+              <PlayCircle className="h-4 w-4" /> Watch Live Demo
             </Link>
           </div>
           <p className="mt-5 text-sm text-slate-300">
