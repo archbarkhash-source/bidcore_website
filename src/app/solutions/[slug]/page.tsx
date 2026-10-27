@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight, CheckCircle2, FileSearch, Plug, Ruler, Sparkles, type LucideIcon } from "lucide-react";
 import { SITE_URL } from "@/lib/bidcore-api";
+import { SolutionCard, SolutionCta, SolutionHero } from "@/components/solutions/SolutionParts";
 import { SOLUTIONS, getSolution } from "@/lib/solutions";
-import { signUpHref } from "@/lib/app-links";
 
 // One statically generated page per audience: /solutions/epc-contractors, /general-contractors, /design-build-contractors, /subcontractors.
 export const dynamicParams = false;
@@ -37,39 +37,18 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <div className="bg-white">
-      <section className="bg-brand-navy text-white">
-        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400 sm:text-sm">{s.custom ? s.custom.eyebrow : `Solutions for ${s.name}`}</p>
-          <h1 className="mt-4 max-w-3xl text-balance text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">{s.headline}</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">{s.intro}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href={s.custom ? s.custom.cta.href : "/request-demo"}
-              className="inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-orange-400"
-            >
-              {s.custom ? s.custom.cta.label : "Request a Demo"} <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link href="/products" className="inline-flex items-center rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
-              Explore Products
-            </Link>
-          </div>
-        </div>
-      </section>
+      <SolutionHero
+        eyebrow={s.custom ? s.custom.eyebrow : `Solutions for ${s.name}`}
+        headline={s.headline}
+        intro={s.intro}
+        primary={s.custom ? { label: s.custom.cta.label, href: s.custom.cta.href } : undefined}
+      />
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <h2 className="text-3xl font-bold tracking-tight text-brand-navy">{s.custom ? s.custom.itemsHeading : `How BidcoreAI helps ${s.name}`}</h2>
         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {s.items.map((item) => (
-            <div key={item.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-navy text-orange-400">
-                <CheckCircle2 className="h-5 w-5" />
-              </span>
-              <h3 className="mt-4 font-semibold text-brand-navy">{item.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{item.body}</p>
-              <Link href={item.link.href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent hover:underline">
-                {item.link.label} <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
+            <SolutionCard key={item.title} icon={CheckCircle2} title={item.title} body={item.body} link={item.link} />
           ))}
         </div>
         {s.note && <p className="mt-6 max-w-3xl text-sm text-slate-500">{s.note}</p>}
@@ -115,19 +94,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      <section className="bg-brand-navy text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-4 py-12 sm:px-6 md:flex-row md:items-center">
-          <h2 className="max-w-xl text-2xl font-bold tracking-tight sm:text-3xl">See how BidcoreAI fits the way you work</h2>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/request-demo" className="rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
-              Request a Demo
-            </Link>
-            <a href={signUpHref("tender-connect")} className="rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-white/10">
-              Start Free Trial
-            </a>
-          </div>
-        </div>
-      </section>
+      <SolutionCta />
     </div>
   );
 }

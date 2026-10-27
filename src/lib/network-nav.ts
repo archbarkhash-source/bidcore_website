@@ -16,6 +16,8 @@ export const MARKETPLACE_LINKS: NavEntry[] = [
   { label: "Find Equipment Providers", href: "/marketplace/categories/equipment-rental" },
   { label: "Marketplace Overview", href: "/marketplace" },
   { label: "List Your Business", href: "/marketplace/list-your-business" },
+  // A separate step from the Marketplace listing: company details for Tender Connect, so EPC companies can find the company and invite it to tender.
+  { label: "Add Your Company Info", href: "/add-company" },
 ];
 
 export interface NetworkCategory extends NavEntry {
