@@ -92,8 +92,14 @@ export async function POST(req: NextRequest) {
     const e = err as { code?: string; responseCode?: number; message?: string };
     console.error("[signup] verification email failed:", e.code, e.responseCode, e.message);
     await db.signupOtp.delete({ where: { email } }).catch(() => {});
+    // A rejected address is the visitor's to fix; a failure on our side (mail login, connection, not configured) is not, so say that instead.
+    const ours = e.code === "EAUTH" || e.code === "ECONNECTION" || e.code === "ETIMEDOUT" || e.code === "ESOCKET" || e.code === "EDNS" || /not configured/i.test(e.message ?? "");
     return NextResponse.json(
-      { error: "We couldn't send the verification email. Check the address and try again." },
+      {
+        error: ours
+          ? "Our email service is not available right now, so we can't send the code. Please try again later or write to info@bidcore.in."
+          : "We couldn't send the verification email. Check the address and try again.",
+      },
       { status: 502 },
     );
   }

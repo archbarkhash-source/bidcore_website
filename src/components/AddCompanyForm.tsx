@@ -339,7 +339,7 @@ export default function AddCompanyForm() {
                   <input
                     required
                     inputMode="numeric"
-                    className={`${input} mt-0 rounded-l-none${bad("phone")}`}
+                    className={`${input.replace("mt-1 ", "")} rounded-l-none${bad("phone")}`}
                     value={contact.phone}
                     onChange={(e) => setContact({ ...contact, phone: e.target.value })}
                     placeholder="10-digit mobile number"
