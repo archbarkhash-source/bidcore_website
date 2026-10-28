@@ -6,7 +6,6 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Menu, Search, UserRound, X } from "lucide-react";
 import { notifySessionChange, useSession } from "@/lib/use-session";
 import { PRODUCTS, appLoginUrl, signUpHref } from "@/lib/app-links";
-import { MARKETPLACE_LINKS } from "@/lib/network-nav";
 import { SOLUTIONS } from "@/lib/solutions";
 import CountrySwitch from "@/components/CountrySwitch";
 
@@ -30,15 +29,13 @@ const PRODUCTS_GROUPS: NavGroup[] = [
   { heading: "Construction software", links: [{ label: "All software products", href: "/products" }, ...PRODUCTS_LINKS] },
 ];
 
-// Marketplace = construction products, materials, equipment and suppliers (not the software above). Every link is an existing page.
-const MARKETPLACE_GROUPS: NavGroup[] = [{ links: MARKETPLACE_LINKS }];
-
-// Explore = find companies and services (the Marketplace menu is for shopping products, suppliers and equipment), plus the people and equipment listings and help.
+// Explore = find contractors, services, vendors, people and equipment, list your own company, and help. (There is no separate Marketplace tab any more: the
+// Marketplace pages are reached from here and from the home page.)
 const EXPLORE_GROUPS: NavGroup[] = [
   {
     heading: "Find",
     links: [
-      { label: "Find Contractors", href: "/marketplace/companies" },
+      { label: "Find Contractors", href: "/companies" },
       { label: "Find Services", href: "/marketplace/services" },
       { label: "Find Vendors", href: "/marketplace/companies?type=Supplier" },
       { label: "Site Engineers", href: "/professionals?role=Site+Engineer" },
@@ -46,6 +43,14 @@ const EXPLORE_GROUPS: NavGroup[] = [
       { label: "Surveyors", href: "/professionals?role=Surveyor" },
       { label: "All Professionals", href: "/professionals" },
       { label: "Equipment", href: "/equipment" },
+    ],
+  },
+  {
+    heading: "List your company",
+    links: [
+      { label: "List Your Business", href: "/marketplace/list-your-business" },
+      // A separate step from the Marketplace listing: company details for Tender Connect, so EPC companies can find the company and invite it to tender.
+      { label: "Add Your Company Info", href: "/add-company" },
     ],
   },
   {
@@ -202,13 +207,6 @@ export default function Header() {
               <Link href="/tenders" className="text-sm font-medium text-slate-700 hover:text-brand-accent">
                 Public Tenders
               </Link>
-              <NavDropdown
-                label="Marketplace"
-                groups={MARKETPLACE_GROUPS}
-                isOpen={openMenu === "Marketplace"}
-                onToggle={() => setOpenMenu(openMenu === "Marketplace" ? null : "Marketplace")}
-                onClose={() => setOpenMenu(null)}
-              />
               <Link href="/pricing" className="text-sm font-medium text-slate-700 hover:text-brand-accent">
                 Pricing
               </Link>
@@ -262,7 +260,6 @@ export default function Header() {
               <MobileLink href="/tenders" onNavigate={() => setMobileOpen(false)}>
                 Public Tenders
               </MobileLink>
-              <MobileGroup title="Marketplace" links={MARKETPLACE_LINKS} onNavigate={() => setMobileOpen(false)} />
               <MobileLink href="/pricing" onNavigate={() => setMobileOpen(false)}>
                 Pricing
               </MobileLink>

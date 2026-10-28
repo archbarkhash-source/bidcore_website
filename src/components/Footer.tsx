@@ -69,7 +69,7 @@ export default function Footer() {
       title: "Explore",
       links: [
         { label: "Public Tenders", href: "/tenders" },
-        { label: "Find Contractors", href: "/marketplace/companies" },
+        { label: "Find Contractors", href: "/companies" },
         { label: "Find Services", href: "/marketplace/services" },
         { label: "Find Vendors", href: "/marketplace/companies?type=Supplier" },
         { label: "Professionals", href: "/professionals" },
