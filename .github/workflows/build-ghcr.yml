@@ -1,7 +1,7 @@
 name: Build bidcore.in image (ghcr)
 
 # Builds the site image on GitHub's runners and pushes it to ghcr.io (free) with the built-in GITHUB_TOKEN. It does NOT deploy: roll the Container App to the new
-# tag with `az containerapp update -n bidcore-in-website -g ollama-rg --image ghcr.io/archbarkhash-source/bidcore-in-website:<sha>` and read it back.
+# tag with `az containerapp update -n bidcore-in-website -g ollama-rg --image ghcr.io/archbarkhash-source/bidcore-site:<sha>` and read it back.
 # (deploy-azure.yml targets the Azure Container Registry, which was deleted; it stays switched off.)
 on:
   push:
@@ -34,6 +34,8 @@ jobs:
             NEXT_PUBLIC_BIDCORE_API_URL=https://bidcoreai-backend.kindfield-e51eccf3.southcentralus.azurecontainerapps.io
             BIDCORE_API_URL=https://bidcoreai-backend.kindfield-e51eccf3.southcentralus.azurecontainerapps.io
             SITE_URL=https://www.bidcore.in
+          # A NEW package name on purpose: `bidcore-in-website` was created by hand (crane copy), so it is not linked to this repository and the built-in
+          # GITHUB_TOKEN may not write to it (denied: write_package). A package this workflow creates is linked to the repo and writable.
           tags: |
-            ghcr.io/archbarkhash-source/bidcore-in-website:${{ github.sha }}
-            ghcr.io/archbarkhash-source/bidcore-in-website:latest
+            ghcr.io/archbarkhash-source/bidcore-site:${{ github.sha }}
+            ghcr.io/archbarkhash-source/bidcore-site:latest
