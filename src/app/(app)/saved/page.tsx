@@ -49,7 +49,7 @@ export default function SavedCompaniesPage() {
                 href="/companies"
                 className="inline-block rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent-light"
               >
-                Find Companies
+                Find Contractors
               </Link>
             </div>
           </div>

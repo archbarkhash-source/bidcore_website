@@ -40,7 +40,7 @@ export default async function CompanyProfilePage({
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-slate-500">
         <Link href="/companies" className="hover:text-brand-navy">
-          Find Companies
+          Find Contractors
         </Link>{" "}
         /{" "}
         <Link href={`/states/${state.slug}`} className="hover:text-brand-navy">

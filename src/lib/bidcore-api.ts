@@ -69,6 +69,9 @@ export interface Contractor {
   trades: string[];
   website: string | null;
   about?: string | null;
+  // Bidcore directory companies only: the contact MASKED (the real values need a signed-in member, see DirectoryContact).
+  contact?: { available: boolean; phone: string | null; email: string | null; address: string | null };
+  verified_on?: string | null;
 }
 
 export interface PublicPlan {

@@ -117,7 +117,7 @@ const VALUE_PROPS = [
     icon: Building2,
     title: "Find the Right Connections.",
     body: "Discover contractors, suppliers, manufacturers, and service providers, including eligible public business contact information.",
-    cta: { label: "Find Companies", href: "/marketplace/companies" },
+    cta: { label: "Find Contractors", href: "/marketplace/companies" },
   },
   {
     icon: ShoppingBag,
@@ -247,7 +247,7 @@ function Directory({ companies }: { companies: Contractor[] }) {
               className="w-full rounded-sm border border-slate-300 bg-white py-3 pl-9 pr-3 text-sm outline-none focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10"
             />
           </div>
-          <button className="rounded-sm bg-brand-navy px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-brand-navy-light">Find Companies</button>
+          <button className="rounded-sm bg-brand-navy px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-brand-navy-light">Find Contractors</button>
         </form>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

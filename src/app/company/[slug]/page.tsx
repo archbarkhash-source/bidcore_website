@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Globe, MapPin } from "lucide-react";
+import DirectoryContact from "@/components/DirectoryContact";
 import { getContractor } from "@/lib/bidcore-api";
 
 export const revalidate = 300;
@@ -13,7 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: `${res.data.name} | Bidcore`, description: res.data.about?.slice(0, 180) ?? `${res.data.name} on Bidcore`, alternates: { canonical: `/company/${slug}` } };
 }
 
-// A company with an active Bidcore subscription. Only the public card is shown: no phone, e-mail or other contact details.
+// A company with an active Bidcore subscription, or a Bidcore directory company. The public card never carries real contact details: a directory company's
+// contact arrives masked and is opened by a signed-in member (DirectoryContact).
 export default async function CompanyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const res = await getContractor(slug);
@@ -55,6 +57,11 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
         </div>
       )}
       {c.about && <p className="mt-6 whitespace-pre-line leading-relaxed text-slate-700">{c.about}</p>}
+      {c.contact?.available && (
+        <div className="mt-8">
+          <DirectoryContact slug={slug} masked={{ phone: c.contact.phone, email: c.contact.email, address: c.contact.address }} />
+        </div>
+      )}
     </div>
   );
 }

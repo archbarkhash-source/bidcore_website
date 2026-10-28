@@ -38,7 +38,7 @@ const EXPLORE_GROUPS: NavGroup[] = [
   {
     heading: "Find",
     links: [
-      { label: "Find Companies", href: "/marketplace/companies" },
+      { label: "Find Contractors", href: "/marketplace/companies" },
       { label: "Find Services", href: "/marketplace/services" },
       { label: "Find Vendors", href: "/marketplace/companies?type=Supplier" },
       { label: "Site Engineers", href: "/professionals?role=Site+Engineer" },

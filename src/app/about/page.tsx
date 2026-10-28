@@ -35,7 +35,7 @@ const ECOSYSTEM = [
     icon: Building2,
     title: "Company Directory",
     body: "Find construction companies, EPC contractors, subcontractors, and professional service providers to build valuable business connections.",
-    cta: { label: "Find Companies", href: "/marketplace/companies" },
+    cta: { label: "Find Contractors", href: "/marketplace/companies" },
   },
 ];
 

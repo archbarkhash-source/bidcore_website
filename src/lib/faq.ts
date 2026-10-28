@@ -41,7 +41,7 @@ export const FAQ: FaqItem[] = [
   {
     q: "How do I find suppliers or subcontractors for a package?",
     a: "Publish the package on Tender Connect to invite subcontractors privately or openly, and compare their item-wise quotations side by side. To look for companies, suppliers and manufacturers, or for construction products and services, use the Marketplace.",
-    link: { label: "Find companies", href: "/marketplace/companies" },
+    link: { label: "Find contractors", href: "/marketplace/companies" },
   },
   {
     q: "What is the Bidcore Marketplace?",
@@ -55,7 +55,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I find services or service providers?",
-    a: "Open the Explore menu and choose Find Services for testing and inspection, surveying and other construction services, or Find Companies to search businesses directly. Open a listing and use Send enquiry to contact the provider.",
+    a: "Open the Explore menu and choose Find Services for testing and inspection, surveying and other construction services, or Find Contractors to search businesses directly. Open a listing and use Send enquiry to contact the provider.",
     link: { label: "Find services", href: "/marketplace/services" },
   },
   {
