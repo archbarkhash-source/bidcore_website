@@ -3,9 +3,8 @@ name: Build bidcore.in image (ghcr)
 # Builds the site image on GitHub's runners and pushes it to ghcr.io (free) with the built-in GITHUB_TOKEN. It does NOT deploy: roll the Container App to the new
 # tag with `az containerapp update -n bidcore-in-website -g ollama-rg --image ghcr.io/archbarkhash-source/bidcore-site:<sha>` and read it back.
 # (deploy-azure.yml targets the Azure Container Registry, which was deleted; it stays switched off.)
+# bidcore.in is now deployed by Vercel from this repository (every push to main), so this image build only runs when started by hand.
 on:
-  push:
-    branches: [main]
   workflow_dispatch: {}
 
 jobs:
