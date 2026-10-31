@@ -38,10 +38,31 @@ export const DIRECTORY_PRODUCTS = new Set(["bidcore-india", "bidcore-tender-conn
 
 export const TOKEN_HOURS = 24; // an access token lives one day; the program activates again (and is re-checked for revocation and expiry) after that
 export const DIRECTORY_PAGE_MAX = 500;
+export const TRIAL_DAYS = 30; // the server-recorded trial of an installed program without a licence (same length as the program's own trial)
 export const LIMITS = {
   activatePerIpPerHour: 30,
   activatePerLicencePerHour: 20,
   directoryPerActivationPerHour: 120,
+  trialsPerIpPerDay: 5,
+  // invitations sent by bidcore.in on behalf of a company account
+  invitationsPerDayLicence: 200,
+  invitationsPerDayTrial: 20,
+  invitationsPerTender: 300,
+  // software calls per computer per hour
+  tenderWritesPerHour: 300,
+  responsesPerHour: 240,
+  messagesPerHour: 120,
+  // files (Neon free plan: 1 GB per project - keep tender files well inside it)
+  chunkBytes: 4 * 1024 * 1024,
+  fileBytesMax: 15 * 1024 * 1024,
+  tenderFilesBytesMax: 40 * 1024 * 1024,
+  bidFilesBytesMax: 20 * 1024 * 1024,
+  tenantFilesBytesMax: 300 * 1024 * 1024,
+  // contractor portal
+  codeSendsPerInvitationPerHour: 5,
+  codeAttempts: 5,
+  portalHours: 12,
+  abuseReportsToSuspend: 3,
 };
 
 export interface LicencePayload {
