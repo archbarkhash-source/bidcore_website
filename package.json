@@ -15,7 +15,9 @@
     "test:directory": "tsx --test scripts/directory.test.ts",
     "directory:import": "tsx scripts/directory-import.ts",
     "requests": "tsx scripts/software-requests.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "software": "tsx scripts/software-admin.ts",
+    "test:software": "tsx --test scripts/software-licence.test.ts"
   },
   "dependencies": {
     "@google-cloud/storage": "^8.4.0",
