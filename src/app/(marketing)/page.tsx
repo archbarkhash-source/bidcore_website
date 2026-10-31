@@ -3,7 +3,9 @@ import Link from "next/link";
 import { ArrowRight, Building2, CheckCircle2, Cpu, MapPin, PlayCircle, Search, ShoppingBag } from "lucide-react";
 import TenderCard from "@/components/TenderCard";
 import { BiddersBoardGraphic, OpportunityBoardGraphic, QuotationCompareGraphic } from "@/components/graphics/TenderConnectGraphics";
-import { getContractors, getTenders, type Contractor, type Tender } from "@/lib/bidcore-api";
+import type { Contractor, Tender } from "@/lib/bidcore-api";
+import { listDirectory } from "@/lib/directory";
+import { getTenders } from "@/lib/site-tenders";
 import { PRODUCTS, signUpHref } from "@/lib/app-links";
 import { COMPANY_SHORTCUTS, PRODUCT_SHORTCUTS } from "@/lib/network-nav";
 import { getProductPage } from "@/lib/product-pages";
@@ -35,7 +37,7 @@ const LIST_BENEFITS = [
 export default async function Home() {
   const [tendersRes, companiesRes] = await Promise.all([
     getTenders({ status: "open", sort: "newest", page_size: "3" }),
-    getContractors({ page_size: "3" }),
+    listDirectory({ page_size: 3 }),
   ]);
   const tenders = tendersRes.ok ? tendersRes.data.items : [];
   const companies = companiesRes.ok ? companiesRes.data.items : [];
@@ -267,9 +269,9 @@ function Directory({ companies }: { companies: Contractor[] }) {
         {companies.length > 0 && (
           <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-3">
-              <h3 className="text-lg font-semibold text-brand-navy">Companies on Bidcore</h3>
-              <Link href="/marketplace/companies" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:text-brand-accent">
-                Browse all companies <ArrowRight className="h-4 w-4" />
+              <h3 className="text-lg font-semibold text-brand-navy">Contractors on Bidcore</h3>
+              <Link href="/companies" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:text-brand-accent">
+                Browse all contractors <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

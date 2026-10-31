@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import TenderCard from "@/components/TenderCard";
 import TenderFilters from "@/components/TenderFilters";
-import { getTenders } from "@/lib/bidcore-api";
+import { getTenders } from "@/lib/site-tenders";
 import { STATES } from "@/lib/data";
 import { signUpHref } from "@/lib/app-links";
 

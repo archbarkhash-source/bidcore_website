@@ -4,7 +4,8 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { ExternalLink, FileText } from "lucide-react";
 import { StatusBadge } from "@/components/TenderCard";
 import ShareTender from "@/components/ShareTender";
-import { SITE_URL, formatDate, formatValue, getTender, type TenderBidForm } from "@/lib/bidcore-api";
+import { SITE_URL, formatDate, formatValue, type TenderBidForm } from "@/lib/bidcore-api";
+import { getTender } from "@/lib/site-tenders";
 import { appLoginUrl, signUpHref } from "@/lib/app-links";
 
 export const revalidate = 60;

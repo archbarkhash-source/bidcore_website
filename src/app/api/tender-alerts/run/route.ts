@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
-import { getTenders, formatDate, formatValue, type Tender } from "@/lib/bidcore-api";
+import { formatDate, formatValue, type Tender } from "@/lib/bidcore-api";
+import { getTenders } from "@/lib/site-tenders";
 import { sendMail } from "@/lib/mail";
 import { SITE_URL } from "@/lib/bidcore-api";
 

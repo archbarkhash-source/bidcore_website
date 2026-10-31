@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL, getTenderSitemap } from "@/lib/bidcore-api";
+import { SITE_URL } from "@/lib/bidcore-api";
+import { getTenderSitemap } from "@/lib/site-tenders";
 import { PRODUCT_PAGES } from "@/lib/product-pages";
 import { SOLUTIONS } from "@/lib/solutions";
 import { sitemapEntries } from "@/lib/marketplace/queries";

@@ -8,7 +8,7 @@ import { STATES } from "@/lib/data";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Companies on Bidcore",
+  title: "Contractors on Bidcore",
   description: "EPC contractors, subcontractors and design-build contractors listed on Bidcore, starting with Mumbai.",
   alternates: { canonical: "/companies" },
 };
@@ -19,7 +19,7 @@ const COMPANY_TYPES = DIRECTORY_TYPES;
 type SP = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) || undefined;
 
-// Explore > Companies: the Bidcore contractor directory (EPC contractors, subcontractors and design-build contractors listed from public business information),
+// Explore > Contractors: the Bidcore contractor directory (EPC contractors, subcontractors and design-build contractors listed from public business information),
 // read straight from this site's database. Cards carry the contact MASKED and blurred; the real values need a signed-in member.
 export default async function CompaniesPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
@@ -36,7 +36,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Companies on Bidcore</h1>
+          <h1 className="text-2xl font-bold text-slate-900">Contractors on Bidcore</h1>
           <p className="mt-1 text-sm text-slate-500">EPC contractors, subcontractors and design-build contractors. Sign up free to view contact details.</p>
         </div>
         <Link href="/add-company" className="rounded-full bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90">
@@ -50,7 +50,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
           <input
             name="q"
             defaultValue={f.q}
-            placeholder="Search companies"
+            placeholder="Search contractors"
             className="w-full rounded-md border border-slate-300 py-2 pl-9 pr-3 text-sm outline-none focus:border-brand-navy"
           />
         </div>
@@ -71,7 +71,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
           ))}
         </select>
         <select name="type" defaultValue={f.type ?? ""} className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm">
-          <option value="">All company types</option>
+          <option value="">All contractor types</option>
           {COMPANY_TYPES.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -83,7 +83,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
 
       {!res.ok ? (
         <p className="mt-8 text-sm text-slate-600">
-          Companies are temporarily unavailable. Please try again in a few minutes. You can still{" "}
+          Contractors are temporarily unavailable. Please try again in a few minutes. You can still{" "}
           <Link href="/add-company" className="font-medium text-brand-accent hover:underline">
             add your company info
           </Link>
@@ -91,7 +91,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
         </p>
       ) : res.data.items.length === 0 ? (
         <div className="mt-8 rounded-lg border border-slate-200 bg-white p-8 text-center">
-          <p className="font-medium text-slate-800">No companies to show yet.</p>
+          <p className="font-medium text-slate-800">No contractors to show yet.</p>
           <p className="mt-1 text-sm text-slate-500">Try a different search or filter, or add your own company.</p>
           <Link href="/add-company" className="mt-4 inline-block rounded-full bg-brand-accent px-5 py-2 text-sm font-semibold text-white hover:bg-brand-accent-light">
             Add your company info
@@ -99,7 +99,7 @@ export default async function CompaniesPage({ searchParams }: { searchParams: Pr
         </div>
       ) : (
         <>
-          <p className="mt-6 text-sm text-slate-500">{res.data.total} compan{res.data.total === 1 ? "y" : "ies"}</p>
+          <p className="mt-6 text-sm text-slate-500">{res.data.total} contractor{res.data.total === 1 ? "" : "s"}</p>
           <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {res.data.items.map((c) => (
               <Link key={c.slug} href={`/company/${c.slug}`} className="rounded-lg border border-slate-200 bg-white p-5 transition hover:border-brand-accent/40 hover:shadow-sm">
