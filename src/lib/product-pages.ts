@@ -110,11 +110,11 @@ const tenderConnectLive: Cta = { label: "See Tender Connect", href: productHref(
 const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
   heading: "30-day free trial. No credit card.",
   body:
-    "Browsing public tenders and companies is free. Each company gets a 30-day free trial of Tender Connect that begins the first time you prepare a quotation or publish a tender, with no credit card. After the trial, one monthly or yearly plan covers publishing public and private tenders and submitting quotations.",
+    "Browsing public tenders and companies is free. Each company gets a 30-day free trial of Tender Connect that begins the first time you prepare a quotation or publish a tender, with no credit card. After the trial, one yearly plan covers publishing public and private tenders and submitting quotations.",
   rows: [
     ["Browse public tenders and companies", "Free"],
     ["Prepare and publish your first tenders / quotations", "30-day free trial per company, no card"],
-    ["Keep publishing and submitting after the trial", "Monthly or yearly plan"],
+    ["Keep publishing and submitting after the trial", "Yearly plan"],
     ["Your drafts, submitted quotations and records", "Kept, whatever your plan"],
   ],
   ctas: [
@@ -275,7 +275,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         icon: BadgeCheck,
         title: "Free Trial and Subscription",
         problem: "Teams hesitate to commit before they have tried the workflow.",
-        body: "Try Tender Connect free for 30 days with no credit card, then continue on a monthly or yearly plan. Browsing, drafts and past quotations never depend on a plan.",
+        body: "Try Tender Connect free for 30 days with no credit card, then continue on a yearly plan. Browsing, drafts and past quotations never depend on a plan.",
         status: "live",
       },
     ],
@@ -324,7 +324,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
       },
       {
         q: "What does it cost?",
-        a: "Browsing is free. Each company gets a 30-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a monthly or yearly plan applies. The current prices are always on the pricing page.",
+        a: "Browsing is free. Each company gets a 30-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a yearly plan applies. The current prices are always on the pricing page.",
       },
       {
         q: "Is the free trial per person?",
