@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CardArt, SuiteGraphic } from "@/components/graphics/ProductGraphics";
-import { PRODUCTS, signUpHref } from "@/lib/app-links";
+import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN } from "@/lib/app-links";
 
 export const metadata: Metadata = {
   title: "BidcoreAI Construction Software Products | Bidcore",
@@ -37,9 +37,9 @@ export default function ProductsIndex() {
               <Link href="/request-demo" className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wider text-brand-navy transition hover:bg-slate-200">
                 Request a Demo
               </Link>
-              <a href={signUpHref("tender-connect")} className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
+              {FREE_TRIAL_OPEN && <a href={signUpHref("tender-connect")} className="w-full justify-center sm:w-auto inline-flex items-center gap-2 rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white transition hover:bg-white/10">
                 Start free with Tender Connect
-              </a>
+              </a>}
             </div>
           </div>
           <SuiteGraphic />
@@ -59,7 +59,7 @@ export default function ProductsIndex() {
                     <Link href={p.href} className="inline-flex items-center gap-1 text-brand-navy hover:text-brand-accent">
                       Learn more <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
-                    {p.key === "tender-connect" ? (
+                    {p.key === "tender-connect" && FREE_TRIAL_OPEN ? (
                       <Link href={signUpHref(p.key)} className="text-brand-accent hover:underline">
                         Start free trial
                       </Link>

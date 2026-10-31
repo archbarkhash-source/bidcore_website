@@ -6,7 +6,7 @@ import { BiddersBoardGraphic, OpportunityBoardGraphic, QuotationCompareGraphic }
 import type { Contractor, Tender } from "@/lib/bidcore-api";
 import { listDirectory } from "@/lib/directory";
 import { getTenders } from "@/lib/site-tenders";
-import { PRODUCTS, signUpHref } from "@/lib/app-links";
+import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN, TENDER_CONNECT_DEMO } from "@/lib/app-links";
 import { COMPANY_SHORTCUTS, PRODUCT_SHORTCUTS } from "@/lib/network-nav";
 import { getProductPage } from "@/lib/product-pages";
 
@@ -183,7 +183,7 @@ function Audiences({ publish }: { publish: string }) {
       ],
       ctas: [
         { label: "Browse Public Tenders", href: "/tenders", solid: true },
-        { label: "Start Free Trial", href: signUpHref("tender-connect"), solid: false },
+        FREE_TRIAL_OPEN ? { label: "Start Free Trial", href: signUpHref("tender-connect"), solid: false } : { label: "Request a Demo", href: TENDER_CONNECT_DEMO, solid: false },
       ],
       graphic: <OpportunityBoardGraphic />,
     },
@@ -370,7 +370,7 @@ function Software() {
                   <Link href={p.href} className="inline-flex items-center gap-1 text-brand-navy hover:text-brand-accent">
                     Learn more <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                  {p.key === "tender-connect" ? (
+                  {p.key === "tender-connect" && FREE_TRIAL_OPEN ? (
                     <Link href={signUpHref(p.key)} className="text-brand-accent hover:underline">
                       Start free trial
                     </Link>

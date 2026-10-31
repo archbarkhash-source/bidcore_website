@@ -21,6 +21,11 @@ export const PRODUCTS: Product[] = [
   { key: "site-management", name: "Site Operations", href: "/products/site-management", tagline: "Plan crews, equipment and work packages, and run the site day to day." },
 ];
 
+/** While the downloadable Starter Lite programs are not published on the website, no page offers a "Start Free Trial": visitors are sent to Request a Demo instead.
+ *  Set to true when the downloads (/software) go live; every "Start Free Trial" button comes back with it. */
+export const FREE_TRIAL_OPEN = false;
+export const TENDER_CONNECT_DEMO = "/request-demo?product=Tender%20Connect";
+
 /** Where "Sign Up" / "Start free trial" for a product goes: this website's own sign-up (the product and intent are remembered in the address). */
 export function signUpHref(product: ProductKey = "tender-connect", extra?: Record<string, string>): string {
   const qs = new URLSearchParams({ product });

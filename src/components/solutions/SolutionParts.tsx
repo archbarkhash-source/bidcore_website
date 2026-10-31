@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, type LucideIcon } from "lucide-react";
-import { signUpHref } from "@/lib/app-links";
+import { signUpHref, FREE_TRIAL_OPEN } from "@/lib/app-links";
 
 // Building blocks shared by the solution pages (/solutions and /solutions/<slug>), so the index looks exactly like the EPC Contractors page:
 // the dark hero, the cards with a dark icon tile, and the closing call to action.
@@ -63,9 +63,11 @@ export function SolutionCta() {
           <Link href="/request-demo" className="rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
             Request a Demo
           </Link>
-          <a href={signUpHref("tender-connect")} className="rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-white/10">
-            Start Free Trial
-          </a>
+          {FREE_TRIAL_OPEN && (
+            <a href={signUpHref("tender-connect")} className="rounded-sm border border-white/60 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-white/10">
+              Start Free Trial
+            </a>
+          )}
         </div>
       </div>
     </section>

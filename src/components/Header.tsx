@@ -5,12 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { FormEvent, useCallback, useEffect, useRef, useState } from "react";
 import { Menu, Search, UserRound, X } from "lucide-react";
 import { notifySessionChange, useSession } from "@/lib/use-session";
-import { PRODUCTS, appLoginUrl, signUpHref } from "@/lib/app-links";
+import { PRODUCTS, appLoginUrl } from "@/lib/app-links";
 import { SOLUTIONS } from "@/lib/solutions";
 import CountrySwitch from "@/components/CountrySwitch";
 
 // Products are the primary navigation. Marketplace = shop for products, suppliers and equipment; Explore = find companies and services.
-const PRODUCTS_LINKS = [...PRODUCTS.map((p) => ({ label: `BidcoreAI ${p.name}`, href: p.href })), { label: "Download Starter Lite software", href: "/software" }];
+const PRODUCTS_LINKS = PRODUCTS.map((p) => ({ label: `BidcoreAI ${p.name}`, href: p.href }));
 
 interface NavLink {
   label: string;
@@ -143,12 +143,6 @@ export default function Header() {
                 <UserRound className="h-4 w-4" />
                 Sign In
               </a>
-              <Link
-                href={signUpHref("tender-connect", { intent: "publish" })}
-                className="hidden whitespace-nowrap rounded-md border border-brand-navy px-4 py-2 text-sm font-semibold text-brand-navy transition hover:bg-brand-navy hover:text-white lg:inline-block"
-              >
-                Publish a tender
-              </Link>
             </>
           )}
           {session && (
@@ -262,9 +256,6 @@ export default function Header() {
               </MobileLink>
               <MobileLink href="/pricing" onNavigate={() => setMobileOpen(false)}>
                 Pricing
-              </MobileLink>
-              <MobileLink href={signUpHref("tender-connect", { intent: "publish" })} onNavigate={() => setMobileOpen(false)}>
-                Publish a tender
               </MobileLink>
               {EXPLORE_GROUPS.map((g) => (
                 <MobileGroup key={g.heading} title={`Explore · ${g.heading}`} links={g.links} onNavigate={() => setMobileOpen(false)} />

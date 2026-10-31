@@ -29,7 +29,7 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { signUpHref, type ProductKey } from "@/lib/app-links";
+import { signUpHref, type ProductKey, FREE_TRIAL_OPEN, TENDER_CONNECT_DEMO } from "@/lib/app-links";
 
 // Content for the five BidcoreAI product landing pages (/products/<slug>), rendered by components/product/ProductLanding.tsx.
 //
@@ -118,7 +118,7 @@ const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
     ["Your drafts, submitted quotations and records", "Kept, whatever your plan"],
   ],
   ctas: [
-    { label: "Start Free", href: signUpHref("tender-connect") },
+    ...(FREE_TRIAL_OPEN ? [{ label: "Start Free", href: signUpHref("tender-connect") }] : [{ label: "Request a Demo", href: TENDER_CONNECT_DEMO }]),
     { label: "View Pricing", href: "/pricing" },
   ],
 };
@@ -157,7 +157,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     ctas: {
       primary: { label: "Explore Public Tenders", href: "/tenders" },
       secondary: { label: "Publish a Tender", href: signUpHref("tender-connect", { intent: "publish" }) },
-      tertiary: { label: "Start Free", href: signUpHref("tender-connect") },
+      ...(FREE_TRIAL_OPEN ? { tertiary: { label: "Start Free", href: signUpHref("tender-connect") } } : {}),
     },
     valueProps: [
       {

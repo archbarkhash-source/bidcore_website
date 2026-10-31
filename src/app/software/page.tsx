@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Download Starter Lite software | Bidcore",
   description: `Bidcore Starter Lite programs for Windows: Tender Connect and Takeoff. They run on your own computer with a ${TRIAL_DAYS}-day free trial, then a yearly subscription.`,
   alternates: { canonical: "/software" },
+  robots: { index: false, follow: true }, // not linked or indexed until the downloads go live (FREE_TRIAL_OPEN in src/lib/app-links.ts)
 };
 
 export default function SoftwarePage() {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PRODUCTS, signUpHref } from "@/lib/app-links";
+import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN } from "@/lib/app-links";
 import { SOLUTIONS } from "@/lib/solutions";
 
 interface FooterLink {
@@ -49,7 +49,7 @@ export default function Footer() {
       links: [
         { label: "View all products", href: "/products" },
         { label: "Pricing", href: "/pricing" },
-        { label: "Start Free Trial", href: signUpHref("tender-connect") },
+        ...(FREE_TRIAL_OPEN ? [{ label: "Start Free Trial", href: signUpHref("tender-connect") }] : []),
         { label: "Request a Demo", href: "/request-demo" },
         { label: "Watch Live Demo", href: "/live-demo" },
         { label: "Contact sales", href: `mailto:${contactEmail}?subject=${encodeURIComponent("Sales enquiry")}` },

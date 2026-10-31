@@ -146,18 +146,6 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
               </Link>
               <p className="mt-2 text-xs text-slate-500">No credit card required.</p>
             </div>
-            <div className="rounded-lg border border-slate-200 bg-white p-6">
-              <h2 className="text-lg font-semibold text-brand-navy">Have a tender to publish?</h2>
-              <p className="mt-1 text-sm text-slate-500">
-                Publish it on Tender Connect and it appears here and in the Opportunities of every Tender Connect user.
-              </p>
-              <Link
-                href={signUpHref("tender-connect", { intent: "publish" })}
-                className="mt-4 inline-block rounded-full border border-brand-navy px-5 py-2.5 text-sm font-semibold text-brand-navy hover:bg-brand-navy hover:text-white"
-              >
-                Publish a tender
-              </Link>
-            </div>
           </div>
         </div>
       </section>

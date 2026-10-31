@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
-import { signUpHref } from "@/lib/app-links";
+import { signUpHref, FREE_TRIAL_OPEN, TENDER_CONNECT_DEMO } from "@/lib/app-links";
 
 const SALES_EMAIL = "barkha@bidcoreai.com";
 const mailto = (subject: string, ask: string) =>
@@ -102,10 +102,10 @@ export default function PricingPlans() {
 
               {plan.key === "tender_connect" ? (
                 <Link
-                  href={signUpHref("tender-connect")}
+                  href={FREE_TRIAL_OPEN ? signUpHref("tender-connect") : TENDER_CONNECT_DEMO}
                   className="mt-6 block rounded-full bg-brand-accent px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-brand-accent-light"
                 >
-                  Start Free Trial
+                  {FREE_TRIAL_OPEN ? "Start Free Trial" : "Request a Demo"}
                 </Link>
               ) : enterprise ? (
                 <a
