@@ -66,6 +66,8 @@ export default function AddCompanyForm() {
             about: c.about ?? "",
             listed: c.listed !== false,
           });
+        const k = d.contact;
+        if (k) setContact((x) => ({ ...x, name: k.contactName ?? "", designation: k.designation ?? "" }));
       })
       .finally(() => setLoaded(true));
   }, [session]);

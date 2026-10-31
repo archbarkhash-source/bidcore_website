@@ -5,6 +5,7 @@ import { COMPANY_TYPES, STATES } from "@/lib/data";
 import { SESSION_COOKIE, readSessionUserId } from "@/lib/session";
 import { payloadFor, pushContractor } from "@/lib/contractor-sync";
 import { syncMemberDirectory } from "@/lib/directory";
+import { readMemberContact, saveMemberContact } from "@/lib/member-contact";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,9 @@ export async function GET() {
   const user = await currentUser();
   if (!user) return NextResponse.json({ error: "Please sign in first." }, { status: 401 });
   const saved = await db.memberCompany.findUnique({ where: { userId: user.id } }).catch(() => null);
+  const contact = (await readMemberContact(user.id)) ?? { contactName: null, designation: null };
   return NextResponse.json({
+    contact,
     company: saved ?? {
       companyName: user.companyName,
       companyType: null,
@@ -86,6 +89,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Your company details could not be saved right now. Please try again shortly." }, { status: 503 });
   }
 
+  await saveMemberContact(user.id, { contactName, designation });
   const listedInDirectory = await syncMemberDirectory(user.id, { companyName, companyType, city, state, trades, website, listed });
   const synced = await pushContractor({
     ...payloadFor({ id: user.id, email: user.email, companyName, role: companyType ?? user.role, city, name: contactName ?? user.name, phone: user.phone }),
