@@ -270,13 +270,13 @@ function Directory({ companies }: { companies: Contractor[] }) {
           <div className="mt-10">
             <div className="flex flex-wrap items-end justify-between gap-3">
               <h3 className="text-lg font-semibold text-brand-navy">Contractors on Bidcore</h3>
-              <Link href="/companies" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:text-brand-accent">
+              <Link href="/contractors" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:text-brand-accent">
                 Browse all contractors <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {companies.map((c) => (
-                <Link key={c.slug} href={`/company/${c.slug}`} className="rounded-lg border border-slate-200 bg-white p-5 transition hover:border-brand-accent/40 hover:shadow-sm">
+                <Link key={c.slug} href={`/contractor/${c.slug}`} className="rounded-lg border border-slate-200 bg-white p-5 transition hover:border-brand-accent/40 hover:shadow-sm">
                   <h4 className="font-semibold text-brand-navy">{c.name}</h4>
                   {c.type && <p className="mt-0.5 text-sm text-slate-500">{c.type}</p>}
                   {(c.city || c.state) && (

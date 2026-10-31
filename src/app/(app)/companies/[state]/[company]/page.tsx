@@ -39,7 +39,7 @@ export default async function CompanyProfilePage({
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-slate-500">
-        <Link href="/companies" className="hover:text-brand-navy">
+        <Link href="/contractors" className="hover:text-brand-navy">
           Find Contractors
         </Link>{" "}
         /{" "}

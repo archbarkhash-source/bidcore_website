@@ -146,7 +146,7 @@ export default function SignInForm({
           the Bidcore directory.
         </p>
         <Link
-          href="/companies"
+          href="/contractors"
           className="mt-5 inline-block rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent-light"
         >
           Browse Companies

@@ -20,7 +20,7 @@ export default async function CompanyTypesPage() {
           return (
             <Link
               key={type}
-              href={`/companies?type=${encodeURIComponent(type)}`}
+              href={`/contractors?type=${encodeURIComponent(type)}`}
               className="flex items-center justify-between rounded-lg border border-slate-200 bg-white px-4 py-3.5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-navy/30 hover:shadow-md"
             >
               <span className="flex items-center gap-2.5">

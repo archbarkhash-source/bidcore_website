@@ -46,7 +46,7 @@ export default function SavedCompaniesPage() {
             </p>
             <div className="mt-5">
               <Link
-                href="/companies"
+                href="/contractors"
                 className="inline-block rounded-md bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent-light"
               >
                 Find Contractors

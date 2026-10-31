@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
-// www.bidcore.in is the public front door of Bidcore Tender Connect: tenders first, companies (only those with an active subscription) under Explore.
-// The old registry-based directory pages (states, cities, near me ...) are not linked any more; their addresses land on the one companies page.
-const toCompanies = [
-  "/contractors",
+// www.bidcore.in is the public front door of Bidcore Tender Connect: tenders first, the contractor directory (/contractors, /contractor/<name>) under Explore.
+// The old addresses (/companies, /company/<name>) and the old registry-based directory pages (states, cities, near me ...) land on the contractor directory.
+const toContractors = [
+  "/companies",
   "/developers",
   "/general-contractors",
   "/architects",
@@ -24,7 +24,8 @@ const nextConfig: NextConfig = {
     return [
       { source: "/bid-board", destination: "/tenders", permanent: true }, // Tender Connect = the public published tenders
       { source: "/products/procurement", destination: "/products/procurement-management", permanent: true },
-      ...toCompanies.map((source) => ({ source, destination: "/companies", permanent: false })),
+      { source: "/company/:slug", destination: "/contractor/:slug", permanent: true },      // the old address of a contractor's page
+      ...toContractors.map((source) => ({ source, destination: "/contractors", permanent: false })),
     ];
   },
 };

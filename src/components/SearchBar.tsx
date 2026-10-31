@@ -16,7 +16,7 @@ export default function SearchBar({
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const q = value.trim();
-    if (q) router.push(`/companies?q=${encodeURIComponent(q)}`);
+    if (q) router.push(`/contractors?q=${encodeURIComponent(q)}`);
   }
 
   const padding = size === "lg" ? "py-4 text-base" : "py-2.5 text-sm";

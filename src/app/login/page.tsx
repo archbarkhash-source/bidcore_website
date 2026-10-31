@@ -3,7 +3,7 @@ import LoginForm from "@/components/LoginForm";
 
 // Only same-site paths are allowed as a post-login destination.
 function safeNext(raw: string | undefined): string {
-  return raw && raw.startsWith("/") && !raw.startsWith("//") ? raw : "/companies";
+  return raw && raw.startsWith("/") && !raw.startsWith("//") ? raw : "/contractors";
 }
 
 export default async function LoginPage({

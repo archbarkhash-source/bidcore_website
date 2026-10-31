@@ -18,7 +18,7 @@ export default async function SpecializationsPage() {
         {specializations.map(([spec, count]) => (
           <Link
             key={spec}
-            href={`/companies?q=${encodeURIComponent(spec)}`}
+            href={`/contractors?q=${encodeURIComponent(spec)}`}
             className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-sm text-slate-700 shadow-sm transition hover:border-brand-navy/30 hover:text-brand-navy"
           >
             <Tags className="h-3.5 w-3.5 text-slate-400" />

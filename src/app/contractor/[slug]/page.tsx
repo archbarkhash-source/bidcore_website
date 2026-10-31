@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const res = await getDirectoryCompany(slug);
   if (!res.ok) return { title: "Company not found", robots: { index: false, follow: false } };
-  return { title: `${res.data.name} | Bidcore`, description: `${res.data.name}: ${[res.data.type, res.data.city].filter(Boolean).join(", ")} on Bidcore`, alternates: { canonical: `/company/${slug}` } };
+  return { title: `${res.data.name} | Bidcore`, description: `${res.data.name}: ${[res.data.type, res.data.city].filter(Boolean).join(", ")} on Bidcore`, alternates: { canonical: `/contractor/${slug}` } };
 }
 
 // A Bidcore directory company. The public card never carries real contact details: the contact arrives masked and is opened by a signed-in member (DirectoryContact).
@@ -23,8 +23,8 @@ export default async function CompanyPage({ params }: { params: Promise<{ slug: 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
       <nav className="text-sm text-slate-500">
-        <Link href="/companies" className="hover:text-brand-accent">
-          Companies
+        <Link href="/contractors" className="hover:text-brand-accent">
+          Contractors
         </Link>{" "}
         / <span>{c.name}</span>
       </nav>

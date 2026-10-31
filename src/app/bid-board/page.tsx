@@ -60,7 +60,7 @@ export default function BidBoardPage() {
               Sign Up
             </Link>
             <Link
-              href="/companies"
+              href="/contractors"
               className="rounded-full border border-slate-300 bg-white px-6 py-2.5 text-sm font-semibold text-brand-navy transition hover:border-slate-400"
             >
               Explore Companies Now

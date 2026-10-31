@@ -324,7 +324,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
       },
       {
         q: "What does it cost?",
-        a: "Browsing is free. Each company gets a 30-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a yearly plan applies. The current prices are always on the pricing page.",
+        a: "Browsing is free. Each company gets a 30-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a yearly plan applies. Contact us for pricing.",
       },
       {
         q: "Is the free trial per person?",

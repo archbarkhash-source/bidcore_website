@@ -13,7 +13,7 @@ const CARDS = [
     icon: Building2,
     title: "Companies",
     body: "General contractors, subcontractors, builders, architects and suppliers with an active Bidcore subscription.",
-    href: "/companies",
+    href: "/contractors",
     add: { label: "Add your company info", href: "/add-company" },
   },
   {

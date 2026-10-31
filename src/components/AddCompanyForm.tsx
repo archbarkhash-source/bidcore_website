@@ -178,7 +178,7 @@ export default function AddCompanyForm() {
             : `${card.companyName || "Your company"} is saved. It is not shown in Find Contractors, because that list is for EPC, general, specialty and design-build contractors, or because you chose not to list it.`}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link href="/companies" className="rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent-light">
+          <Link href="/contractors" className="rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent-light">
             Find contractors
           </Link>
           <button onClick={() => setDone(null)} className="px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-brand-accent">
@@ -364,7 +364,7 @@ export default function AddCompanyForm() {
         <button disabled={busy || (!!session && !loaded)} className="rounded-full bg-brand-navy px-6 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50">
           {busy ? "Please wait…" : session ? "Save company information" : "Verify and add my company"}
         </button>
-        <Link href="/companies" className="text-sm text-slate-500 hover:text-brand-accent">
+        <Link href="/contractors" className="text-sm text-slate-500 hover:text-brand-accent">
           Cancel
         </Link>
       </div>

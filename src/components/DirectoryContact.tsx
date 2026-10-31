@@ -40,7 +40,7 @@ export default function DirectoryContact({ slug, masked }: { slug: string; maske
 
   const shown = real ?? masked;
   const blurred = real ? "" : "select-none blur-[5px]";
-  const next = `/company/${slug}`;
+  const next = `/contractor/${slug}`;
 
   return (
     <div className="rounded-lg border border-slate-200 bg-white p-5">
