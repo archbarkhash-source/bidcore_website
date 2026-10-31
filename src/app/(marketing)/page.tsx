@@ -93,40 +93,46 @@ function Hero() {
 
 /* ── The construction life cycle ─────────────────────────────────────────────────────────────────────────────────── */
 
-// Every stage names what the software does today; "AI" marks only the steps where it assists (and the person still reviews the result).
+// Every stage names the product(s) that do it and what the software does today; "AI" marks only the steps where it assists (and the person still reviews the result).
 const STAGES = [
   {
     n: "01",
+    products: [{ name: "Tender Connect", href: "/products/tender-connect" }],
     title: "Find and qualify tenders",
     body: "Public tenders and private invitations on one Tender Board, with closing dates tracked.",
     ai: "AI Go / No-Go: your Company Intelligence checked against the tender's eligibility, missing data flagged for review.",
   },
   {
     n: "02",
+    products: [{ name: "Tender Management", href: "/products/tender-management" }],
     title: "Analyse tender documents",
     body: "RFP, datasheet, schedules and corrigenda in one place, with the bid security, performance security and key dates read out.",
     ai: "AI tender analysis: every finding keeps its document and page, so you can check it in one click.",
   },
   {
     n: "03",
+    products: [{ name: "Tender Management", href: "/products/tender-management" }],
     title: "Take off and estimate",
     body: "Digital quantity takeoff from PDF drawings and cost estimation with CPWD Civil, CPWD E&M, MoRTH and your own cost models.",
     ai: "AI assistance: symbol counts on drawings and automatic assignment of rate analyses to BOQ lines.",
   },
   {
     n: "04",
+    products: [{ name: "Tender Management", href: "/products/tender-management" }],
     title: "Tender cost and schedule",
     body: "Overheads, GST and profit on one bid cost estimate; EMD and securities calculated; a schedule, WBS and productivity built from the BOQ.",
     ai: "Agent X, the AI assistant, answers questions on the tender and the project in plain language.",
   },
   {
     n: "05",
+    products: [{ name: "Tender Connect", href: "/products/tender-connect" }, { name: "Procurement", href: "/products/procurement-management" }],
     title: "Subcontract and procure",
     body: "Invite subcontractors, compare item-wise quotations, then purchase orders, change orders and material delivery.",
     ai: "Matching subcontractors are found in the Bidcore contractor directory by trade and location.",
   },
   {
     n: "06",
+    products: [{ name: "Project Management", href: "/products/project-management" }, { name: "Site Operations", href: "/products/site-management" }],
     title: "Build, control and hand over",
     body: "Budget against actual cost, the project schedule with actual dates, daily progress reports, RA bills, monthly MIS and site crews.",
     ai: "Forecasts follow the site: quantities logged in daily progress reports move the schedule forecast.",
@@ -146,7 +152,16 @@ function LifeCycle() {
         <ol className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {STAGES.map((st) => (
             <li key={st.n} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
-              <span className="text-sm font-bold text-orange-500">{st.n}</span>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <span className="text-sm font-bold text-orange-500">{st.n}</span>
+                <span className="flex flex-wrap gap-1.5">
+                  {st.products.map((pr) => (
+                    <Link key={pr.name} href={pr.href} className="rounded-full bg-brand-navy/5 px-2.5 py-0.5 text-xs font-semibold text-brand-navy hover:bg-brand-navy/10">
+                      {pr.name}
+                    </Link>
+                  ))}
+                </span>
+              </div>
               <h3 className="mt-1 text-lg font-semibold text-brand-navy">{st.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{st.body}</p>
               <p className="mt-4 flex items-start gap-2 rounded-md bg-brand-navy/5 p-3 text-sm text-brand-navy">

@@ -83,6 +83,16 @@ export async function listDirectory(f: { q?: string; city?: string; state?: stri
   }
 }
 
+/** Every LISTED directory company's page, for the sitemap: slug + last change only (no contact field is read). Empty when the directory is not set up. */
+export async function directorySitemap(): Promise<{ slug: string; updatedAt: Date }[]> {
+  try {
+    const rows = await db.$queryRawUnsafe<{ slug: string; updated_at: Date }[]>(`SELECT slug, updated_at FROM directory_companies WHERE listed = TRUE ORDER BY slug LIMIT 45000`);
+    return rows.map((r) => ({ slug: r.slug, updatedAt: new Date(r.updated_at) }));
+  } catch {
+    return [];
+  }
+}
+
 export async function getDirectoryCompany(slug: string): Promise<{ ok: true; data: DirectoryCompany } | { ok: false; status: number }> {
   try {
     const rows = await db.$queryRawUnsafe<Row[]>(`SELECT ${COLUMNS} FROM directory_companies WHERE slug = $1 AND listed = TRUE LIMIT 1`, slug);

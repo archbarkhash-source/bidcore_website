@@ -5,11 +5,14 @@ import { CONTRACTOR_CATEGORIES } from "@/lib/contractor-categories";
 import { PRODUCT_PAGES } from "@/lib/product-pages";
 import { SOLUTIONS } from "@/lib/solutions";
 import { sitemapEntries } from "@/lib/marketplace/queries";
+import { directorySitemap } from "@/lib/directory";
+import { db } from "@/lib/db";
 
 export const revalidate = 3600;
 
-// Only approved public content: the landing page, the product landing pages, the tender directory, and every PUBLISHED public tender. Drafts, withdrawn and private tenders are not
-// in the feed the website receives, so they can never be listed here.
+// Only approved public content that answers 200 itself: the landing page, products and solutions, every PUBLISHED public tender, the contractor directory (each LISTED
+// company's page), listed professionals and equipment, and the published marketplace. Drafts, withdrawn / private tenders, unlisted profiles, forms, sign-in, the
+// invitation portal, dashboards, the not-yet-public /software page and pages that only redirect elsewhere (/states, /cities ...) are never listed.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const pages: MetadataRoute.Sitemap = [
@@ -22,6 +25,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/request-demo`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
     { url: `${SITE_URL}/live-demo`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/help`, lastModified: now, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${SITE_URL}/explore`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${SITE_URL}/professionals`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
+    { url: `${SITE_URL}/equipment`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
     ...PRODUCT_PAGES.map((p) => ({
       url: `${SITE_URL}/products/${p.slug}`,
       lastModified: now,
@@ -36,6 +43,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/marketplace/products`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
     { url: `${SITE_URL}/marketplace/services`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
   ];
+  // Contractor directory: one page per LISTED company (directory companies and members who chose to be listed).
+  for (const c of await directorySitemap()) pages.push({ url: `${SITE_URL}/contractor/${c.slug}`, lastModified: c.updatedAt, changeFrequency: "weekly", priority: 0.6 });
+  // Professionals and equipment owners who listed themselves (unlisted ones are left out).
+  const listings = await db.memberListing.findMany({ where: { listed: true }, select: { slug: true, kind: true, updatedAt: true }, take: 45000 }).catch(() => []);
+  for (const l of listings)
+    if (l.kind === "professional" || l.kind === "equipment")
+      pages.push({ url: `${SITE_URL}/${l.kind === "professional" ? "professionals" : "equipment"}/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "weekly", priority: 0.4 });
   // Marketplace: only published companies / listings, and only categories that actually contain listings (no empty or duplicate pages).
   const mp = await sitemapEntries();
   for (const slug of mp.categories) pages.push({ url: `${SITE_URL}/marketplace/categories/${slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
