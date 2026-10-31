@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Mail, MapPin, Phone, Search } from "lucide-react";
-import { getContractors } from "@/lib/bidcore-api";
+import { DIRECTORY_CITIES, DIRECTORY_TYPES } from "@/lib/directory-core";
+import { listDirectory } from "@/lib/directory";
 import { STATES } from "@/lib/data";
 
 export const revalidate = 300;
@@ -13,19 +14,18 @@ export const metadata: Metadata = {
 };
 
 // The Bidcore directory is built city by city (Mumbai first, then Delhi); the type names are the ones the directory stores.
-const DIRECTORY_CITIES = ["Mumbai", "Delhi"];
-const COMPANY_TYPES = ["EPC Contractor", "Subcontractor", "Design-Build Contractor"];
+const COMPANY_TYPES = DIRECTORY_TYPES;
 
 type SP = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) || undefined;
 
-// Explore > Companies: companies with an ACTIVE paid Bidcore subscription plus the Bidcore directory (EPC contractors, subcontractors and design-build
-// contractors listed from public business information). Directory cards carry the contact MASKED and blurred; the real values need a signed-in member.
+// Explore > Companies: the Bidcore contractor directory (EPC contractors, subcontractors and design-build contractors listed from public business information),
+// read straight from this site's database. Cards carry the contact MASKED and blurred; the real values need a signed-in member.
 export default async function CompaniesPage({ searchParams }: { searchParams: Promise<SP> }) {
   const sp = await searchParams;
   const f = { q: one(sp.q), state: one(sp.state), city: one(sp.city), type: one(sp.type), page: one(sp.page) ?? "1", page_size: "24" };
-  const res = await getContractors(f);
   const page = Number(f.page) || 1;
+  const res = await listDirectory({ q: f.q, city: f.city, state: f.state, type: f.type, page, page_size: 24 });
   const link = (p: number) => {
     const qs = new URLSearchParams();
     for (const [k, v] of Object.entries({ ...f, page: String(p), page_size: undefined })) if (v) qs.set(k, v);

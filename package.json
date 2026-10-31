@@ -12,6 +12,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:marketplace": "tsx prisma/seed-marketplace.ts",
     "test:marketplace": "tsx --test scripts/marketplace.test.ts",
+    "test:directory": "tsx --test scripts/directory.test.ts",
+    "directory:import": "tsx scripts/directory-import.ts",
     "db:studio": "prisma studio"
   },
   "dependencies": {
