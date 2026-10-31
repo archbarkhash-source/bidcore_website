@@ -1,38 +1,25 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Building2, CheckCircle2, Cpu, MapPin, PlayCircle, Search, ShoppingBag } from "lucide-react";
+import { ArrowRight, Calculator, CheckCircle2, ClipboardList, Cpu, FileSearch, HardHat, MapPin, PlayCircle, Search, Sparkles } from "lucide-react";
 import TenderCard from "@/components/TenderCard";
 import { BiddersBoardGraphic, OpportunityBoardGraphic, QuotationCompareGraphic } from "@/components/graphics/TenderConnectGraphics";
 import type { Contractor, Tender } from "@/lib/bidcore-api";
 import { listDirectory } from "@/lib/directory";
 import { getTenders } from "@/lib/site-tenders";
 import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN, TENDER_CONNECT_DEMO } from "@/lib/app-links";
-import { COMPANY_SHORTCUTS, PRODUCT_SHORTCUTS } from "@/lib/network-nav";
 import { getProductPage } from "@/lib/product-pages";
 
-// Bidcore.in presents four connected offerings: construction software (paid products), a construction business network (companies), a products & services
-// marketplace, and public tenders. Live sections (companies, tenders) use real data from the BidcoreAI API; a section with no data is left out rather than filled
+// The landing page is about ONE thing: BidcoreAI, the complete AI-integrated construction life-cycle solution for contractors (tender to handover).
+// Public tenders and the contractor directory follow as connected parts; the products & services marketplace is reached from the menu and footer, not from here. Live sections (companies, tenders) use real data from the BidcoreAI API; a section with no data is left out rather than filled
 // with placeholders, and nothing here is an invented count, rating or testimonial.
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Bidcore: Construction Software, Company Network and Marketplace for India",
+  title: "BidcoreAI: Complete AI-Integrated Construction Life Cycle Solution for Contractors",
   description:
-    "Estimate and manage projects with construction software, discover companies and suppliers, promote your products and services, and find public tenders, all on one platform for construction businesses in India.",
+    "One platform for Indian EPC contractors: tender analysis, quantity takeoff, CPWD / MoRTH cost estimation, tender cost and schedules, subcontractor tendering, budgets, procurement, daily progress and site operations.",
   alternates: { canonical: "/" },
 };
-
-const LIST_URL = "/marketplace/list-your-business";
-
-const LIST_BENEFITS = [
-  "Create or claim a company profile",
-  "Add products and services",
-  "Showcase company capabilities and experience",
-  "Display eligible public business contact information",
-  "Improve company and category search visibility",
-  "Receive relevant enquiries, where supported",
-  "Connect with tender opportunities through Bidcore",
-];
 
 export default async function Home() {
   const [tendersRes, companiesRes] = await Promise.all([
@@ -41,18 +28,16 @@ export default async function Home() {
   ]);
   const tenders = tendersRes.ok ? tendersRes.data.items : [];
   const companies = companiesRes.ok ? companiesRes.data.items : [];
-  const publish = signUpHref("tender-connect", { intent: "publish" });
 
   return (
     <div className="bg-white">
       <Hero />
+      <LifeCycle />
       <ValueProps />
-      <Audiences publish={publish} />
-      <Directory companies={companies} />
-      <MarketplaceSection />
+      <Audiences />
       <Software />
-      <TenderDiscovery ok={tendersRes.ok} tenders={tenders} publish={publish} />
-      <ListYourBusiness />
+      <TenderDiscovery ok={tendersRes.ok} tenders={tenders} />
+      <Directory companies={companies} />
     </div>
   );
 }
@@ -64,17 +49,17 @@ function Hero() {
     <section className="relative overflow-hidden bg-brand-navy text-white">
       <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-20">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400 sm:text-sm">One platform for construction businesses</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400 sm:text-sm">For EPC contractors, general contractors and subcontractors</p>
           {/* One colour for the whole headline: white on the dark hero. Orange is kept for buttons, icons and small accents only. */}
-          <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">Build Smarter. Connect Better. Grow Faster.</h1>
+          <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">Complete AI-Integrated Construction Life Cycle Solution</h1>
           <p className="mt-5 text-xl font-semibold leading-snug text-slate-100 sm:text-2xl">
-            AI-Powered End-to-End Construction Solutions
+            From tender to handover, for Indian EPC contractors
             <br />
-            On One Integrated Platform
+            On one integrated platform
           </p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            BidcoreAI helps construction businesses estimate and manage projects, discover companies and suppliers, promote their products and services, and connect with
-            business opportunities, all in one platform.
+            Analyse tender documents, take off quantities, estimate with CPWD, CPWD E&amp;M and MoRTH cost models, build the tender cost and schedule, invite and compare
+            subcontractors, then run the project: budget, procurement, daily progress and site crews, all in BidcoreAI.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -94,8 +79,8 @@ function Hero() {
               Browse Public Tenders →
             </Link>
             <span className="mx-3 text-slate-500">|</span>
-            <Link href={LIST_URL} className="font-semibold text-orange-300 underline-offset-2 hover:underline">
-              List Your Business →
+            <Link href="/contractors" className="font-semibold text-orange-300 underline-offset-2 hover:underline">
+              Find Contractors →
             </Link>
           </p>
         </div>
@@ -106,33 +91,110 @@ function Hero() {
   );
 }
 
+/* ── The construction life cycle ─────────────────────────────────────────────────────────────────────────────────── */
+
+// Every stage names what the software does today; "AI" marks only the steps where it assists (and the person still reviews the result).
+const STAGES = [
+  {
+    n: "01",
+    title: "Find and qualify tenders",
+    body: "Public tenders and private invitations on one Tender Board, with closing dates tracked.",
+    ai: "AI Go / No-Go: your Company Intelligence checked against the tender's eligibility, missing data flagged for review.",
+  },
+  {
+    n: "02",
+    title: "Analyse tender documents",
+    body: "RFP, datasheet, schedules and corrigenda in one place, with the bid security, performance security and key dates read out.",
+    ai: "AI tender analysis: every finding keeps its document and page, so you can check it in one click.",
+  },
+  {
+    n: "03",
+    title: "Take off and estimate",
+    body: "Digital quantity takeoff from PDF drawings and cost estimation with CPWD Civil, CPWD E&M, MoRTH and your own cost models.",
+    ai: "AI assistance: symbol counts on drawings and automatic assignment of rate analyses to BOQ lines.",
+  },
+  {
+    n: "04",
+    title: "Tender cost and schedule",
+    body: "Overheads, GST and profit on one bid cost estimate; EMD and securities calculated; a schedule, WBS and productivity built from the BOQ.",
+    ai: "Agent X, the AI assistant, answers questions on the tender and the project in plain language.",
+  },
+  {
+    n: "05",
+    title: "Subcontract and procure",
+    body: "Invite subcontractors, compare item-wise quotations, then purchase orders, change orders and material delivery.",
+    ai: "Matching subcontractors are found in the Bidcore contractor directory by trade and location.",
+  },
+  {
+    n: "06",
+    title: "Build, control and hand over",
+    body: "Budget against actual cost, the project schedule with actual dates, daily progress reports, RA bills, monthly MIS and site crews.",
+    ai: "Forecasts follow the site: quantities logged in daily progress reports move the schedule forecast.",
+  },
+];
+
+function LifeCycle() {
+  return (
+    <section className="border-b border-slate-200 bg-[#F6F7F9]">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">The construction life cycle</p>
+        <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-brand-navy">One connected workflow, from the tender notice to handover</h2>
+        <p className="mt-2 max-w-2xl text-slate-600">
+          Each stage uses the work of the one before: the quantities you take off become the estimate, the estimate becomes the tender cost and the budget, the BOQ becomes
+          the schedule.
+        </p>
+        <ol className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {STAGES.map((st) => (
+            <li key={st.n} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
+              <span className="text-sm font-bold text-orange-500">{st.n}</span>
+              <h3 className="mt-1 text-lg font-semibold text-brand-navy">{st.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{st.body}</p>
+              <p className="mt-4 flex items-start gap-2 rounded-md bg-brand-navy/5 p-3 text-sm text-brand-navy">
+                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" />
+                {st.ai}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 /* ── Three core value propositions ───────────────────────────────────────────────────────────────────────────────── */
 
+// The solutions in BidcoreAI, in the order a tender becomes a project. Each card links to its product page.
 const VALUE_PROPS = [
   {
-    icon: Cpu,
-    title: "Estimate. Plan. Manage.",
-    body: "Estimate costs, prepare bids, plan schedules, and manage construction projects with integrated software.",
-    cta: { label: "Explore Products", href: "/products" },
+    icon: FileSearch,
+    title: "Tender Connect",
+    body: "Invite subcontractors from the Bidcore contractor directory, receive and compare their quotations, and check Go / No-Go eligibility on public tenders.",
+    cta: { label: "Tender Connect", href: "/products/tender-connect" },
   },
   {
-    icon: Building2,
-    title: "Find the Right Connections.",
-    body: "Discover contractors, suppliers, manufacturers, and service providers, including eligible public business contact information.",
-    cta: { label: "Find Contractors", href: "/marketplace/companies" },
+    icon: Calculator,
+    title: "Tender Management",
+    body: "Tender document analysis with page references, digital quantity takeoff, cost estimation with CPWD, CPWD E&M and MoRTH cost models, tender cost, schedule and WBS.",
+    cta: { label: "Tender Management", href: "/products/tender-management" },
   },
   {
-    icon: ShoppingBag,
-    title: "Promote Your Business.",
-    body: "Showcase construction products and services and help potential buyers discover your business.",
-    cta: { label: "Explore Marketplace", href: "/marketplace" },
+    icon: ClipboardList,
+    title: "Project Management & Procurement",
+    body: "Budget and cost control, project schedule and Gantt, purchase orders, change orders, daily progress reports, RA bills and monthly MIS.",
+    cta: { label: "Project Management", href: "/products/project-management" },
+  },
+  {
+    icon: HardHat,
+    title: "Site Operations",
+    body: "Plan crews, equipment and work packages, schedule your workforce and subcontractor crews, and track the site day to day.",
+    cta: { label: "Site Operations", href: "/products/site-management" },
   },
 ];
 
 function ValueProps() {
   return (
     <section className="border-b border-slate-200">
-      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         {VALUE_PROPS.map((v) => (
           <div key={v.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
             <span className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-navy text-orange-400">
@@ -152,21 +214,21 @@ function ValueProps() {
 
 /* ── EPC contractors and subcontractors ──────────────────────────────────────────────────────────────────────────── */
 
-function Audiences({ publish }: { publish: string }) {
+function Audiences() {
   const panels = [
     {
       eyebrow: "For EPC and General Contractors",
       title: "Source, qualify and compare subcontractor bids in one place",
       points: [
-        "Publish a public tender, or invite your own network privately",
+        "Invite subcontractors from your own network or the Bidcore contractor directory",
         "Share the BOQ, drawings and tender documents, with visibility set per document",
         "Qualify bidders with questionnaires before they quote",
         "Compare item-wise quotations side by side against one BOQ",
         "Take the project into estimating, planning and project management with BidcoreAI software",
       ],
       ctas: [
-        { label: "Publish a Public Tender", href: publish, solid: true },
-        { label: "Request a Demo", href: "/request-demo", solid: false },
+        { label: "Request a Demo", href: "/request-demo", solid: true },
+        { label: "See the Products", href: "/products", solid: false },
       ],
       graphic: <QuotationCompareGraphic />,
     },
@@ -179,7 +241,7 @@ function Audiences({ publish }: { publish: string }) {
         "Check eligibility with Go / No-Go before you invest time in a quotation",
         "Prepare item-wise quotations and attach supporting documents",
         "Shortlist opportunities and keep track of closing dates",
-        "Build a company profile so contractors can find you",
+        "Plan your crews and equipment with Site Operations",
       ],
       ctas: [
         { label: "Browse Public Tenders", href: "/tenders", solid: true },
@@ -192,7 +254,7 @@ function Audiences({ publish }: { publish: string }) {
     <section className="bg-gradient-to-br from-[#1b4a94] to-[#0f2447] text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <h2 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl">One platform for EPC contractors and the subcontractors they work with</h2>
-        <p className="mt-3 max-w-2xl text-blue-100">Tender Connect brings both sides of a package into the same workflow, from the tender notice to the quotation.</p>
+        <p className="mt-3 max-w-2xl text-blue-100">Both sides of a package work in the same life cycle, from the tender notice to the quotation and the work on site.</p>
         <div className="mt-12 space-y-16">
           {panels.map((p, i) => (
             <div key={p.eyebrow} className="grid items-center gap-10 lg:grid-cols-2">
@@ -236,35 +298,21 @@ function Directory({ companies }: { companies: Contractor[] }) {
   return (
     <section className="bg-[#F6F7F9]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Discover the Construction Business Network</h2>
-        <p className="mt-2 max-w-2xl text-slate-600">Find contractors, suppliers, manufacturers and service providers for your next project.</p>
+        <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Bidcore Contractor Directory</h2>
+        <p className="mt-2 max-w-2xl text-slate-600">EPC contractors, subcontractors and design-build contractors you can invite to your tenders.</p>
 
-        <form action="/marketplace/companies" method="get" role="search" className="mt-6 flex max-w-xl flex-col gap-2 sm:flex-row">
+        <form action="/contractors" method="get" role="search" className="mt-6 flex max-w-xl flex-col gap-2 sm:flex-row">
           <div className="relative flex-1">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input
               name="q"
-              aria-label="Search companies"
-              placeholder="Search companies by name, trade or product"
+              aria-label="Search contractors"
+              placeholder="Search contractors by name, trade or city"
               className="w-full rounded-sm border border-slate-300 bg-white py-3 pl-9 pr-3 text-sm outline-none focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10"
             />
           </div>
           <button className="rounded-sm bg-brand-navy px-6 py-3 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-brand-navy-light">Find Contractors</button>
         </form>
-
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {COMPANY_SHORTCUTS.map((c) => (
-            <Link key={c.label} href={c.href} className="group flex items-start gap-4 rounded-lg border border-slate-200 bg-white p-5 transition hover:border-orange-400/60 hover:shadow-sm">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-navy text-orange-400">
-                <c.icon className="h-5 w-5" />
-              </span>
-              <span>
-                <span className="block font-semibold text-brand-navy group-hover:text-brand-accent">{c.label}</span>
-                <span className="mt-0.5 block text-sm text-slate-600">{c.blurb}</span>
-              </span>
-            </Link>
-          ))}
-        </div>
 
         {companies.length > 0 && (
           <div className="mt-10">
@@ -295,47 +343,6 @@ function Directory({ companies }: { companies: Contractor[] }) {
   );
 }
 
-/* ── Products & services marketplace ─────────────────────────────────────────────────────────────────────────────── */
-
-function MarketplaceSection() {
-  return (
-    <section className="border-b border-slate-200">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Discover Construction Products and Services</h2>
-            <p className="mt-2 max-w-2xl text-slate-600">
-              Find construction products and materials, explore services, and connect with suppliers and business opportunities across India.
-            </p>
-          </div>
-          <Link href="/marketplace" className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:text-brand-accent">
-            Explore Marketplace <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCT_SHORTCUTS.map((c) => (
-            <Link key={c.label} href={c.href} className="group flex flex-col rounded-lg border border-slate-200 bg-white p-5 transition hover:border-orange-400/60 hover:shadow-sm">
-              <span className="flex h-10 w-10 items-center justify-center rounded-md bg-brand-navy text-orange-400">
-                <c.icon className="h-5 w-5" />
-              </span>
-              <span className="mt-4 block font-semibold text-brand-navy group-hover:text-brand-accent">{c.label}</span>
-              <span className="mt-1 block flex-1 text-sm text-slate-600">{c.blurb}</span>
-            </Link>
-          ))}
-        </div>
-        <div className="mt-6 flex flex-wrap gap-5 text-sm font-semibold">
-          <Link href="/marketplace/products" className="text-brand-accent hover:underline">
-            Find Products
-          </Link>
-          <Link href="/marketplace/services" className="text-brand-accent hover:underline">
-            Find Services
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ── Bidcore software ────────────────────────────────────────────────────────────────────────────────────────────── */
 
 function Software() {
@@ -343,7 +350,7 @@ function Software() {
     <section className="bg-[#F6F7F9]">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">BidcoreAI software</p>
-        <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-brand-navy">Construction Software for Every Stage of the Project</h2>
+        <h2 className="mt-2 max-w-3xl text-3xl font-bold tracking-tight text-brand-navy">The BidcoreAI products behind each stage</h2>
         <p className="mt-2 max-w-2xl text-slate-600">Bring estimating, bidding, planning, project execution, and cost management into a connected workflow.</p>
         <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => {
@@ -385,7 +392,7 @@ function Software() {
           })}
         </div>
         <p className="mt-6 text-sm text-slate-500">
-          Software products are BidcoreAI&apos;s own tools, which are separate from the third-party products listed in the Marketplace.{" "}
+          Use one product or the whole life cycle.{" "}
           <Link href="/pricing" className="font-medium text-brand-accent hover:underline">
             See the plans
           </Link>
@@ -398,7 +405,7 @@ function Software() {
 
 /* ── Public tender discovery ─────────────────────────────────────────────────────────────────────────────────────── */
 
-function TenderDiscovery({ ok, tenders, publish }: { ok: boolean; tenders: Tender[]; publish: string }) {
+function TenderDiscovery({ ok, tenders }: { ok: boolean; tenders: Tender[] }) {
   return (
     <section>
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
@@ -410,9 +417,6 @@ function TenderDiscovery({ ok, tenders, publish }: { ok: boolean; tenders: Tende
           <div className="flex flex-wrap gap-3">
             <Link href="/tenders" className="rounded-sm bg-brand-navy px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-brand-navy-light">
               Browse Public Tenders
-            </Link>
-            <Link href={publish} className="rounded-sm border border-slate-300 bg-white px-5 py-3 text-sm font-semibold uppercase tracking-wider text-brand-navy hover:border-slate-400">
-              Publish a Public Tender
             </Link>
           </div>
         </div>
@@ -431,37 +435,6 @@ function TenderDiscovery({ ok, tenders, publish }: { ok: boolean; tenders: Tende
             ))}
           </div>
         )}
-      </div>
-    </section>
-  );
-}
-
-/* ── List your business ──────────────────────────────────────────────────────────────────────────────────────────── */
-
-function ListYourBusiness() {
-  return (
-    <section className="bg-brand-navy text-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Put Your Business in Front of Construction Buyers</h2>
-          <p className="mt-4 max-w-lg leading-relaxed text-slate-300">
-            Create your company profile, showcase your products and services, and help contractors and procurement teams discover your business.
-          </p>
-          <div className="mt-7">
-            <Link href={LIST_URL} className="w-full justify-center sm:w-auto inline-flex items-center gap-3 rounded-sm bg-orange-500 px-5 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-400">
-              List Your Business <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <p className="mt-4 max-w-lg text-xs leading-relaxed text-slate-400">A profile is marked claimed or verified only after the business claims it and Bidcore verifies it, and never automatically.</p>
-        </div>
-        <ul className="space-y-3 rounded-lg border border-white/15 bg-white/5 p-6 text-sm">
-          {LIST_BENEFITS.map((b) => (
-            <li key={b} className="flex items-start gap-2 text-slate-100">
-              <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-orange-400" />
-              {b}
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );
