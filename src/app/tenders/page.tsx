@@ -136,7 +136,7 @@ export default async function TendersPage({ searchParams }: { searchParams: Prom
             <div className="rounded-lg border border-slate-200 bg-white p-6">
               <h2 className="text-lg font-semibold text-brand-navy">Prepare and submit quotations</h2>
               <p className="mt-1 text-sm text-slate-500">
-                Browsing is free. Starter Lite starts with a 7-day free trial with no credit card required, and then continues on a monthly or yearly plan.
+                Browsing is free. Starter Lite starts with a 30-day free trial with no credit card required, and then continues on a monthly or yearly plan.
               </p>
               <Link
                 href={signUpHref("tender-connect")}

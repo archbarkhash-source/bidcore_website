@@ -86,6 +86,8 @@ async function post(path: string, payload: object): Promise<{ ok: boolean; error
 
 /** Copy one item to the BidcoreAI India database. Never throws; on failure the newest state of that item is queued for a retry. */
 async function pushToBackend(path: string, key: string, payload: object): Promise<boolean> {
+  // No BidcoreAI backend configured (the site runs on Vercel + Neon only): the member is already saved in this site's own database, so there is nothing to copy or queue.
+  if (!API || !process.env.WEBSITE_SYNC_SECRET) return false;
   const r = await post(path, payload);
   if (r.ok) {
     await db.contractorSyncOutbox.deleteMany({ where: { key } }).catch(() => {});

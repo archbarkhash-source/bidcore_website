@@ -4,7 +4,6 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { notifySessionChange, useSession } from "@/lib/use-session";
 import { COMPANY_TYPES, STATES } from "@/lib/data";
-import { signUpHref } from "@/lib/app-links";
 
 // One page to add a company to the Bidcore directory: the company, and the person to contact for tender invites (name, designation, verified email and mobile).
 // There is no app account to create. Verifying the e-mail and the mobile number with one-time codes is what keeps the directory real; the saved company is copied to
@@ -47,7 +46,7 @@ export default function AddCompanyForm() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [field, setField] = useState("");
-  const [done, setDone] = useState<null | { synced: boolean }>(null);
+  const [done, setDone] = useState<null | { listedInDirectory: boolean }>(null);
 
   // A signed-in member sees what they saved before (and is already verified).
   useEffect(() => {
@@ -98,7 +97,7 @@ export default function AddCompanyForm() {
       setStep("form");
       return;
     }
-    setDone({ synced: json.synced });
+    setDone({ listedInDirectory: !!json.listedInDirectory });
   }
 
   async function requestCode() {
@@ -174,15 +173,13 @@ export default function AddCompanyForm() {
       <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-8">
         <h2 className="text-lg font-semibold text-emerald-800">Your company is added to the Bidcore directory.</h2>
         <p className="mt-2 text-sm text-emerald-700">
-          EPC and general contractors using Tender Connect can now find {card.companyName || "your company"} and send tender invitations to {contactName || "your contact person"}.{" "}
-          {done.synced ? "" : "The copy to the BidcoreAI contractor database is queued and will complete automatically."}
+          {done.listedInDirectory
+            ? `${card.companyName || "Your company"} is now listed under Find Contractors on Bidcore.in. Your phone and email are never shown.`
+            : `${card.companyName || "Your company"} is saved. It is not shown in Find Contractors, because that list is for EPC, general, specialty and design-build contractors, or because you chose not to list it.`}
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
-          <Link href={signUpHref("tender-connect")} className="rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent-light">
-            Find opportunities, sign up free
-          </Link>
-          <Link href="/companies" className="rounded-full border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy hover:border-slate-400">
-            Back to companies
+          <Link href="/companies" className="rounded-full bg-brand-accent px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-accent-light">
+            Find contractors
           </Link>
           <button onClick={() => setDone(null)} className="px-3 py-2.5 text-sm font-medium text-slate-600 hover:text-brand-accent">
             Edit again

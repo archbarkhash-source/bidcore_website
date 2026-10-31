@@ -1,7 +1,7 @@
 // Unit tests for the contractor directory's pure rules (no database, no network). Run: npm run test:directory
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { cleanEmail, cleanPhone, keyOf, maskAddress, maskEmail, maskPhone, normaliseWebsite, publicContact, slugify } from "../src/lib/directory-core";
+import { cleanEmail, cleanPhone, directoryTypeFor, keyOf, maskAddress, maskEmail, maskPhone, normaliseWebsite, publicContact, slugify } from "../src/lib/directory-core";
 
 test("masks hide the real values", () => {
   assert.equal(maskPhone("+91 22 2575 1000"), "+91 22******00");
@@ -40,4 +40,11 @@ test("a company is one row by website host, else by name + city", () => {
   assert.equal(keyOf("Acme Builders", "", "Mumbai"), "acme-builders-mumbai");
   assert.equal(slugify("Larsen & Toubro Limited"), "larsen-and-toubro-limited");
   assert.equal(slugify("!!!"), "company");
+});
+
+test("a member's company type maps to a directory type, or none", () => {
+  for (const t of ["EPC Contractor", "General Contractor", "Civil Contractor", "Building Contractor", "Infrastructure Contractor", "Structural Contractor"]) assert.equal(directoryTypeFor(t), "EPC Contractor", t);
+  for (const t of ["MEP Contractor", "Electrical Contractor", "Plumbing Contractor", "Interior Contractor", "Subcontractor", "Specialty Contractor"]) assert.equal(directoryTypeFor(t), "Subcontractor", t);
+  assert.equal(directoryTypeFor("Design-Build Contractor"), "Design-Build Contractor");
+  for (const t of ["Architect", "Supplier", "Real Estate Developer", "Construction Consultant", "PMC", "", null, undefined]) assert.equal(directoryTypeFor(t), null, String(t));
 });

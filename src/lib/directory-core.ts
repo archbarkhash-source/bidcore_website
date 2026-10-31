@@ -5,6 +5,16 @@ export const DIRECTORY_TYPES = ["EPC Contractor", "Subcontractor", "Design-Build
 export const DIRECTORY_CITIES = ["Mumbai", "Delhi"] as const;
 export const CONTACTS_PER_MEMBER_PER_DAY = 40; // different companies one member may open in a day (stops a member from copying the whole directory)
 
+/** Which directory type a member's company type belongs to, or null when it is not a contractor (suppliers, architects, developers ... are not in this list). */
+export function directoryTypeFor(companyType: string | null | undefined): (typeof DIRECTORY_TYPES)[number] | null {
+  const t = (companyType ?? "").toLowerCase();
+  if (!t) return null;
+  if (t.includes("design") && t.includes("build")) return "Design-Build Contractor";
+  if (/subcontractor|specialty|mep|electrical|plumbing|interior|hvac|fire/.test(t)) return "Subcontractor";
+  if (/contractor|epc/.test(t)) return "EPC Contractor";
+  return null;
+}
+
 const EMAIL = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
 export function cleanPhone(raw: string | null | undefined): string | null {

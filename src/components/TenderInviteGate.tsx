@@ -6,7 +6,7 @@ import { Lock } from "lucide-react";
 import { notifySessionChange, useSession } from "@/lib/use-session";
 import { signUpHref } from "@/lib/app-links";
 
-const TRIAL_DAYS = 7;
+const TRIAL_DAYS = 30;
 
 export default function TenderInviteGate({
   companySlug,
@@ -64,7 +64,7 @@ export default function TenderInviteGate({
     return (
       <GateCard
         title="Start your Tender Connect free trial"
-        body="Start a 7-day free trial, no credit card required. Sign up to see pricing."
+        body="Start a 30-day free trial, no credit card required. Sign up to see pricing."
       >
         <button onClick={startTrial} disabled={busy} className={`${buttonClass} disabled:opacity-60`}>
           {busy ? "Starting..." : "Start Free"}

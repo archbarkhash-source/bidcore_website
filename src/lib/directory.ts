@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
-import { CONTACTS_PER_MEMBER_PER_DAY, publicContact, type MaskedContact } from "@/lib/directory-core";
+import { CONTACTS_PER_MEMBER_PER_DAY, directoryTypeFor, normaliseWebsite, publicContact, slugify, type MaskedContact } from "@/lib/directory-core";
+import { DIRECTORY_SCHEMA_SQL } from "@/lib/directory-schema";
 
 // The Bidcore contractor directory lives in this site's own Postgres (Neon) database, in `directory_companies`, and is read straight from the pages on Vercel:
 // no separate backend server. Created and filled by `npm run directory:import` (scripts/directory-import.ts; the SQL is in src/lib/directory-schema.ts).
@@ -115,5 +116,48 @@ export async function revealDirectoryContact(slug: string, memberId: string): Pr
     return { ok: true, contact: { phone: row.phone, email: row.email, address: row.address, website: row.website } };
   } catch {
     return { ok: false, status: 503, message: "Contact details are temporarily unavailable. Please try again in a few minutes." };
+  }
+}
+
+let tablesReady = false;
+async function ensureTables() {
+  if (tablesReady) return;
+  for (const sql of DIRECTORY_SCHEMA_SQL) await db.$executeRawUnsafe(sql);
+  tablesReady = true;
+}
+
+/** A member's own company card -> the directory. Listed when the member chose to be listed AND the company type is a contractor type; otherwise any earlier
+ *  listing is switched off. No phone, e-mail or address is stored for a member's company (the add-company form promises they are never shown). Returns whether it is listed. */
+export async function syncMemberDirectory(
+  userId: string,
+  c: { companyName: string; companyType: string | null; city: string | null; state: string | null; trades: string[]; website: string | null; listed: boolean },
+): Promise<boolean> {
+  const type = directoryTypeFor(c.companyType);
+  const key = `member:${userId}`;
+  try {
+    await ensureTables();
+    if (!type || !c.listed) {
+      await db.$executeRawUnsafe(`UPDATE directory_companies SET listed = FALSE, updated_at = now() WHERE key = $1`, key);
+      return false;
+    }
+    const city = c.city || c.state || "India";
+    const slug = `${slugify(c.companyName)}-${slugify(city)}-m${userId.slice(-6).toLowerCase()}`;
+    await db.$executeRawUnsafe(
+      `INSERT INTO directory_companies (key, slug, name, type, city, state, trades, website, verified_on)
+       VALUES ($1, $2, $3, $4, $5, $6, $7::text[], $8, CURRENT_DATE)
+       ON CONFLICT (key) DO UPDATE SET name = EXCLUDED.name, type = EXCLUDED.type, city = EXCLUDED.city, state = EXCLUDED.state, trades = EXCLUDED.trades,
+         website = EXCLUDED.website, listed = TRUE, updated_at = now()`,
+      key,
+      slug,
+      c.companyName,
+      type,
+      city,
+      c.state,
+      c.trades.slice(0, 12),
+      normaliseWebsite(c.website),
+    );
+    return true;
+  } catch {
+    return false; // the company card itself is already saved; the directory copy is retried the next time the member saves
   }
 }

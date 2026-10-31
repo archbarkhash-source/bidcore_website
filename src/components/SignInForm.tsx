@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 import { notifySessionChange } from "@/lib/use-session";
-import { appSignupUrl, type ProductKey } from "@/lib/app-links";
+import type { ProductKey } from "@/lib/app-links";
 import { COUNTRIES, ROLE_LABELS, dialCodeFor, marketForCountry } from "@/lib/roles";
 
 
@@ -26,12 +26,10 @@ export default function SignInForm({
   intent = "company",
   next,
   product,
-  appNext,
-  publish,
 }: {
   intent?: SignUpIntent;
   next?: string;
-  /** A Bidcore product sign-up: once the email is verified (and saved here and in the BidcoreAI India database) the person continues in the BidcoreAI sign-up. */
+  /** A Bidcore product sign-up: the account is created on this website (saved in its database) and the person continues here, to `next` or to Add company info. */
   product?: ProductKey;
   appNext?: string;
   /** The person came from "Publish a tender": the BidcoreAI sign-up is told, so it can start them as a publisher. */
@@ -115,7 +113,7 @@ export default function SignInForm({
       const res = await fetch("/api/signup/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: details.email, code, phoneCode: phoneRequired ? phoneCode : undefined, startTenderTrial: intent === "tender" && !product }),
+        body: JSON.stringify({ email: details.email, code, phoneCode: phoneRequired ? phoneCode : undefined, startTenderTrial: intent === "tender" }),
       });
       const json = await res.json();
       if (!res.ok) {
@@ -123,13 +121,10 @@ export default function SignInForm({
         return;
       }
       notifySessionChange();
-      if (product) {
-        // Hand over to the BidcoreAI sign-up (India preselected, product remembered, details filled in).
-        window.location.href = appSignupUrl(product, { name: details.name, email: details.email, company: details.companyName, phone: details.phone, next: appNext, intent: publish ? "publish" : undefined, market: details.country, role: details.role, vt: json.handoff ?? undefined });
-        return;
-      }
-      if (next) {
-        router.push(next);
+      // Signed up on this website: continue here (the page they were sent from, or add the company's information).
+      const dest = next ?? (product ? "/add-company" : undefined);
+      if (dest) {
+        router.push(dest);
         return;
       }
       setStep("done");

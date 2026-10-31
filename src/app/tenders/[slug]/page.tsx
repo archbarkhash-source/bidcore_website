@@ -141,7 +141,7 @@ export default async function TenderPage({ params }: { params: Promise<{ slug: s
                 Sign up to BidcoreAI Tender Connect to submit the quote
               </p>
               <p className="text-sm text-slate-500">
-                Review eligibility, prepare your pricing and submit. Your 7-day free trial covers quotations, with no
+                Review eligibility, prepare your pricing and submit. Your 30-day free trial covers quotations, with no
                 credit card required.
               </p>
               <Link

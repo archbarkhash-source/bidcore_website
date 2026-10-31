@@ -90,7 +90,7 @@ export default function PricingPlans() {
                 ) : (
                   <span className="text-lg font-bold text-brand-navy">{enterprise ? "Request for pricing" : "Request a demo to see pricing"}</span>
                 )}
-                {plan.key === "tender_connect" && <p className="mt-1 text-xs text-slate-500">7-day free trial · No credit card required</p>}
+                {plan.key === "tender_connect" && <p className="mt-1 text-xs text-slate-500">30-day free trial · No credit card required</p>}
               </div>
 
               <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">

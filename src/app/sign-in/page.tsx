@@ -26,12 +26,11 @@ const COPY: Record<SignUpIntent, { title: string; body: React.ReactNode }> = {
     ),
   },
   tender: {
-    title: "Start Free, No Credit Card",
+    title: "Sign Up Free",
     body: (
       <>
-        Verify your email, then continue to create your BidcoreAI account. You get a 7-day free
-        trial of Tender Connect (Starter Lite), no credit card required; after that you choose a
-        monthly or yearly plan.
+        Verify your email and mobile number with one-time codes to create your Bidcore account. It is free, with no credit card. You can then add your company
+        information to the Bidcore directory and view contact details across it.
       </>
     ),
   },
@@ -41,8 +40,8 @@ const PUBLISH_COPY = {
   title: "Publish Your Tender on Bidcore",
   body: (
     <>
-      Verify your email, then create your BidcoreAI account. Once you are in, add your tender to a package, choose Public Tender and publish, and it appears on
-      Bidcore.in and in Opportunities for every Tender Connect user. No credit card required.
+      Verify your email to create your Bidcore account. Tenders are published from the BidcoreAI software and appear on Bidcore.in under Public Tenders. No credit
+      card required.
     </>
   ),
 };
@@ -60,7 +59,8 @@ export default async function SignInPage({
   const publish = rawIntent === "publish";
   const { title, body } = publish ? PUBLISH_COPY : COPY[intent];
   const explicitNext = appNext?.startsWith("/") && !appNext.startsWith("//") ? appNext : undefined;
-  const next = explicitNext ?? (intent === "tender" ? `/send-tender-invite${company ? `?company=${encodeURIComponent(company)}` : ""}` : undefined);
+  // After verifying, the person stays on this website: an explicit page, the tender-invite page when they came for a named company, else Add company info.
+  const next = explicitNext ?? (intent === "tender" && company ? `/send-tender-invite?company=${encodeURIComponent(company)}` : undefined);
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-14 sm:px-6">

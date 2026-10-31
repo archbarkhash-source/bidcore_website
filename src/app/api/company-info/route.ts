@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { COMPANY_TYPES, STATES } from "@/lib/data";
 import { SESSION_COOKIE, readSessionUserId } from "@/lib/session";
 import { payloadFor, pushContractor } from "@/lib/contractor-sync";
+import { syncMemberDirectory } from "@/lib/directory";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +35,7 @@ export async function GET() {
 
 const clean = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
-// Save the card here first, then copy it (signed) to BidcoreAI. A failed copy is queued and retried; it never loses what the member typed.
+// Save the card in this site's database, list it in the contractor directory (when it is a contractor type), and copy it to BidcoreAI only when a backend is configured.
 export async function POST(req: NextRequest) {
   const user = await currentUser();
   if (!user) return NextResponse.json({ error: "Please sign in first." }, { status: 401 });
@@ -85,6 +86,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Your company details could not be saved right now. Please try again shortly." }, { status: 503 });
   }
 
+  const listedInDirectory = await syncMemberDirectory(user.id, { companyName, companyType, city, state, trades, website, listed });
   const synced = await pushContractor({
     ...payloadFor({ id: user.id, email: user.email, companyName, role: companyType ?? user.role, city, name: contactName ?? user.name, phone: user.phone }),
     contact_designation: designation,
@@ -94,5 +96,5 @@ export async function POST(req: NextRequest) {
     about,
     listed,
   });
-  return NextResponse.json({ ok: true, synced, company: saved });
+  return NextResponse.json({ ok: true, synced, listedInDirectory, company: saved });
 }

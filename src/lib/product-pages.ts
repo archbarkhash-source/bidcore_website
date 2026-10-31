@@ -106,14 +106,14 @@ const DEMO_PRODUCT: Partial<Record<ProductKey, string>> = {
 const demoFor = (key: ProductKey): Cta => ({ label: "Request a Demo", href: `/request-demo?product=${encodeURIComponent(DEMO_PRODUCT[key] ?? "")}` });
 const tenderConnectLive: Cta = { label: "See Tender Connect", href: productHref("tender-connect") };
 
-/** How the free allowance really works (backend/tender_entitlements.py: 7-day company-level trial, then the Tender Connect plan). One place to change if that rule changes. */
+/** How the free allowance really works (backend/tender_entitlements.py: 30-day company-level trial, then the Tender Connect plan). One place to change if that rule changes. */
 const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
-  heading: "7-day free trial. No credit card.",
+  heading: "30-day free trial. No credit card.",
   body:
-    "Browsing public tenders and companies is free. Each company gets a 7-day free trial of Tender Connect that begins the first time you prepare a quotation or publish a tender, with no credit card. After the trial, one monthly or yearly plan covers publishing public and private tenders and submitting quotations.",
+    "Browsing public tenders and companies is free. Each company gets a 30-day free trial of Tender Connect that begins the first time you prepare a quotation or publish a tender, with no credit card. After the trial, one monthly or yearly plan covers publishing public and private tenders and submitting quotations.",
   rows: [
     ["Browse public tenders and companies", "Free"],
-    ["Prepare and publish your first tenders / quotations", "7-day free trial per company, no card"],
+    ["Prepare and publish your first tenders / quotations", "30-day free trial per company, no card"],
     ["Keep publishing and submitting after the trial", "Monthly or yearly plan"],
     ["Your drafts, submitted quotations and records", "Kept, whatever your plan"],
   ],
@@ -125,7 +125,7 @@ const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
 
 const COMING_SOON_NOTE = (name: string, key: ProductKey): ProductPage["access"] => ({
   heading: "See it in a live demo",
-  body: `Request a demo and a Bidcore team member will show you ${name} and share the pricing. The 7-day free trial is for Tender Connect (Starter Lite).`,
+  body: `Request a demo and a Bidcore team member will show you ${name} and share the pricing. The 30-day free trial is for Tender Connect (Starter Lite).`,
   rows: [
     ["Live demo", "Pick a date and time (IST)"],
     ["Pricing", "Shared in the demo"],
@@ -275,7 +275,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         icon: BadgeCheck,
         title: "Free Trial and Subscription",
         problem: "Teams hesitate to commit before they have tried the workflow.",
-        body: "Try Tender Connect free for 7 days with no credit card, then continue on a monthly or yearly plan. Browsing, drafts and past quotations never depend on a plan.",
+        body: "Try Tender Connect free for 30 days with no credit card, then continue on a monthly or yearly plan. Browsing, drafts and past quotations never depend on a plan.",
         status: "live",
       },
     ],
@@ -324,7 +324,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
       },
       {
         q: "What does it cost?",
-        a: "Browsing is free. Each company gets a 7-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a monthly or yearly plan applies. The current prices are always on the pricing page.",
+        a: "Browsing is free. Each company gets a 30-day free trial, with no credit card, that starts when you first prepare a quotation or publish a tender. After that, a monthly or yearly plan applies. The current prices are always on the pricing page.",
       },
       {
         q: "Is the free trial per person?",
@@ -475,7 +475,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
       },
       {
         q: "Does it guarantee that I will win a tender?",
@@ -626,7 +626,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
       },
       {
         q: "Which cost models are supported?",
@@ -746,7 +746,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
       },
       {
         q: "Can I compare supplier quotations?",
@@ -876,7 +876,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
     faqs: [
       {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 7-day free trial.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
       },
       {
         q: "Can a subcontractor see my work packages?",
