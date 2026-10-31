@@ -28,7 +28,6 @@ const PLANS: Plan[] = [
       "BOQ pricing, documents and checklists",
     ],
     highlight: true,
-    price: { amount: "₹5,000", per: " / month" },
   },
   {
     key: "starter",
@@ -63,8 +62,8 @@ const PLANS: Plan[] = [
   },
 ];
 
-// Plans and what they include. Starter Lite shows its price and is the one plan with a free trial and a Start Free Trial button; Starter and Pro go through Request a Demo,
-// and Enterprise through Request for pricing.
+// Plans and what they include. No plan shows a price on the website. Starter Lite (Tender Connect) is the one plan with a free trial and a Start Free Trial button;
+// Starter and Pro go through Request a Demo, and Enterprise through Request for pricing.
 export default function PricingPlans() {
   return (
     <div>
@@ -82,15 +81,14 @@ export default function PricingPlans() {
               <p className="mt-1.5 text-sm text-slate-500">{plan.tagline}</p>
 
               <div className="mt-5">
-                {plan.price ? (
+                {plan.key === "tender_connect" ? (
                   <>
-                    <span className="text-3xl font-bold text-brand-navy">{plan.price.amount}</span>
-                    <span className="text-sm text-slate-500">{plan.price.per}</span>
+                    <span className="text-lg font-bold text-brand-navy">30-day free trial</span>
+                    <p className="mt-1 text-xs text-slate-500">No credit card required</p>
                   </>
                 ) : (
                   <span className="text-lg font-bold text-brand-navy">{enterprise ? "Request for pricing" : "Request a demo to see pricing"}</span>
                 )}
-                {plan.key === "tender_connect" && <p className="mt-1 text-xs text-slate-500">30-day free trial · No credit card required</p>}
               </div>
 
               <ul className="mt-5 flex-1 space-y-2 text-sm text-slate-700">
