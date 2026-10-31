@@ -10,7 +10,7 @@ import { SOLUTIONS } from "@/lib/solutions";
 import CountrySwitch from "@/components/CountrySwitch";
 
 // Products are the primary navigation. Marketplace = shop for products, suppliers and equipment; Explore = find companies and services.
-const PRODUCTS_LINKS = PRODUCTS.map((p) => ({ label: `BidcoreAI ${p.name}`, href: p.href }));
+const PRODUCTS_LINKS = [...PRODUCTS.map((p) => ({ label: `BidcoreAI ${p.name}`, href: p.href })), { label: "Download Starter Lite software", href: "/software" }];
 
 interface NavLink {
   label: string;

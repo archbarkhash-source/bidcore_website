@@ -29,6 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: p.availability === "available" ? 0.8 : 0.5,
     })),
     { url: `${SITE_URL}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${SITE_URL}/software`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/contractors`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     ...CONTRACTOR_CATEGORIES.map((c) => ({ url: `${SITE_URL}/contractors/${c.slug}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.5 })),
     { url: `${SITE_URL}/marketplace`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
