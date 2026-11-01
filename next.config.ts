@@ -33,6 +33,8 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // One address per page for search engines: bidcore.in (no www) goes to www.bidcore.in
+      { source: "/:path*", has: [{ type: "host", value: "bidcore.in" }], destination: "https://www.bidcore.in/:path*", permanent: true },
       { source: "/bid-board", destination: "/tenders", permanent: true }, // Tender Connect = the public published tenders
       { source: "/products/procurement", destination: "/products/procurement-management", permanent: true },
       { source: "/company/:slug", destination: "/contractor/:slug", permanent: true },      // the old address of a contractor's page
