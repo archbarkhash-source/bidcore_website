@@ -10,7 +10,7 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: "What is Bidcore?",
-    a: "Bidcore brings BidcoreAI construction software, public tenders, a company directory and a marketplace for products and services together in one platform for construction companies in India.",
+    a: "Bidcore brings BidcoreAI construction software, public tenders, a company directory and a supplier and vendor directory together in one platform for construction companies in India.",
     link: { label: "Explore the platform", href: "/products" },
   },
   {
@@ -40,17 +40,17 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I find suppliers or subcontractors for a package?",
-    a: "Publish the package on Tender Connect to invite subcontractors privately or openly, and compare their item-wise quotations side by side. To look for companies, suppliers and manufacturers, or for construction products and services, use the Marketplace.",
+    a: "Publish the package on Tender Connect to invite subcontractors privately or openly, and compare their item-wise quotations side by side. To look for companies, suppliers and manufacturers, or for construction products and services, use Suppliers and Vendors.",
     link: { label: "Find contractors", href: "/supply/companies" },
   },
   {
-    q: "What is the Bidcore Marketplace?",
-    a: "The Marketplace is where construction companies promote their products and services and where buyers find them: suppliers, manufacturers, equipment providers and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
-    link: { label: "Open the Marketplace", href: "/supply" },
+    q: "Where do I find construction suppliers and vendors?",
+    a: "Suppliers and Vendors is where construction companies promote their products and services and where contractors find them: suppliers, manufacturers, equipment providers and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
+    link: { label: "Find suppliers and vendors", href: "/supply" },
   },
   {
-    q: "How do I find products on the Marketplace?",
-    a: "Open the Marketplace menu and choose Find Products. Search by name, or browse by category such as construction materials, electrical and mechanical products, infrastructure products and equipment rental. Open a listing and use Request a quote to send the supplier an enquiry.",
+    q: "How do I find construction products and suppliers?",
+    a: "Choose Find Products in the Explore menu. Search by name, or browse by category such as construction materials, electrical and mechanical products, infrastructure products and equipment rental. Open a listing and use Request a quote to send the supplier an enquiry.",
     link: { label: "Find products", href: "/supply/products" },
   },
   {
@@ -59,13 +59,13 @@ export const FAQ: FaqItem[] = [
     link: { label: "Find services", href: "/supply/services" },
   },
   {
-    q: "How do I add my products or services to the Marketplace?",
+    q: "How do I list my company as a supplier or vendor?",
     a: "Choose List Your Construction Services and sign in with your company email (personal addresses such as Gmail are not accepted). Find your company to claim it, or add it, then fill in your business details and add your products and services. Listings move from Draft to Awaiting review and appear once they are approved and published. Joining is free, and the free plan allows up to 10 active listings per company.",
     link: { label: "List your construction services", href: "/supply/list-your-company" },
   },
   {
     q: "How do I receive enquiries from buyers?",
-    a: "When a buyer sends an enquiry about one of your listings, it arrives in the Enquiries section of your Marketplace dashboard, and we use your company email to send it to you as well. You can mark each enquiry as responded, in discussion, converted or closed.",
+    a: "When a buyer sends an enquiry about one of your listings, it arrives in the Enquiries section of your supplier dashboard, and we use your company email to send it to you as well. You can mark each enquiry as responded, in discussion, converted or closed.",
     link: { label: "Go to your dashboard", href: "/supply/dashboard" },
   },
   {

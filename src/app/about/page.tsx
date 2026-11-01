@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/bidcore-api";
 export const metadata: Metadata = {
   title: "About Bidcore | AI-Powered End-to-End Construction Solutions",
   description:
-    "BidcoreAI connects construction software, public tenders, company discovery and a marketplace for construction products and services in one integrated ecosystem, with BidcoreAI software serving both the United States and India.",
+    "BidcoreAI connects construction software, public tenders, company discovery and a directory of construction suppliers and vendors in one integrated ecosystem, with BidcoreAI software serving both the United States and India.",
   alternates: { canonical: "/about" },
   openGraph: { title: "About Bidcore", url: `${SITE_URL}/about`, type: "website", siteName: "Bidcore", locale: "en_IN" },
 };
@@ -27,9 +27,9 @@ const ECOSYSTEM = [
   },
   {
     icon: ShoppingBag,
-    title: "Construction Marketplace",
+    title: "Suppliers and Vendors",
     body: "Discover construction materials, products, equipment, suppliers, manufacturers, and service providers.",
-    cta: { label: "Explore Marketplace", href: "/supply" },
+    cta: { label: "Find Suppliers and Vendors", href: "/supply" },
   },
   {
     icon: Building2,
@@ -62,7 +62,7 @@ const POSITIONS = ["left-0 top-0", "right-0 top-0", "bottom-0 left-0", "bottom-0
 const BIDCORE_NODES: HubNode[] = [
   { icon: Cpu, label: "BidcoreAI software" },
   { icon: FileText, label: "Public tenders" },
-  { icon: ShoppingBag, label: "Marketplace" },
+  { icon: ShoppingBag, label: "Suppliers and Vendors" },
   { icon: Building2, label: "Company directory" },
 ];
 const BIDCOREAI_NODES: HubNode[] = [
@@ -120,7 +120,7 @@ export default function AboutPage() {
             On One Integrated Platform
           </h1>
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-slate-300">
-            BidcoreAI connects construction software, public tenders, company discovery, and a marketplace for construction products and services, helping businesses
+            BidcoreAI connects construction software, public tenders, company discovery, and a directory of construction suppliers and vendors, helping businesses
             discover opportunities, prepare bids, manage projects, and connect with the wider construction industry.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -128,7 +128,7 @@ export default function AboutPage() {
               Explore Bidcore <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/supply" className={buttonOutline}>
-              Explore the Marketplace
+              Find suppliers and vendors
             </Link>
           </div>
         </div>

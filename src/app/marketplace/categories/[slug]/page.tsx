@@ -23,8 +23,8 @@ export async function generateMetadata({ params, searchParams }: { params: Promi
   const thin = d.listings.total === 0 && d.companies.total === 0;
   const what = d.kind === "service" ? "service providers" : "suppliers and products";
   return {
-    title: `${d.node.name} — ${what} | Bidcore Marketplace`,
-    description: d.node.description ?? `Find ${what} for ${d.node.name.toLowerCase()} on the Bidcore construction marketplace.`,
+    title: `${d.node.name} — ${what} | Bidcore`,
+    description: d.node.description ?? `Find ${what} for ${d.node.name.toLowerCase()} on Bidcore.`,
     alternates: { canonical: `${MP}/categories/${slug}` },
     // An empty category is not a useful page for a search engine; it stays reachable for visitors.
     robots: thin ? { index: false, follow: true } : undefined,
@@ -41,7 +41,7 @@ export default async function CategoryPage({ params, searchParams }: { params: P
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-slate-500" aria-label="Breadcrumb">
-        <Link href={MP} className="hover:text-brand-accent">Marketplace</Link> /{" "}
+        <Link href={MP} className="hover:text-brand-accent">Suppliers and Vendors</Link> /{" "}
         {parent && (
           <>
             <Link href={`${MP}/categories/${parent.slug}`} className="hover:text-brand-accent">{parent.name}</Link> /{" "}

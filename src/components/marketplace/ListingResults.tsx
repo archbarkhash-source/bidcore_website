@@ -13,14 +13,14 @@ const COPY = {
     path: "products",
     h1: "Browse construction products and equipment",
     lead: "Building materials, machinery, electrical and mechanical products, and infrastructure products from suppliers and manufacturers.",
-    title: "Construction Products, Materials and Equipment in India | Bidcore Marketplace",
+    title: "Construction Products, Materials and Equipment in India | Bidcore",
     description: "Browse construction products, building materials and equipment from suppliers and manufacturers. Request a quote directly.",
   },
   service: {
     path: "services",
     h1: "Browse construction services",
     lead: "Consultants, contractors, testing laboratories, surveyors and equipment rental providers.",
-    title: "Construction, Engineering and Testing Services in India | Bidcore Marketplace",
+    title: "Construction, Engineering and Testing Services in India | Bidcore",
     description: "Find engineering consultants, contractors, testing and survey services and equipment rental. Send an enquiry directly.",
   },
 } as const;
@@ -31,7 +31,7 @@ export function listingsMetadata(kind: ListingKind, sp: SP, categoryName?: strin
   const page = Number(one(sp.page)) || 1;
   const base = `${MP}/${c.path}`;
   return {
-    title: categoryName ? `${categoryName} — ${kind === "product" ? "Suppliers and Products" : "Service Providers"} | Bidcore Marketplace` : c.title,
+    title: categoryName ? `${categoryName} — ${kind === "product" ? "Suppliers and Products" : "Service Providers"} | Bidcore` : c.title,
     description: c.description,
     alternates: { canonical: page > 1 && !filtered ? `${base}?page=${page}` : base },
     robots: filtered ? { index: false, follow: true } : undefined,
@@ -66,7 +66,7 @@ export default async function ListingResults({ kind, sp }: { kind: ListingKind; 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-slate-500" aria-label="Breadcrumb">
-        <Link href={MP} className="hover:text-brand-accent">Marketplace</Link> / <span className="text-slate-700">{kind === "product" ? "Products" : "Services"}</span>
+        <Link href={MP} className="hover:text-brand-accent">Suppliers and Vendors</Link> / <span className="text-slate-700">{kind === "product" ? "Products" : "Services"}</span>
       </nav>
       <h1 className="mt-2 text-2xl font-bold text-slate-900">{c.h1}</h1>
       <p className="mt-1 text-sm text-slate-600">{c.lead}</p>

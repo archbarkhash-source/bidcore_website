@@ -8,7 +8,7 @@ import { analytics, completion, first, loadDashboard } from "@/lib/marketplace/d
 import { submitForPublication } from "@/lib/marketplace/actions";
 import { COMPANY_STATUS_LABEL, MP } from "@/lib/marketplace/constants";
 
-export const metadata: Metadata = { title: "Marketplace dashboard | Bidcore", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Supplier dashboard | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -20,14 +20,14 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
     const claims = await db.companyClaim.findMany({ where: { userId: user.id, status: "pending" }, include: { company: { select: { name: true } } } });
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 sm:px-6">
-        <h1 className="text-2xl font-bold text-slate-900">Marketplace dashboard</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Supplier dashboard</h1>
         {claims.length > 0 && (
           <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
             <p className="font-medium">Claim requests awaiting review</p>
             <ul className="mt-1 list-disc pl-5">{claims.map((c) => <li key={c.id}>{c.company.name}</li>)}</ul>
           </div>
         )}
-        <p className="mt-4 text-slate-600">You do not manage a company on the marketplace yet. Find your company to claim it, or add it if it is not listed.</p>
+        <p className="mt-4 text-slate-600">You do not manage a company on Bidcore yet. Find your company to claim it, or add it if it is not listed.</p>
         <Link href={`${MP}/list-your-company`} className={`${primaryBtn} mt-5`}>List your construction services</Link>
       </div>
     );
@@ -83,7 +83,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
               <div><dd className="text-2xl font-bold text-slate-900">{stats.listingViews}</dd><dt className="text-xs text-slate-500">Listing views</dt></div>
               <div><dd className="text-2xl font-bold text-slate-900">{stats.enquiries}</dd><dt className="text-xs text-slate-500">Enquiries</dt></div>
             </dl>
-            <p className="mt-3 text-xs text-slate-400">Counts come from page views recorded on bidcore.in since the marketplace launched. Bots and repeat views in one session are not counted.</p>
+            <p className="mt-3 text-xs text-slate-400">Counts come from page views recorded on bidcore.in since the supplier pages launched. Bots and repeat views in one session are not counted.</p>
           </section>
 
           <section className="grid gap-4 sm:grid-cols-2">

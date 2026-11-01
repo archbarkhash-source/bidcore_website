@@ -68,8 +68,8 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Find suppliers and manufacturers",
-        body: "Search the marketplace for companies, products and services across India.",
-        link: { label: "Marketplace", href: "/supply" },
+        body: "Search suppliers and vendors for products and services across India.",
+        link: { label: "Suppliers and Vendors", href: "/supply" },
       },
     ],
   },
@@ -142,8 +142,8 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Find suppliers and manufacturers",
-        body: "Search the marketplace for suppliers, manufacturers and equipment providers.",
-        link: { label: "Marketplace", href: "/supply" },
+        body: "Find suppliers, manufacturers and equipment providers.",
+        link: { label: "Suppliers and Vendors", href: "/supply" },
       },
       {
         title: "Control cost through delivery",
@@ -227,7 +227,7 @@ export const SOLUTIONS: Solution[] = [
       },
       {
         title: "Own a construction product or service?",
-        body: "List your construction services on the marketplace so contractors and procurement teams can find your products and services.",
+        body: "List your construction services on Bidcore so contractors and procurement teams can find your products and services.",
         link: { label: "List Your Construction Services", href: "/supply/list-your-company" },
       },
     ],

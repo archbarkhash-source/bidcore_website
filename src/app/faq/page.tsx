@@ -6,7 +6,7 @@ import { SITE_URL } from "@/lib/bidcore-api";
 
 export const metadata: Metadata = {
   title: "FAQ | Bidcore",
-  description: "Answers about Bidcore: public and private tenders, bidding on government tenders, running projects, the Marketplace, finding suppliers and subcontractors, the free trial, and demos.",
+  description: "Answers about Bidcore: public and private tenders, bidding on government tenders, running projects, finding suppliers and subcontractors, the free trial, and demos.",
   alternates: { canonical: "/faq" },
   openGraph: { title: "FAQ | Bidcore", url: `${SITE_URL}/faq`, type: "website", siteName: "Bidcore", locale: "en_IN" },
 };

@@ -7,7 +7,7 @@ import { saveProfile } from "@/lib/marketplace/actions";
 import { BUSINESS_TYPES, MP } from "@/lib/marketplace/constants";
 import { redirect } from "next/navigation";
 
-export const metadata: Metadata = { title: "Company profile | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Company profile | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 const join = (xs: string[]) => xs.join(", ");

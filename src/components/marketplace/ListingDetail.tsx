@@ -18,7 +18,7 @@ export async function listingMetadata(kind: ListingKind, slug: string): Promise<
   if (!l) return { title: "Listing not found", robots: { index: false, follow: false } };
   const place = [l.company.cityName, l.company.state.name].filter(Boolean).join(", ");
   return {
-    title: `${l.title} — ${companyTitle(l.company)}, ${place} | Bidcore Marketplace`,
+    title: `${l.title} — ${companyTitle(l.company)}, ${place} | Bidcore`,
     description: (l.shortDescription ?? l.description ?? `${l.title} from ${companyTitle(l.company)}.`).slice(0, 160),
     alternates: { canonical: `${MP}/${path(kind)}/${slug}` },
     openGraph: l.images[0] ? { images: [l.images[0]] } : undefined,
@@ -63,7 +63,7 @@ export default async function ListingDetail({ kind, slug }: { kind: ListingKind;
       <JsonLd data={ld} />
       <TrackView type="listing_view" id={l.id} />
       <nav className="text-sm text-slate-500" aria-label="Breadcrumb">
-        <Link href={MP} className="hover:text-brand-accent">Marketplace</Link> / <Link href={`${MP}/${path(kind)}`} className="hover:text-brand-accent">{kind === "product" ? "Products" : "Services"}</Link>
+        <Link href={MP} className="hover:text-brand-accent">Suppliers and Vendors</Link> / <Link href={`${MP}/${path(kind)}`} className="hover:text-brand-accent">{kind === "product" ? "Products" : "Services"}</Link>
         {l.category && (
           <>
             {" "}/ <Link href={`${MP}/categories/${l.category.slug}`} className="hover:text-brand-accent">{l.category.name}</Link>

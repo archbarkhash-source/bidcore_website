@@ -9,7 +9,7 @@ import { PRODUCTS } from "@/lib/app-links";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Construction Marketplace: Materials, Equipment, Tools and Services | Bidcore",
+  title: "Construction Suppliers and Vendors: Materials, Equipment, Tools and Services | Bidcore",
   description: "Discover construction materials, equipment, tools, safety products and professional services from suppliers across India. Compare options and request quotes.",
   alternates: { canonical: MP },
 };
@@ -110,7 +110,7 @@ export default async function MarketplaceHome() {
 
         <section className="grid gap-4 lg:grid-cols-[1fr_1fr]">
           <div className="rounded-lg border border-slate-200 bg-white p-6">
-            <h2 className="text-lg font-bold text-slate-900">Sell on the Bidcore marketplace</h2>
+            <h2 className="text-lg font-bold text-slate-900">Supply to contractors on Bidcore</h2>
             <p className="mt-1 text-sm text-slate-600">List your products and services for free, show your capabilities, and receive quote requests from contractors and procurement teams.</p>
             <Link href={`${MP}/list-your-company`} className={`${outlineBtn} mt-4`}>List Your Construction Services</Link>
           </div>

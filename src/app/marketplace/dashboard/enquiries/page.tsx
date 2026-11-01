@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { first, loadDashboard } from "@/lib/marketplace/dashboard";
 import { ENQUIRY_STATUSES, MP, enquiryStatusLabel } from "@/lib/marketplace/constants";
 
-export const metadata: Metadata = { title: "My enquiries | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "My enquiries | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 

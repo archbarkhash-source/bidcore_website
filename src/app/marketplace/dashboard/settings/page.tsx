@@ -6,7 +6,7 @@ import { loadDashboard } from "@/lib/marketplace/dashboard";
 import { saveSettings, withdrawFromMarketplace } from "@/lib/marketplace/actions";
 import { MP } from "@/lib/marketplace/constants";
 
-export const metadata: Metadata = { title: "Settings | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Settings | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 
@@ -41,9 +41,9 @@ export default async function SettingsPage({ searchParams }: { searchParams: Pro
         {(company.marketplaceStatus === "published" || company.marketplaceStatus === "pending") && (
           <form action={withdrawFromMarketplace} className="border-t border-slate-200 pt-6">
             <input type="hidden" name="companyId" value={company.id} />
-            <h2 className="text-lg font-semibold text-slate-900">Remove from the marketplace</h2>
+            <h2 className="text-lg font-semibold text-slate-900">Remove from the supplier listings</h2>
             <p className="mt-1 text-sm text-slate-600">Hides your profile and all your listings from the public. You can submit again later. Your data is kept.</p>
-            <button className="mt-3 rounded-full border border-red-300 px-5 py-2 text-sm font-semibold text-red-700 hover:bg-red-50">Withdraw from marketplace</button>
+            <button className="mt-3 rounded-full border border-red-300 px-5 py-2 text-sm font-semibold text-red-700 hover:bg-red-50">Withdraw from supplier listings</button>
           </form>
         )}
       </div>

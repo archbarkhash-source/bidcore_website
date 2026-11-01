@@ -32,7 +32,7 @@ export interface EnquiryMail {
 
 export function notifySupplier(to: string, claimed: boolean, e: EnquiryMail) {
   return send(to, `New enquiry ${e.ref}: ${e.subject}`, [
-    `You have a new enquiry on the Bidcore marketplace about: ${e.subject}`,
+    `You have a new enquiry on Bidcore about: ${e.subject}`,
     `From: ${e.buyerName}${e.buyerCompany ? `, ${e.buyerCompany}` : ""}`,
     `Email: ${e.buyerEmail}${e.buyerPhone ? `\nPhone: ${e.buyerPhone}` : ""}`,
     ...(e.quantity ? [`Quantity: ${e.quantity}`] : []),

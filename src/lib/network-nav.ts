@@ -14,7 +14,7 @@ export const MARKETPLACE_LINKS: NavEntry[] = [
   { label: "Find Products", href: "/supply/products" },
   { label: "Find Suppliers & Manufacturers", href: "/supply/companies?type=Supplier" },
   { label: "Find Equipment Providers", href: "/supply/categories/equipment-rental" },
-  { label: "Marketplace Overview", href: "/supply" },
+  { label: "Suppliers and Vendors", href: "/supply" },
   { label: "List Your Construction Services", href: "/supply/list-your-company" },
   // A separate step from the Marketplace listing: company details for Tender Connect, so EPC companies can find the company and invite it to tender.
   { label: "Add Your Company Info", href: "/add-company" },

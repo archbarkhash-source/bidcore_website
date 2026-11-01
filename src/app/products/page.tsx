@@ -29,7 +29,7 @@ export default function ProductsIndex() {
               Software for estimating, tendering, planning and running construction projects, from the first tender to the last site report. Looking for construction products and
               suppliers instead? Visit the{" "}
               <Link href="/supply" className="font-semibold text-white underline underline-offset-2 hover:text-amber-300">
-                Marketplace
+                supplier and vendor directory
               </Link>
               .
             </p>

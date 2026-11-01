@@ -4,7 +4,7 @@ import ContractorsList, { type SP } from "@/components/ContractorsList";
 export const revalidate = 300;
 
 export const metadata: Metadata = {
-  title: "Contractors on Bidcore",
+  title: "Find EPC Contractors and Subcontractors | Bidcore",
   description: "EPC contractors, subcontractors and design-build contractors listed on Bidcore, starting with Mumbai and Delhi.",
   alternates: { canonical: "/contractors" },
 };

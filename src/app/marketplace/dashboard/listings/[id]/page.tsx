@@ -8,7 +8,7 @@ import { loadDashboard } from "@/lib/marketplace/dashboard";
 import { flattenCategories, getCategoryTree } from "@/lib/marketplace/queries";
 import { MP } from "@/lib/marketplace/constants";
 
-export const metadata: Metadata = { title: "Edit listing | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Edit listing | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 

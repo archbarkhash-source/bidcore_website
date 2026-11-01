@@ -8,7 +8,7 @@ import { listingAction } from "@/lib/marketplace/actions";
 import { FREE_LISTING_LIMIT, LISTING_STATUS_LABEL, MP } from "@/lib/marketplace/constants";
 import { redirect } from "next/navigation";
 
-export const metadata: Metadata = { title: "My products and services | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "My products and services | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 

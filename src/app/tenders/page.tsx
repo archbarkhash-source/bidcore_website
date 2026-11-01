@@ -9,7 +9,7 @@ import { signUpHref } from "@/lib/app-links";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Find Construction Tenders on Bidcore",
+  title: "Open Construction Tenders for Contractors in India | Bidcore",
   description:
     "General contractors and EPC companies publish tenders publicly on Bidcore to get more quotes for their tender packages. These are not government tenders. Browse them and submit your quotation.",
   alternates: { canonical: "/tenders" },

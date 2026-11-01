@@ -15,7 +15,7 @@ import { getProductPage } from "@/lib/product-pages";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "BidcoreAI: Complete AI-Integrated Construction Life Cycle Solution for Contractors",
+  title: "Construction Estimation and Tender Management Software | BidcoreAI",
   description:
     "One platform for EPC contractors: tender analysis, quantity takeoff, CPWD / MoRTH cost estimation, tender cost and schedules, subcontractor tendering, budgets, procurement, daily progress and site operations.",
   alternates: { canonical: "/" },

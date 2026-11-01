@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!c) return { title: "Company not found", robots: { index: false, follow: false } };
   const place = [c.cityName, c.state.name].filter(Boolean).join(", ");
   return {
-    title: `${companyTitle(c)} — ${c.type} in ${place} | Bidcore Marketplace`,
-    description: c.about?.slice(0, 160) ?? `${companyTitle(c)} is a ${c.type.toLowerCase()} in ${place}. View products, services and capabilities on the Bidcore marketplace.`,
+    title: `${companyTitle(c)} — ${c.type} in ${place} | Bidcore`,
+    description: c.about?.slice(0, 160) ?? `${companyTitle(c)} is a ${c.type.toLowerCase()} in ${place}. View products, services and capabilities on Bidcore.`,
     alternates: { canonical: `${MP}/companies/${slug}` },
   };
 }
@@ -64,7 +64,7 @@ export default async function CompanyProfile({ params }: { params: Promise<{ slu
       <JsonLd data={ld} />
       <TrackView type="company_view" id={c.id} />
       <nav className="text-sm text-slate-500" aria-label="Breadcrumb">
-        <Link href={MP} className="hover:text-brand-accent">Marketplace</Link> / <Link href={`${MP}/companies`} className="hover:text-brand-accent">Companies</Link> /{" "}
+        <Link href={MP} className="hover:text-brand-accent">Suppliers and Vendors</Link> / <Link href={`${MP}/companies`} className="hover:text-brand-accent">Companies</Link> /{" "}
         <span className="text-slate-700">{companyTitle(c)}</span>
       </nav>
 

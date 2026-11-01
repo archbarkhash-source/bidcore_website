@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PricingPlans from "@/components/PricingPlans";
 
 export const metadata: Metadata = {
-  title: "Plans | Bidcore",
+  title: "BidcoreAI Plans: Tender Connect, Starter, Pro | Bidcore",
   description:
     "BidcoreAI software plans: Starter Lite (Tender Connect), Starter, Pro and Enterprise. Starter Lite starts with a 30-day free trial, no credit card. Request a demo for Starter and Pro.",
   alternates: { canonical: "/pricing" },

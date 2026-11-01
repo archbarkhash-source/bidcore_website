@@ -8,7 +8,7 @@ import { loadDashboard } from "@/lib/marketplace/dashboard";
 import { respondToEnquiry, updateEnquiryStatus } from "@/lib/marketplace/actions";
 import { ENQUIRY_STATUSES, MP, enquiryStatusLabel } from "@/lib/marketplace/constants";
 
-export const metadata: Metadata = { title: "Enquiry | Bidcore marketplace", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Enquiry | Bidcore", robots: { index: false, follow: false } };
 
 type SP = Record<string, string | string[] | undefined>;
 

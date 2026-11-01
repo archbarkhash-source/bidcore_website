@@ -28,7 +28,7 @@ export default function DashboardShell({
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Marketplace dashboard</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Supplier dashboard</p>
           <h1 className="text-2xl font-bold text-slate-900">{title ?? companyTitle(company)}</h1>
         </div>
         {companies.length > 1 && (

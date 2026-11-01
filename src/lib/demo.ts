@@ -1,6 +1,6 @@
 // Choices on the "Request a Demo" form, shared by the form (client) and the API route (server validation).
 export const DEMO_ROLES = ["EPC / General Contractor", "Subcontractor", "Developer / Owner", "Consultant / PMC", "Supplier / Manufacturer", "Other"];
-export const DEMO_INTERESTS = ["Tender Connect", "Tender Management", "Project Management", "Procurement Management", "Site Operations", "Marketplace", "Custom solutions / integration", "Not sure yet"];
+export const DEMO_INTERESTS = ["Tender Connect", "Tender Management", "Project Management", "Procurement Management", "Site Operations", "Suppliers and Vendors", "Custom solutions / integration", "Not sure yet"];
 
 /** How far ahead a demo date can be chosen (any day from tomorrow on). */
 export const DEMO_MAX_DAYS_AHEAD = 90;
