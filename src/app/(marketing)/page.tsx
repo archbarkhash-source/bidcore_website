@@ -17,7 +17,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: "BidcoreAI: Complete AI-Integrated Construction Life Cycle Solution for Contractors",
   description:
-    "One platform for Indian EPC contractors: tender analysis, quantity takeoff, CPWD / MoRTH cost estimation, tender cost and schedules, subcontractor tendering, budgets, procurement, daily progress and site operations.",
+    "One platform for EPC contractors: tender analysis, quantity takeoff, CPWD / MoRTH cost estimation, tender cost and schedules, subcontractor tendering, budgets, procurement, daily progress and site operations.",
   alternates: { canonical: "/" },
 };
 
@@ -53,7 +53,7 @@ function Hero() {
           {/* One colour for the whole headline: white on the dark hero. Orange is kept for buttons, icons and small accents only. */}
           <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">Complete AI-Integrated Construction Life Cycle Solution</h1>
           <p className="mt-5 text-xl font-semibold leading-snug text-slate-100 sm:text-2xl">
-            From tender to handover, for Indian EPC contractors
+            From tender to handover, for EPC contractors
             <br />
             On one integrated platform
           </p>
