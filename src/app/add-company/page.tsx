@@ -19,7 +19,7 @@ export default function AddCompanyPage() {
       <p className="mt-2 text-sm text-slate-500">
         This is separate from the Marketplace. To promote products or services, use{" "}
         <Link href="/marketplace/list-your-business" className="font-medium text-brand-accent hover:underline">
-          List Your Business
+          List Your Construction Services
         </Link>
         .
       </p>

@@ -11,7 +11,7 @@ import { domainOf, normalizeCin, normalizeName } from "@/lib/marketplace/identit
 import { Field, inputClass, outlineBtn, primaryBtn, one } from "@/components/marketplace/ui";
 
 export const metadata: Metadata = {
-  title: "List Your Business on the Bidcore Marketplace",
+  title: "List Your Construction Services on the Bidcore Marketplace",
   description: "Add your construction company, products and services to the Bidcore marketplace for free, or claim an existing profile.",
   alternates: { canonical: `${MP}/list-your-business` },
 };
@@ -35,8 +35,8 @@ function Steps({ current }: { current: number }) {
 function Shell({ children, step, error }: { children: React.ReactNode; step: number; error?: string }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <h1 className="text-2xl font-bold text-slate-900">List your business</h1>
-      <p className="mt-1 text-slate-600">Free to join. Add your company, products and services so buyers across India can find and contact you. Only the basics are required — you can complete the rest later.</p>
+      <h1 className="text-2xl font-bold text-slate-900">List your construction services</h1>
+      <p className="mt-1 text-slate-600">Free to join. Add your company, products and services so buyers across India can find and contact you. Only the basics are required, and you can complete the rest later.</p>
       <Steps current={step} />
       {error && <p role="alert" className="mt-5 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">{error}</p>}
       <div className="mt-6">{children}</div>

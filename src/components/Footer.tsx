@@ -62,7 +62,7 @@ export default function Footer() {
         { label: "Find Products", href: "/marketplace/products" },
         { label: "Find Suppliers & Manufacturers", href: "/marketplace/companies?type=Supplier" },
         { label: "Find Equipment Providers", href: "/marketplace/categories/equipment-rental" },
-        { label: "List Your Business", href: "/marketplace/list-your-business" },
+        { label: "List Your Construction Services", href: "/marketplace/list-your-business" },
       ],
     },
     {

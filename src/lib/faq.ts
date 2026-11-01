@@ -60,8 +60,8 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I add my products or services to the Marketplace?",
-    a: "Choose List Your Business and sign in with your company email (personal addresses such as Gmail are not accepted). Find your company to claim it, or add it, then fill in your business details and add your products and services. Listings move from Draft to Awaiting review and appear once they are approved and published. Joining is free, and the free plan allows up to 10 active listings per company.",
-    link: { label: "List your business", href: "/marketplace/list-your-business" },
+    a: "Choose List Your Construction Services and sign in with your company email (personal addresses such as Gmail are not accepted). Find your company to claim it, or add it, then fill in your business details and add your products and services. Listings move from Draft to Awaiting review and appear once they are approved and published. Joining is free, and the free plan allows up to 10 active listings per company.",
+    link: { label: "List your construction services", href: "/marketplace/list-your-business" },
   },
   {
     q: "How do I receive enquiries from buyers?",
@@ -79,8 +79,8 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "How do I list my business or claim my company profile?",
-    a: "Use List Your Business and search for your company. If your email is on the company's own domain you can claim the profile straight away; otherwise the Bidcore team reviews your request before you can manage it. If it is not listed yet you can add it. A profile is marked claimed or verified only after the business claims it and Bidcore verifies it, never automatically.",
-    link: { label: "List your business", href: "/marketplace/list-your-business" },
+    a: "Use List Your Construction Services and search for your company. If your email is on the company's own domain you can claim the profile straight away; otherwise the Bidcore team reviews your request before you can manage it. If it is not listed yet you can add it. A profile is marked claimed or verified only after the business claims it and Bidcore verifies it, never automatically.",
+    link: { label: "List your construction services", href: "/marketplace/list-your-business" },
   },
   {
     q: "How do I request a demo?",

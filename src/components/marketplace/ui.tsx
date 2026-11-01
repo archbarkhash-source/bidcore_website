@@ -205,7 +205,7 @@ export function EmptyState({ title, children }: { title: string; children?: Reac
       <p className="font-medium text-slate-800">{title}</p>
       {children && <div className="mt-2 text-sm text-slate-500">{children}</div>}
       <Link href={`${MP}/list-your-business`} className={`${primaryBtn} mt-4`}>
-        List your business
+        List your construction services
       </Link>
     </div>
   );

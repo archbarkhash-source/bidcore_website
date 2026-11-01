@@ -245,7 +245,7 @@ export default function AboutPage() {
               Explore Bidcore <ArrowRight className="h-4 w-4" />
             </Link>
             <Link href="/marketplace/list-your-business" className={buttonOutline}>
-              List Your Business
+              List Your Construction Services
             </Link>
           </div>
         </div>
