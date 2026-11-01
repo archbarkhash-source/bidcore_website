@@ -69,7 +69,7 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Find suppliers and manufacturers",
         body: "Search the marketplace for companies, products and services across India.",
-        link: { label: "Marketplace", href: "/marketplace" },
+        link: { label: "Marketplace", href: "/supply" },
       },
     ],
   },
@@ -143,7 +143,7 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Find suppliers and manufacturers",
         body: "Search the marketplace for suppliers, manufacturers and equipment providers.",
-        link: { label: "Marketplace", href: "/marketplace" },
+        link: { label: "Marketplace", href: "/supply" },
       },
       {
         title: "Control cost through delivery",
@@ -186,7 +186,7 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Be found by contractors",
         body: "Build a company profile and list your construction services so general contractors and procurement teams can discover you.",
-        link: { label: "List Your Construction Services", href: "/marketplace/list-your-business" },
+        link: { label: "List Your Construction Services", href: "/supply/list-your-company" },
       },
       {
         title: "Plan crews and equipment",
@@ -228,7 +228,7 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Own a construction product or service?",
         body: "List your construction services on the marketplace so contractors and procurement teams can find your products and services.",
-        link: { label: "List Your Construction Services", href: "/marketplace/list-your-business" },
+        link: { label: "List Your Construction Services", href: "/supply/list-your-company" },
       },
     ],
     note: "Custom solutions are scoped case by case. They are not a catalogue of ready-made connectors, so tell us what you need and we will discuss what is possible.",

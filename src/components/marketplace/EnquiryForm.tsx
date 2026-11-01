@@ -77,7 +77,7 @@ export default function EnquiryForm({ listingId, companyId, kind, subject, suppl
         <Field label="Your company">
           <input name="company" defaultValue={defaults?.company} maxLength={160} autoComplete="organization" className={inputClass} />
         </Field>
-        <Field label="Business email *">
+        <Field label="Company email *">
           <input name="email" type="email" required maxLength={200} autoComplete="email" className={inputClass + bad("email")} />
         </Field>
         <Field label="Phone">

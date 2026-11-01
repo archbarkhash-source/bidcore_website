@@ -28,7 +28,7 @@ export default function ProductsIndex() {
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-200">
               Software for estimating, tendering, planning and running construction projects, from the first tender to the last site report. Looking for construction products and
               suppliers instead? Visit the{" "}
-              <Link href="/marketplace" className="font-semibold text-white underline underline-offset-2 hover:text-amber-300">
+              <Link href="/supply" className="font-semibold text-white underline underline-offset-2 hover:text-amber-300">
                 Marketplace
               </Link>
               .

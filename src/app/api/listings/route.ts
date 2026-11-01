@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
     .slice(0, 15);
   const expRaw = body.experienceYears === "" || body.experienceYears == null ? null : Number(body.experienceYears);
 
-  if (!name) return NextResponse.json({ error: kind === "equipment" ? "Enter your business name." : "Enter your name.", field: "name" }, { status: 400 });
+  if (!name) return NextResponse.json({ error: kind === "equipment" ? "Enter your company name." : "Enter your name.", field: "name" }, { status: 400 });
   if (!meta.roles.includes(role)) return NextResponse.json({ error: `Choose a ${meta.roleLabel.toLowerCase()} from the list.`, field: "role" }, { status: 400 });
   if (state && !STATES.some((s) => s.name === state)) return NextResponse.json({ error: "Choose a state from the list.", field: "state" }, { status: 400 });
   if (availability && !AVAILABILITY.includes(availability)) return NextResponse.json({ error: "Choose availability from the list.", field: "availability" }, { status: 400 });

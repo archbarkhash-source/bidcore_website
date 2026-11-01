@@ -170,7 +170,7 @@ export default function AddListingForm({ initialKind }: { initialKind: ListingKi
       </div>
 
       <label className="block text-sm font-medium text-slate-700">
-        {kind === "equipment" ? "Business / owner name *" : "Your name *"}
+        {kind === "equipment" ? "Company / owner name *" : "Your name *"}
         <input required className={input + bad("name")} value={form.name} onChange={(e) => set("name", e.target.value)} maxLength={200} />
       </label>
 

@@ -31,7 +31,7 @@ export default function ContactReveal({ slug, signInHref, initial }: { slug: str
     return (
       <p className="text-sm text-slate-600">
         <Link href={signInHref} className="font-medium text-brand-accent hover:underline">
-          Sign in with your business email
+          Sign in with your company email
         </Link>{" "}
         to view this company&apos;s contact details.
       </p>

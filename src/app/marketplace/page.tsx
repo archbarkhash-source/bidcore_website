@@ -41,9 +41,9 @@ export default async function MarketplaceHome() {
     <div className="bg-[#F6F7F9]">
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
-          <h1 className="max-w-3xl text-3xl font-bold leading-tight text-brand-navy sm:text-4xl">Discover Construction Products, Services and Business Partners</h1>
+          <h1 className="max-w-3xl text-3xl font-bold leading-tight text-brand-navy sm:text-4xl">Discover Construction Products, Services, Suppliers and Contractors</h1>
           <p className="mt-3 max-w-2xl text-slate-600">
-            Find construction companies, explore products and services, connect with suppliers, and discover business opportunities across India.
+            Find construction companies, explore products and services, connect with suppliers, and discover tender and supply opportunities across India.
           </p>
           <div className="mt-6 max-w-4xl">
             <MarketplaceSearch />
@@ -52,7 +52,7 @@ export default async function MarketplaceHome() {
             <Link href={`${MP}/products`} className={primaryBtn}>
               Browse products
             </Link>
-            <Link href={`${MP}/list-your-business`} className={outlineBtn}>
+            <Link href={`${MP}/list-your-company`} className={outlineBtn}>
               List Your Construction Services
             </Link>
           </div>
@@ -112,7 +112,7 @@ export default async function MarketplaceHome() {
           <div className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="text-lg font-bold text-slate-900">Sell on the Bidcore marketplace</h2>
             <p className="mt-1 text-sm text-slate-600">List your products and services for free, show your capabilities, and receive quote requests from contractors and procurement teams.</p>
-            <Link href={`${MP}/list-your-business`} className={`${outlineBtn} mt-4`}>List Your Construction Services</Link>
+            <Link href={`${MP}/list-your-company`} className={`${outlineBtn} mt-4`}>List Your Construction Services</Link>
           </div>
           <div className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="text-lg font-bold text-slate-900">Buying for a project?</h2>

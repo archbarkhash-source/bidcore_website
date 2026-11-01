@@ -41,7 +41,7 @@ export function notifySupplier(to: string, claimed: boolean, e: EnquiryMail) {
     `Message:\n${e.message}`,
     claimed
       ? `Reply and manage this enquiry in your dashboard: ${SITE_URL}${MP}/dashboard/enquiries`
-      : `Your company profile on Bidcore has not been claimed yet. Claim it to respond and manage enquiries: ${SITE_URL}${MP}/list-your-business`,
+      : `Your company profile on Bidcore has not been claimed yet. Claim it to respond and manage enquiries: ${SITE_URL}${MP}/list-your-company`,
   ]);
 }
 

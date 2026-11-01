@@ -146,7 +146,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
       "Discover construction tenders, publish opportunities, share BOQs and manage contractor quotations with BidcoreAI Tender Connect.",
     headline: "One Platform to Publish Tenders, Find Contractors and Manage Quotations",
     intro:
-      "Connect General Contractors, Subcontractors and construction businesses through a common tendering workspace. Publish public or private tenders, invite contractors, discover construction opportunities, manage bid documents and receive quotations through a structured digital workflow.",
+      "Connect General Contractors, Subcontractors and construction companies through a common tendering workspace. Publish public or private tenders, invite contractors, discover construction opportunities, manage bid documents and receive quotations through a structured digital workflow.",
     atAGlance: [
       "Publish public tenders on Bidcore.in",
       "Invite your own network privately",

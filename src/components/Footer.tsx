@@ -58,11 +58,11 @@ export default function Footer() {
     {
       title: "Marketplace",
       links: [
-        { label: "Marketplace overview", href: "/marketplace" },
-        { label: "Find Products", href: "/marketplace/products" },
-        { label: "Find Suppliers & Manufacturers", href: "/marketplace/companies?type=Supplier" },
-        { label: "Find Equipment Providers", href: "/marketplace/categories/equipment-rental" },
-        { label: "List Your Construction Services", href: "/marketplace/list-your-business" },
+        { label: "Marketplace overview", href: "/supply" },
+        { label: "Find Products", href: "/supply/products" },
+        { label: "Find Suppliers & Manufacturers", href: "/supply/companies?type=Supplier" },
+        { label: "Find Equipment Providers", href: "/supply/categories/equipment-rental" },
+        { label: "List Your Construction Services", href: "/supply/list-your-company" },
       ],
     },
     {
@@ -70,8 +70,8 @@ export default function Footer() {
       links: [
         { label: "Public Tenders", href: "/tenders" },
         { label: "Find Contractors", href: "/contractors" },
-        { label: "Find Services", href: "/marketplace/services" },
-        { label: "Find Vendors", href: "/marketplace/companies?type=Supplier" },
+        { label: "Find Services", href: "/supply/services" },
+        { label: "Find Vendors", href: "/supply/companies?type=Supplier" },
         { label: "Professionals", href: "/professionals" },
         { label: "Equipment", href: "/equipment" },
       ],

@@ -36,8 +36,8 @@ const EXPLORE_GROUPS: NavGroup[] = [
     heading: "Find",
     links: [
       { label: "Find Contractors", href: "/contractors" },
-      { label: "Find Services", href: "/marketplace/services" },
-      { label: "Find Vendors", href: "/marketplace/companies?type=Supplier" },
+      { label: "Find Services", href: "/supply/services" },
+      { label: "Find Vendors", href: "/supply/companies?type=Supplier" },
       { label: "Site Engineers", href: "/professionals?role=Site+Engineer" },
       { label: "QA / QC Engineers", href: "/professionals?role=QA+%2F+QC+Engineer" },
       { label: "Surveyors", href: "/professionals?role=Surveyor" },
@@ -48,7 +48,7 @@ const EXPLORE_GROUPS: NavGroup[] = [
   {
     heading: "List your company",
     links: [
-      { label: "List Your Construction Services", href: "/marketplace/list-your-business" },
+      { label: "List Your Construction Services", href: "/supply/list-your-company" },
       // A separate step from the Marketplace listing: company details for Tender Connect, so EPC companies can find the company and invite it to tender.
       { label: "Add Your Company Info", href: "/add-company" },
     ],

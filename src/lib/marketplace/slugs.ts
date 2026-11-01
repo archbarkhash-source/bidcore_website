@@ -3,7 +3,7 @@ import { randomBytes } from "node:crypto";
 import { db } from "@/lib/db";
 import { slugifyText } from "./constants";
 
-/** Globally unique /marketplace/companies/{slug}. */
+/** Globally unique /supply/companies/{slug}. */
 export async function uniqueMarketplaceSlug(name: string, city?: string | null, state?: string | null): Promise<string> {
   const base = slugifyText([name, city ?? state ?? ""].filter(Boolean).join(" ")) || "company";
   for (let i = 0; i < 8; i++) {

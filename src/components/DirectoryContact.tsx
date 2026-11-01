@@ -89,7 +89,7 @@ export default function DirectoryContact({ slug, masked }: { slug: string; maske
         </button>
       )}
       {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
-      <p className="mt-4 text-xs text-slate-400">Business contact details as the company publishes them. Not your company? Tell us and we will remove or correct it.</p>
+      <p className="mt-4 text-xs text-slate-400">Company contact details as the company publishes them. Not your company? Tell us and we will remove or correct it.</p>
     </div>
   );
 }

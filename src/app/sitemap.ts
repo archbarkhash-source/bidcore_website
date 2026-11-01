@@ -38,10 +38,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/contractors`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
     ...CONTRACTOR_CATEGORIES.map((c) => ({ url: `${SITE_URL}/contractors/${c.slug}`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.5 })),
-    { url: `${SITE_URL}/marketplace`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
-    { url: `${SITE_URL}/marketplace/companies`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
-    { url: `${SITE_URL}/marketplace/products`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
-    { url: `${SITE_URL}/marketplace/services`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/supply`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+    { url: `${SITE_URL}/supply/companies`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/supply/products`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+    { url: `${SITE_URL}/supply/services`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
   ];
   // Contractor directory: one page per LISTED company (directory companies and members who chose to be listed).
   for (const c of await directorySitemap()) pages.push({ url: `${SITE_URL}/contractor/${c.slug}`, lastModified: c.updatedAt, changeFrequency: "weekly", priority: 0.6 });
@@ -52,9 +52,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       pages.push({ url: `${SITE_URL}/${l.kind === "professional" ? "professionals" : "equipment"}/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "weekly", priority: 0.4 });
   // Marketplace: only published companies / listings, and only categories that actually contain listings (no empty or duplicate pages).
   const mp = await sitemapEntries();
-  for (const slug of mp.categories) pages.push({ url: `${SITE_URL}/marketplace/categories/${slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
-  for (const c of mp.companies) if (c.marketplaceSlug) pages.push({ url: `${SITE_URL}/marketplace/companies/${c.marketplaceSlug}`, lastModified: c.updatedAt, changeFrequency: "weekly", priority: 0.6 });
-  for (const l of mp.listings) pages.push({ url: `${SITE_URL}/marketplace/${l.kind === "product" ? "products" : "services"}/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "weekly", priority: 0.5 });
+  for (const slug of mp.categories) pages.push({ url: `${SITE_URL}/supply/categories/${slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
+  for (const c of mp.companies) if (c.marketplaceSlug) pages.push({ url: `${SITE_URL}/supply/companies/${c.marketplaceSlug}`, lastModified: c.updatedAt, changeFrequency: "weekly", priority: 0.6 });
+  for (const l of mp.listings) pages.push({ url: `${SITE_URL}/supply/${l.kind === "product" ? "products" : "services"}/${l.slug}`, lastModified: l.updatedAt, changeFrequency: "weekly", priority: 0.5 });
   const res = await getTenderSitemap();
   if (res.ok) {
     for (const t of res.data.items) {

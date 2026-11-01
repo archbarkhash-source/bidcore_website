@@ -25,11 +25,11 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
         <input type="hidden" name="companyId" value={c.id} />
 
         <fieldset className="space-y-4">
-          <legend className="text-lg font-semibold text-slate-900">Business details</legend>
+          <legend className="text-lg font-semibold text-slate-900">Company details</legend>
           <p className="text-sm text-slate-500">Registered name: <span className="text-slate-800">{c.name}</span> (changed by Bidcore support only). Everything below is optional unless marked.</p>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Display name" hint="How you want the company shown, if different from the registered name."><input name="displayName" defaultValue={c.displayName ?? ""} maxLength={200} className={inputClass} /></Field>
-            <Field label="Business type *"><select name="type" defaultValue={c.type} className={inputClass}>{types.map((t) => <option key={t}>{t}</option>)}</select></Field>
+            <Field label="Company type *"><select name="type" defaultValue={c.type} className={inputClass}>{types.map((t) => <option key={t}>{t}</option>)}</select></Field>
             <Field label="Logo (image address)" hint="A web address starting with https://. File upload is not available yet."><input name="logoUrl" type="url" defaultValue={c.logoUrl ?? ""} className={inputClass} /></Field>
             <Field label="Year founded"><input name="founded" inputMode="numeric" defaultValue={c.founded ?? ""} maxLength={4} className={inputClass} /></Field>
             <Field label="Company size"><input name="sizeRange" defaultValue={c.sizeRange ?? ""} placeholder="e.g. 51-200 employees" className={inputClass} /></Field>
@@ -42,8 +42,8 @@ export default async function ProfilePage({ searchParams }: { searchParams: Prom
           <legend className="text-lg font-semibold text-slate-900">Contact and location</legend>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Website"><input name="website" defaultValue={c.website ?? ""} className={inputClass} /></Field>
-            <Field label="Public business email"><input name="email" type="email" defaultValue={c.email ?? ""} className={inputClass} /></Field>
-            <Field label="Business phone"><input name="phone" defaultValue={c.phone ?? ""} className={inputClass} /></Field>
+            <Field label="Public company email"><input name="email" type="email" defaultValue={c.email ?? ""} className={inputClass} /></Field>
+            <Field label="Company phone"><input name="phone" defaultValue={c.phone ?? ""} className={inputClass} /></Field>
             <Field label="City"><input name="city" defaultValue={c.cityName ?? ""} className={inputClass} /></Field>
             <Field label="Address"><input name="address" defaultValue={c.address ?? ""} maxLength={400} className={inputClass} /></Field>
             <Field label="PIN code"><input name="pinCode" defaultValue={c.pinCode ?? ""} maxLength={6} inputMode="numeric" className={inputClass} /></Field>

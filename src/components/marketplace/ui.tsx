@@ -179,7 +179,7 @@ export function Pagination({ basePath, params, page, pageCount }: { basePath: st
   );
 }
 
-/** Universal search: a plain GET form (works without JavaScript); /marketplace/search sends the visitor to the right results page. */
+/** Universal search: a plain GET form (works without JavaScript); /supply/search sends the visitor to the right results page. */
 export function MarketplaceSearch({ q, type, location, compact }: { q?: string; type?: string; location?: string; compact?: boolean }) {
   return (
     <form action={`${MP}/search`} method="get" role="search" className={`grid gap-2 ${compact ? "md:grid-cols-[1fr_10rem_12rem_auto]" : "md:grid-cols-[1fr_9rem_12rem_auto]"}`}>
@@ -204,7 +204,7 @@ export function EmptyState({ title, children }: { title: string; children?: Reac
     <div className="rounded-lg border border-dashed border-slate-300 bg-white p-8 text-center">
       <p className="font-medium text-slate-800">{title}</p>
       {children && <div className="mt-2 text-sm text-slate-500">{children}</div>}
-      <Link href={`${MP}/list-your-business`} className={`${primaryBtn} mt-4`}>
+      <Link href={`${MP}/list-your-company`} className={`${primaryBtn} mt-4`}>
         List your construction services
       </Link>
     </div>

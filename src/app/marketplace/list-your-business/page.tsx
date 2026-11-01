@@ -13,12 +13,12 @@ import { Field, inputClass, outlineBtn, primaryBtn, one } from "@/components/mar
 export const metadata: Metadata = {
   title: "List Your Construction Services on the Bidcore Marketplace",
   description: "Add your construction company, products and services to the Bidcore marketplace for free, or claim an existing profile.",
-  alternates: { canonical: `${MP}/list-your-business` },
+  alternates: { canonical: `${MP}/list-your-company` },
 };
 
 type SP = Record<string, string | string[] | undefined>;
 
-const STEPS = ["Find your company", "Claim or add", "Business details", "Products and services", "Review and publish"];
+const STEPS = ["Find your company", "Claim or add", "Company details", "Products and services", "Review and publish"];
 
 function Steps({ current }: { current: number }) {
   return (
@@ -51,15 +51,15 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
   const claimId = one(sp.claim);
   const creating = one(sp.new) === "1";
   const error = one(sp.error);
-  const next = `${MP}/list-your-business${claimId ? `?claim=${claimId}` : creating ? "?new=1" : ""}`;
+  const next = `${MP}/list-your-company${claimId ? `?claim=${claimId}` : creating ? "?new=1" : ""}`;
 
   // Step 0 for visitors who are not signed in.
   if (!user) {
     return (
       <Shell step={1} error={error}>
         <div className="rounded-lg border border-slate-200 bg-white p-6">
-          <h2 className="font-semibold text-slate-900">Sign in with your business email</h2>
-          <p className="mt-1 text-sm text-slate-600">We use your company email to confirm you act for the business and to send you enquiries. Personal email addresses (Gmail, Outlook, Yahoo…) are not accepted.</p>
+          <h2 className="font-semibold text-slate-900">Sign in with your company email</h2>
+          <p className="mt-1 text-sm text-slate-600">We use your company email to confirm you act for the company and to send you enquiries. Personal email addresses (Gmail, Outlook, Yahoo…) are not accepted.</p>
           <Link href={signInUrl(next)} className={`${primaryBtn} mt-4`}>Sign in or create an account</Link>
         </div>
       </Shell>
@@ -69,7 +69,7 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
   // Claim a specific company
   if (claimId) {
     const c = await db.company.findFirst({ where: { id: claimId, active: true }, include: { state: { select: { name: true } } } });
-    if (!c) return <Shell step={2} error={error}><p className="text-sm text-slate-600">That company was not found. <Link className="text-brand-accent underline" href={`${MP}/list-your-business`}>Search again</Link>.</p></Shell>;
+    if (!c) return <Shell step={2} error={error}><p className="text-sm text-slate-600">That company was not found. <Link className="text-brand-accent underline" href={`${MP}/list-your-company`}>Search again</Link>.</p></Shell>;
     const taken = c.claimedById && c.claimedById !== user.id;
     const domainOk = emailMatchesCompany(user.email, c);
     return (
@@ -98,7 +98,7 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
               <button className={primaryBtn}>Send claim request</button>
             </form>
           )}
-          <p className="mt-5 text-sm"><Link href={`${MP}/list-your-business`} className="text-slate-500 hover:text-slate-800">← Search again</Link></p>
+          <p className="mt-5 text-sm"><Link href={`${MP}/list-your-company`} className="text-slate-500 hover:text-slate-800">← Search again</Link></p>
         </div>
       </Shell>
     );
@@ -112,7 +112,7 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
           <input type="hidden" name="confirmNew" value="1" />
           <Field label="Registered company name *"><input name="name" required maxLength={300} defaultValue={q} className={inputClass} /></Field>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Business type *">
+            <Field label="Company type *">
               <select name="type" required defaultValue="" className={inputClass}>
                 <option value="" disabled>Choose…</option>
                 {BUSINESS_TYPES.map((t) => <option key={t}>{t}</option>)}
@@ -126,8 +126,8 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
             </Field>
             <Field label="City"><input name="city" maxLength={120} className={inputClass} /></Field>
             <Field label="Website"><input name="website" maxLength={300} placeholder="www.yourcompany.in" className={inputClass} /></Field>
-            <Field label="Business email"><input name="email" type="email" maxLength={200} className={inputClass} /></Field>
-            <Field label="Business phone"><input name="phone" maxLength={40} className={inputClass} /></Field>
+            <Field label="Company email"><input name="email" type="email" maxLength={200} className={inputClass} /></Field>
+            <Field label="Company phone"><input name="phone" maxLength={40} className={inputClass} /></Field>
             <Field label="GSTIN"><input name="gstin" maxLength={15} className={inputClass} /></Field>
             <Field label="CIN"><input name="cin" maxLength={21} className={inputClass} /></Field>
           </div>
@@ -135,7 +135,7 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
           <p className="text-xs text-slate-500">Add at least one of website, email or phone. Your details stay hidden from visitors who are not signed in until you choose to show them. After saving you can add products and services and submit the profile for publication.</p>
           <div className="flex items-center gap-3">
             <button className={primaryBtn}>Save and continue</button>
-            <Link href={`${MP}/list-your-business`} className="text-sm text-slate-500 hover:text-slate-800">Back</Link>
+            <Link href={`${MP}/list-your-company`} className="text-sm text-slate-500 hover:text-slate-800">Back</Link>
           </div>
         </form>
       </Shell>
@@ -191,18 +191,18 @@ export default async function ListYourBusiness({ searchParams }: { searchParams:
                   ) : m.claimedById ? (
                     <span className="text-sm text-slate-400">Already managed</span>
                   ) : (
-                    <Link href={`${MP}/list-your-business?claim=${m.id}`} className={outlineBtn}>This is my company</Link>
+                    <Link href={`${MP}/list-your-company?claim=${m.id}`} className={outlineBtn}>This is my company</Link>
                   )}
                 </li>
               ))}
             </ul>
           )}
           <p className="mt-5 text-sm text-slate-600">
-            Not in the list? <Link href={`${MP}/list-your-business?new=1${q ? `&q=${encodeURIComponent(q)}` : ""}`} className="font-medium text-brand-accent hover:underline">Add your company as a new business</Link>.
+            Not in the list? <Link href={`${MP}/list-your-company?new=1${q ? `&q=${encodeURIComponent(q)}` : ""}`} className="font-medium text-brand-accent hover:underline">Add your company as a new business</Link>.
           </p>
         </div>
       )}
-      {!q && <p className="mt-4 text-sm text-slate-500">Search first so we do not create a second record for a business that is already listed.</p>}
+      {!q && <p className="mt-4 text-sm text-slate-500">Search first so we do not create a second record for a company that is already listed.</p>}
     </Shell>
   );
 }

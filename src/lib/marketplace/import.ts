@@ -48,12 +48,12 @@ function clean(r: ImportRow): { value?: Clean; errors: string[]; warnings: strin
   let type = v("type", 100);
   if (!type) {
     type = "Other";
-    warnings.push("No business type — set to Other.");
+    warnings.push("No company type — set to Other.");
   } else {
     const match = BUSINESS_TYPES.find((t) => t.toLowerCase() === type.toLowerCase());
     if (match) type = match;
     else {
-      warnings.push(`Unrecognised business type “${type}” — set to Other.`);
+      warnings.push(`Unrecognised company type “${type}” — set to Other.`);
       type = "Other";
     }
   }
@@ -72,7 +72,7 @@ function clean(r: ImportRow): { value?: Clean; errors: string[]; warnings: strin
   const pin = v("pinCode", 10);
   const pinCode = PIN_RE.test(pin) ? pin : null;
   if (pin && !pinCode) warnings.push("PIN code is not valid — dropped.");
-  if (!website && !email && !phone) errors.push("No usable website, email or phone — a directory record needs at least one way to reach the business.");
+  if (!website && !email && !phone) errors.push("No usable website, email or phone — a directory record needs at least one way to reach the company.");
 
   if (errors.length) return { errors, warnings };
   return {

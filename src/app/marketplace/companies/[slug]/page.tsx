@@ -86,7 +86,7 @@ export default async function CompanyProfile({ params }: { params: Promise<{ slu
         <div className="flex flex-wrap gap-2">
           <a href="#enquiry" className={primaryBtn}>Contact supplier</a>
           {!c.claimed && (
-            <Link href={`${MP}/list-your-business?claim=${c.id}`} className={outlineBtn}>
+            <Link href={`${MP}/list-your-company?claim=${c.id}`} className={outlineBtn}>
               Claim this profile
             </Link>
           )}
@@ -144,7 +144,7 @@ export default async function CompanyProfile({ params }: { params: Promise<{ slu
           <section id="enquiry" aria-label="Enquiry">
             <EnquiryForm companyId={c.id} kind="company" subject={`General enquiry to ${companyTitle(c)}`} supplierName={companyTitle(c)} />
             {!c.claimed && (
-              <p className="mt-2 text-xs text-slate-500">This profile has not been claimed. The enquiry is recorded, and sent to the company&apos;s business email if one is on file.</p>
+              <p className="mt-2 text-xs text-slate-500">This profile has not been claimed. The enquiry is recorded, and sent to the company&apos;s email if one is on file.</p>
             )}
           </section>
         </div>

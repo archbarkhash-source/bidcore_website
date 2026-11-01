@@ -27,11 +27,11 @@ const back = (path: string, params: Record<string, string>) => {
 // ── onboarding: claim / create ──────────────────────────────────────────────────────────────────────────────────────
 
 export async function claimCompany(formData: FormData) {
-  const user = await requireUser(`${MP}/list-your-business`);
+  const user = await requireUser(`${MP}/list-your-company`);
   const companyId = str(formData.get("companyId"), 40);
-  const here = `${MP}/list-your-business?claim=${companyId}`;
+  const here = `${MP}/list-your-company?claim=${companyId}`;
   const company = await db.company.findFirst({ where: { id: companyId, active: true } });
-  if (!company) redirect(back(`${MP}/list-your-business`, { error: "That company was not found." }));
+  if (!company) redirect(back(`${MP}/list-your-company`, { error: "That company was not found." }));
 
   if (company.claimedById === user.id) redirect(`${MP}/dashboard?company=${company.id}`);
   if (company.claimedById) redirect(back(here, { error: "This company is already managed by another member. If that is wrong, send a correction request from its profile page." }));
@@ -57,8 +57,8 @@ export async function claimCompany(formData: FormData) {
 }
 
 export async function createCompany(formData: FormData) {
-  const user = await requireUser(`${MP}/list-your-business?new=1`);
-  const here = `${MP}/list-your-business?new=1`;
+  const user = await requireUser(`${MP}/list-your-company?new=1`);
+  const here = `${MP}/list-your-company?new=1`;
   const fail = (error: string): never => redirect(back(here, { error }));
 
   const name = str(formData.get("name"), 300);
@@ -74,9 +74,9 @@ export async function createCompany(formData: FormData) {
 
   if (name.length < 2) fail("Enter the company name.");
   if (!STATES.some((s) => s.name === stateName)) fail("Choose a state.");
-  if (!BUSINESS_TYPES.includes(type)) fail("Choose a business type.");
+  if (!BUSINESS_TYPES.includes(type)) fail("Choose a company type.");
   if (str(formData.get("website"), 300) && !website) fail("Enter a valid website address.");
-  if (str(formData.get("email"), 200) && !email) fail("Enter a valid business email.");
+  if (str(formData.get("email"), 200) && !email) fail("Enter a valid company email.");
   if (phone && !normalizePhone(phone)) fail("Enter a valid phone number.");
   if (!website && !email && !phone) fail("Add at least one way to contact the company: website, email or phone.");
   if (str(formData.get("cin"), 30) && !cin) fail("That CIN is not in a valid format.");
@@ -88,7 +88,7 @@ export async function createCompany(formData: FormData) {
   // Never create a second record for a business that is already in the directory.
   if (formData.get("confirmNew") !== "1") {
     const dups = await findDuplicates({ name, stateId, website, cin, gstin });
-    if (dups.length) redirect(back(`${MP}/list-your-business`, { q: name, dup: "1" }));
+    if (dups.length) redirect(back(`${MP}/list-your-company`, { q: name, dup: "1" }));
   }
 
   const proven = emailMatchesCompany(user.email, { website, email });
@@ -138,7 +138,7 @@ export async function saveProfile(formData: FormData) {
   const founded = str(formData.get("founded"), 4);
   const type = str(formData.get("type"), 100);
   if (str(formData.get("website"), 300) && !website) fail("Enter a valid website address.");
-  if (str(formData.get("email"), 200) && !email) fail("Enter a valid business email.");
+  if (str(formData.get("email"), 200) && !email) fail("Enter a valid company email.");
   if (phone && !normalizePhone(phone)) fail("Enter a valid phone number.");
   if (str(formData.get("gstin"), 30) && !gstin) fail("That GSTIN is not in a valid format.");
   if (pin && !PIN_RE.test(pin)) fail("Enter a valid 6-digit PIN code.");

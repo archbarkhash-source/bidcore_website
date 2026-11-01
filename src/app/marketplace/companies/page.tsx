@@ -61,7 +61,7 @@ export default async function CompaniesDirectory({ searchParams }: { searchParam
       <div className="mt-6 grid gap-6 lg:grid-cols-[16rem_1fr]">
         <form method="get" action={`${MP}/companies`} className="space-y-3 self-start rounded-lg border border-slate-200 bg-white p-4 text-sm">
           <input type="hidden" name="q" value={f.q ?? ""} />
-          <Select name="type" label="Business type" value={f.type} options={opts.types.map((t) => [t, t])} />
+          <Select name="type" label="Company type" value={f.type} options={opts.types.map((t) => [t, t])} />
           <Select name="category" label="Product / service category" value={f.category} options={cats.map((c) => [c.slug, c.parentId ? `— ${c.name}` : c.name])} />
           <Select name="state" label="State" value={f.state} options={opts.states.map((s) => [s.slug, s.name])} />
           <label className="block">
@@ -86,7 +86,7 @@ export default async function CompaniesDirectory({ searchParams }: { searchParam
           {res.rows.length === 0 ? (
             <div className="mt-3">
               <EmptyState title={hasFilters ? "No companies match these filters." : "No companies are listed yet."}>
-                {hasFilters ? "Try removing a filter, or " : "Be the first: "}add your business to the marketplace so buyers can find you.
+                {hasFilters ? "Try removing a filter, or " : "Be the first: "}add your company to Bidcore so buyers can find you.
               </EmptyState>
             </div>
           ) : (

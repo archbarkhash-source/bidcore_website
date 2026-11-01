@@ -11,7 +11,7 @@ export default async function CompanyTypesPage() {
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <h1 className="text-2xl font-bold text-slate-900">Company Types</h1>
       <p className="mt-1 text-sm text-slate-500">
-        Browse the network by the kind of construction business you&apos;re looking for.
+        Browse the network by the kind of construction company you&apos;re looking for.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">

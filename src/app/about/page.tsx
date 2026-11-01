@@ -22,20 +22,20 @@ const ECOSYSTEM = [
   {
     icon: FileText,
     title: "Public Tenders",
-    body: "Discover public tender opportunities, review key tender information, and publish tender opportunities for relevant construction businesses.",
+    body: "Discover public tender opportunities, review key tender information, and publish tender opportunities for relevant construction companies.",
     cta: { label: "Explore Tenders", href: "/tenders" },
   },
   {
     icon: ShoppingBag,
     title: "Construction Marketplace",
     body: "Discover construction materials, products, equipment, suppliers, manufacturers, and service providers.",
-    cta: { label: "Explore Marketplace", href: "/marketplace" },
+    cta: { label: "Explore Marketplace", href: "/supply" },
   },
   {
     icon: Building2,
     title: "Company Directory",
-    body: "Find construction companies, EPC contractors, subcontractors, and professional service providers to build valuable business connections.",
-    cta: { label: "Find Contractors", href: "/marketplace/companies" },
+    body: "Find construction companies, EPC contractors, subcontractors, and professional service providers to build valuable contractor and supplier connections.",
+    cta: { label: "Find Contractors", href: "/supply/companies" },
   },
 ];
 
@@ -127,7 +127,7 @@ export default function AboutPage() {
             <Link href="/products" className={buttonSolid}>
               Explore Bidcore <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/marketplace" className={buttonOutline}>
+            <Link href="/supply" className={buttonOutline}>
               Explore the Marketplace
             </Link>
           </div>
@@ -141,13 +141,13 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Building a Connected Construction Industry</h2>
             <div className="mt-5 space-y-4 leading-relaxed text-slate-600">
               <p>
-                Construction businesses often rely on separate tools to estimate costs, prepare tenders, manage projects, discover suppliers, and find new business
+                Construction companies often rely on separate tools to estimate costs, prepare tenders, manage projects, discover suppliers, and find new business
                 opportunities.
               </p>
               <p>Bidcore is being built to bring these workflows closer together through one integrated construction technology ecosystem.</p>
               <p>
                 From BidcoreAI, our AI-powered construction software, and tender discovery to company connections and product sourcing, Bidcore aims to help construction
-                businesses work more efficiently and find opportunities across the industry.
+                companies work more efficiently and find opportunities across the industry.
               </p>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
           <h2 className="text-3xl font-bold tracking-tight text-brand-navy">Our Mission</h2>
           <p className="mt-5 text-xl font-medium leading-relaxed text-slate-700">
-            To make construction technology more connected, practical, and accessible, helping construction businesses estimate with confidence, discover opportunities,
+            To make construction technology more connected, practical, and accessible, helping construction companies estimate with confidence, discover opportunities,
             manage projects, and build stronger industry relationships.
           </p>
         </div>
@@ -237,14 +237,14 @@ export default function AboutPage() {
         <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:px-6">
           <h2 className="text-3xl font-bold tracking-tight">Be Part of a More Connected Construction Industry</h2>
           <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-300">
-            Whether you are a contractor looking for better construction software, a business searching for tender opportunities, or a supplier looking to connect with
+            Whether you are a contractor looking for better construction software, a company searching for tender opportunities, or a supplier looking to connect with
             construction companies, Bidcore brings these possibilities into one ecosystem.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link href="/products" className={buttonSolid}>
               Explore Bidcore <ArrowRight className="h-4 w-4" />
             </Link>
-            <Link href="/marketplace/list-your-business" className={buttonOutline}>
+            <Link href="/supply/list-your-company" className={buttonOutline}>
               List Your Construction Services
             </Link>
           </div>

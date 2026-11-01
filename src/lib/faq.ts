@@ -10,7 +10,7 @@ export interface FaqItem {
 export const FAQ: FaqItem[] = [
   {
     q: "What is Bidcore?",
-    a: "Bidcore brings BidcoreAI construction software, public tenders, a company directory and a marketplace for products and services together in one platform for construction businesses in India.",
+    a: "Bidcore brings BidcoreAI construction software, public tenders, a company directory and a marketplace for products and services together in one platform for construction companies in India.",
     link: { label: "Explore the platform", href: "/products" },
   },
   {
@@ -36,37 +36,37 @@ export const FAQ: FaqItem[] = [
   {
     q: "Who is Bidcore for?",
     a: "EPC contractors, general contractors, design-build contractors and subcontractors, and the suppliers and manufacturers who work with them. Companies that already use other software can also talk to us about a custom solution that integrates it with BidcoreAI.",
-    link: { label: "Solutions for your business", href: "/solutions" },
+    link: { label: "Solutions for your construction company", href: "/solutions" },
   },
   {
     q: "How do I find suppliers or subcontractors for a package?",
     a: "Publish the package on Tender Connect to invite subcontractors privately or openly, and compare their item-wise quotations side by side. To look for companies, suppliers and manufacturers, or for construction products and services, use the Marketplace.",
-    link: { label: "Find contractors", href: "/marketplace/companies" },
+    link: { label: "Find contractors", href: "/supply/companies" },
   },
   {
     q: "What is the Bidcore Marketplace?",
-    a: "The Marketplace is where construction businesses promote their products and services and where buyers find them: suppliers, manufacturers, equipment providers and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
-    link: { label: "Open the Marketplace", href: "/marketplace" },
+    a: "The Marketplace is where construction companies promote their products and services and where buyers find them: suppliers, manufacturers, equipment providers and other service companies. It is separate from the BidcoreAI software, which you use to estimate, tender and manage projects.",
+    link: { label: "Open the Marketplace", href: "/supply" },
   },
   {
     q: "How do I find products on the Marketplace?",
     a: "Open the Marketplace menu and choose Find Products. Search by name, or browse by category such as construction materials, electrical and mechanical products, infrastructure products and equipment rental. Open a listing and use Request a quote to send the supplier an enquiry.",
-    link: { label: "Find products", href: "/marketplace/products" },
+    link: { label: "Find products", href: "/supply/products" },
   },
   {
     q: "How do I find services or service providers?",
-    a: "Open the Explore menu and choose Find Services for testing and inspection, surveying and other construction services, or Find Contractors to search businesses directly. Open a listing and use Send enquiry to contact the provider.",
-    link: { label: "Find services", href: "/marketplace/services" },
+    a: "Open the Explore menu and choose Find Services for testing and inspection, surveying and other construction services, or Find Contractors to search contractors directly. Open a listing and use Send enquiry to contact the provider.",
+    link: { label: "Find services", href: "/supply/services" },
   },
   {
     q: "How do I add my products or services to the Marketplace?",
     a: "Choose List Your Construction Services and sign in with your company email (personal addresses such as Gmail are not accepted). Find your company to claim it, or add it, then fill in your business details and add your products and services. Listings move from Draft to Awaiting review and appear once they are approved and published. Joining is free, and the free plan allows up to 10 active listings per company.",
-    link: { label: "List your construction services", href: "/marketplace/list-your-business" },
+    link: { label: "List your construction services", href: "/supply/list-your-company" },
   },
   {
     q: "How do I receive enquiries from buyers?",
     a: "When a buyer sends an enquiry about one of your listings, it arrives in the Enquiries section of your Marketplace dashboard, and we use your company email to send it to you as well. You can mark each enquiry as responded, in discussion, converted or closed.",
-    link: { label: "Go to your dashboard", href: "/marketplace/dashboard" },
+    link: { label: "Go to your dashboard", href: "/supply/dashboard" },
   },
   {
     q: "Is browsing free, and what does it cost to use the software?",
@@ -78,9 +78,9 @@ export const FAQ: FaqItem[] = [
     a: "No. It is per company, not per browser or login, so colleagues share one trial and creating another login does not start a new one.",
   },
   {
-    q: "How do I list my business or claim my company profile?",
+    q: "How do I list my construction services or claim my company profile?",
     a: "Use List Your Construction Services and search for your company. If your email is on the company's own domain you can claim the profile straight away; otherwise the Bidcore team reviews your request before you can manage it. If it is not listed yet you can add it. A profile is marked claimed or verified only after the business claims it and Bidcore verifies it, never automatically.",
-    link: { label: "List your construction services", href: "/marketplace/list-your-business" },
+    link: { label: "List your construction services", href: "/supply/list-your-company" },
   },
   {
     q: "How do I request a demo?",

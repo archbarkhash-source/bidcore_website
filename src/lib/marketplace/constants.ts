@@ -2,7 +2,7 @@ import { COMPANY_TYPES } from "@/lib/data";
 
 // Shared (client + server) marketplace vocabulary. Nothing here touches the database.
 
-export const MP = "/marketplace";
+export const MP = "/supply";
 
 export type ListingKind = "product" | "service";
 
@@ -201,12 +201,12 @@ export const DEFAULT_CATEGORIES: DefaultCategory[] = [
   },
 ];
 
-/** The shopping sections of /marketplace. A group lists listings (products and services alike) from its categories and their subcategories. */
+/** The shopping sections of /supply. A group lists listings (products and services alike) from its categories and their subcategories. */
 export const SHOP_GROUPS: { key: string; title: string; blurb: string; slugs: string[]; href: string }[] = [
-  { key: "materials", title: "Construction Materials", blurb: "Steel, cement, aggregates, pipes and other materials.", slugs: ["building-materials", "roads-highway-products", "water-pipeline-systems", "infrastructure-products"], href: "/marketplace/products?category=building-materials" },
-  { key: "equipment", title: "Equipment and Machinery", blurb: "Construction machinery, equipment and rental providers.", slugs: ["construction-equipment", "equipment-rental", "industrial-epc-equipment", "electrical-mechanical-products"], href: "/marketplace/categories/construction-equipment" },
-  { key: "tools", title: "Tools, Safety and Site Products", blurb: "Surveying tools, safety products and site equipment.", slugs: ["tools-safety-site-products"], href: "/marketplace/categories/tools-safety-site-products" },
-  { key: "services", title: "Professional Services", blurb: "Engineering, surveying, testing and specialist services.", slugs: ["engineering-consultancy", "testing-inspection-services", "surveying-geotechnical-services", "construction-contractors"], href: "/marketplace/services" },
+  { key: "materials", title: "Construction Materials", blurb: "Steel, cement, aggregates, pipes and other materials.", slugs: ["building-materials", "roads-highway-products", "water-pipeline-systems", "infrastructure-products"], href: "/supply/products?category=building-materials" },
+  { key: "equipment", title: "Equipment and Machinery", blurb: "Construction machinery, equipment and rental providers.", slugs: ["construction-equipment", "equipment-rental", "industrial-epc-equipment", "electrical-mechanical-products"], href: "/supply/categories/construction-equipment" },
+  { key: "tools", title: "Tools, Safety and Site Products", blurb: "Surveying tools, safety products and site equipment.", slugs: ["tools-safety-site-products"], href: "/supply/categories/tools-safety-site-products" },
+  { key: "services", title: "Professional Services", blurb: "Engineering, surveying, testing and specialist services.", slugs: ["engineering-consultancy", "testing-inspection-services", "surveying-geotechnical-services", "construction-contractors"], href: "/supply/services" },
 ];
 
 export const BUSINESS_TYPES: string[] = [
@@ -254,7 +254,7 @@ export const COMPANY_STATUS_LABEL: Record<string, string> = {
 
 // Distinct definitions - shown to visitors on the profile and in the dashboard. None may be used in place of another.
 export const TRUST_DEFINITIONS = [
-  { key: "imported", label: "Listed from public sources", text: "Basic business details were added by Bidcore from public or licensed sources. The company has not confirmed them." },
+  { key: "imported", label: "Listed from public sources", text: "Basic company details were added by Bidcore from public or licensed sources. The company has not confirmed them." },
   { key: "claimed", label: "Claimed", text: "A representative proved they act for the company (a company-domain e-mail, or a reviewed request). Details may now be maintained by the company." },
   { key: "verified", label: "Verified by Bidcore", text: "Bidcore reviewed supporting evidence for the company. This is only shown after that review is complete." },
   { key: "featured", label: "Featured", text: "Placed in a featured section by the Bidcore team. It is not a verification and not a paid placement." },

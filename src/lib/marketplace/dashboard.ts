@@ -22,7 +22,7 @@ export function completion(c: DashboardCompany, listingCount: number) {
   const checks: { label: string; done: boolean; href: string }[] = [
     { label: "Add a company description", done: !!c.about, href: "profile" },
     { label: "Add a logo", done: !!c.logoUrl, href: "profile" },
-    { label: "Add a phone number or business email", done: !!(c.phone || c.email), href: "profile" },
+    { label: "Add a phone number or company email", done: !!(c.phone || c.email), href: "profile" },
     { label: "Add your address and PIN code", done: !!(c.address && c.pinCode), href: "profile" },
     { label: "List what you offer (specialisations or capabilities)", done: c.specializations.length + c.capabilities.length > 0, href: "profile" },
     { label: "Add certifications and credentials", done: c.certifications.length > 0, href: "profile" },

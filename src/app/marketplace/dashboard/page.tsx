@@ -28,7 +28,7 @@ export default async function DashboardHome({ searchParams }: { searchParams: Pr
           </div>
         )}
         <p className="mt-4 text-slate-600">You do not manage a company on the marketplace yet. Find your company to claim it, or add it if it is not listed.</p>
-        <Link href={`${MP}/list-your-business`} className={`${primaryBtn} mt-5`}>List your construction services</Link>
+        <Link href={`${MP}/list-your-company`} className={`${primaryBtn} mt-5`}>List your construction services</Link>
       </div>
     );
   }
