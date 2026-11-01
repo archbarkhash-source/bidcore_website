@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 import { isValidEmail } from "@/lib/email-domain";
 import { sendVerificationCode } from "@/lib/mail";
 import { OTP_RESEND_MS, OTP_TTL_MS, generateCode, hashCode } from "@/lib/otp";
-import { ROLE_LABELS, isMarket } from "@/lib/roles";
+import { COUNTRIES, ROLE_LABELS, isMarket } from "@/lib/roles";
 import { allowSms, indianMobile, isValidIndianMobile, sendPhoneCode } from "@/lib/sms";
 
 const clean = (v: unknown) => (typeof v === "string" ? v.trim() : "");
@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
   const companyName = clean(body.companyName);
   const city = clean(body.city) || null;
   const country = clean(body.country) || "IN";
+  const companyCountry = clean(body.companyCountry);   // the company's own country (Add company form), any ISO code
   // Product sign-ups (intent "tender") hand over to the BidcoreAI app, which has its own flow; everything else also verifies an Indian mobile number.
   const intent = clean(body.intent);
   const mobile91 = intent === "tender" ? null : indianMobile(phone);
@@ -44,7 +45,11 @@ export async function POST(req: NextRequest) {
   if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Enter a valid email address.", field: "email" }, { status: 400 });
   }
-  if (phone.replace(/\D/g, "").length < 10) {
+  if (companyCountry && !COUNTRIES.some((c) => c.code === companyCountry)) {
+    return NextResponse.json({ error: "Choose your country.", field: "country" }, { status: 400 });
+  }
+  const phoneDigits = phone.replace(/\D/g, "").length;   // country code + number: 7 to 15 digits for any country (E.164)
+  if (phoneDigits < 7 || phoneDigits > 15) {
     return NextResponse.json({ error: "Enter a valid phone number.", field: "phone" }, { status: 400 });
   }
   if (mobile91 && !isValidIndianMobile(mobile91)) {

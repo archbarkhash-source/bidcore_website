@@ -210,7 +210,6 @@ export default function Header() {
                 isOpen={openMenu === "Explore"}
                 onToggle={() => setOpenMenu(openMenu === "Explore" ? null : "Explore")}
                 onClose={() => setOpenMenu(null)}
-                muted
               />
                 </nav>
         </div>

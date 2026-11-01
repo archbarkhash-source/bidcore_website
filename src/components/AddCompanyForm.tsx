@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { notifySessionChange, useSession } from "@/lib/use-session";
 import { COMPANY_TYPES, STATES } from "@/lib/data";
+import { COUNTRIES, dialCodeFor, marketForCountry } from "@/lib/roles";
 
 // One page to add a company to the Bidcore directory: the company, and the person to contact for tender invites (name, designation, verified email and mobile).
 // There is no app account to create. Verifying the e-mail and the mobile number with one-time codes is what keeps the directory real; the saved company is copied to
@@ -12,6 +13,7 @@ import { COMPANY_TYPES, STATES } from "@/lib/data";
 interface Card {
   companyName: string;
   companyType: string;
+  country: string; // ISO 3166-1 alpha-2, India by default
   state: string;
   city: string;
   trades: string;
@@ -20,7 +22,7 @@ interface Card {
   listed: boolean;
 }
 
-const EMPTY: Card = { companyName: "", companyType: "", state: "", city: "", trades: "", website: "", about: "", listed: true };
+const EMPTY: Card = { companyName: "", companyType: "", country: "IN", state: "", city: "", trades: "", website: "", about: "", listed: true };
 
 /** The sign-up role (lib/roles) that best matches a company type, for the OTP request. */
 function roleForType(t: string): string {
@@ -43,6 +45,8 @@ export default function AddCompanyForm() {
   const [step, setStep] = useState<"form" | "codes">("form");
   const [code, setCode] = useState("");
   const [phoneCode, setPhoneCode] = useState("");
+  const [dialOf, setDialOf] = useState("IN"); // the country whose dial code the phone number uses (follows the company country until changed)
+  const [phoneRequired, setPhoneRequired] = useState(false); // an SMS code is sent only to +91 mobiles
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [field, setField] = useState("");
@@ -59,6 +63,7 @@ export default function AddCompanyForm() {
           setCard({
             companyName: c.companyName ?? "",
             companyType: c.companyType ?? "",
+            country: "IN",
             state: c.state ?? "",
             city: c.city ?? "",
             trades: (c.trades ?? []).join(", "),
@@ -68,13 +73,22 @@ export default function AddCompanyForm() {
           });
         const k = d.contact;
         if (k) setContact((x) => ({ ...x, name: k.contactName ?? "", designation: k.designation ?? "" }));
+        if (k?.country) {
+          setCard((x) => ({ ...x, country: k.country }));
+          setDialOf(k.country);
+        }
       })
       .finally(() => setLoaded(true));
   }, [session]);
 
   const set = (k: keyof Card, v: string | boolean) => setCard((c) => ({ ...c, [k]: v }));
+  const india = card.country === "IN";
+  const setCountry = (code: string) => {
+    setCard((c) => ({ ...c, country: code, state: code === "IN" || c.country === "IN" ? "" : c.state }));
+    setDialOf(code);
+  };
   const bad = (f: string) => (field === f ? " border-red-400" : "");
-  const phoneFull = `+91 ${contact.phone.replace(/\D/g, "")}`;
+  const phoneFull = `${dialCodeFor(dialOf)} ${contact.phone.replace(/\D/g, "")}`;
   // A signed-in member's own name is the default contact person until they type another.
   const contactName = contact.name || session?.name || "";
 
@@ -113,7 +127,8 @@ export default function AddCompanyForm() {
         role: roleForType(card.companyType),
         companyName: card.companyName,
         city: card.city,
-        country: "IN",
+        country: marketForCountry(card.country),
+        companyCountry: card.country,
         intent: "company",
       }),
     });
@@ -123,6 +138,7 @@ export default function AddCompanyForm() {
       setField(json.field ?? "");
       return false;
     }
+    setPhoneRequired(json.phoneRequired === true);
     return true;
   }
 
@@ -152,7 +168,7 @@ export default function AddCompanyForm() {
       const res = await fetch("/api/signup/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: contact.email.trim().toLowerCase(), code, phoneCode }),
+        body: JSON.stringify({ email: contact.email.trim().toLowerCase(), code, phoneCode: phoneRequired ? phoneCode : undefined }),
       });
       const json = await res.json();
       if (!res.ok) {
@@ -195,7 +211,13 @@ export default function AddCompanyForm() {
     return (
       <form onSubmit={verify} className="space-y-5 rounded-lg border border-slate-200 bg-white p-6">
         <div className="rounded-md bg-slate-100 px-4 py-3 text-sm text-slate-700">
-          We emailed a 6-digit code to <span className="font-semibold">{contact.email}</span> and sent an SMS code to <span className="font-semibold">{phoneFull}</span>. Both expire in 10 minutes.
+          We emailed a 6-digit code to <span className="font-semibold">{contact.email}</span>
+          {phoneRequired && (
+            <>
+              {" "}and sent an SMS code to <span className="font-semibold">{phoneFull}</span>
+            </>
+          )}
+          . {phoneRequired ? "Both expire" : "It expires"} in 10 minutes.
         </div>
         <label className="block text-sm font-medium text-slate-700">
           Email verification code *
@@ -211,6 +233,7 @@ export default function AddCompanyForm() {
             placeholder="······"
           />
         </label>
+        {phoneRequired && (
         <label className="block text-sm font-medium text-slate-700">
           Mobile (SMS) verification code *
           <input
@@ -224,10 +247,11 @@ export default function AddCompanyForm() {
             placeholder="······"
           />
         </label>
+        )}
         {error && <p className="rounded-md bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
         <div className="flex flex-wrap items-center gap-4">
           <button
-            disabled={busy || code.length !== 6 || phoneCode.length !== 6}
+            disabled={busy || code.length !== 6 || (phoneRequired && phoneCode.length !== 6)}
             className="rounded-full bg-brand-accent px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-accent-light disabled:opacity-60"
           >
             {busy ? "Verifying…" : "Verify and add my company"}
@@ -282,14 +306,31 @@ export default function AddCompanyForm() {
             </select>
           </label>
           <label className="block text-sm font-medium text-slate-700">
-            State *
-            <select required className={input + bad("state")} value={card.state} onChange={(e) => set("state", e.target.value)}>
-              <option value="">Choose…</option>
-              {STATES.map((s) => (
-                <option key={s.slug}>{s.name}</option>
+            Country *
+            <select required className={input + bad("country")} value={card.country} onChange={(e) => setCountry(e.target.value)}>
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>
+                  {c.label}
+                </option>
               ))}
             </select>
           </label>
+          {india ? (
+            <label className="block text-sm font-medium text-slate-700">
+              State *
+              <select required className={input + bad("state")} value={card.state} onChange={(e) => set("state", e.target.value)}>
+                <option value="">Choose…</option>
+                {STATES.map((s) => (
+                  <option key={s.slug}>{s.name}</option>
+                ))}
+              </select>
+            </label>
+          ) : (
+            <label className="block text-sm font-medium text-slate-700">
+              State / region
+              <input className={input + bad("state")} value={card.state} onChange={(e) => set("state", e.target.value)} maxLength={100} />
+            </label>
+          )}
           <label className="block text-sm font-medium text-slate-700">
             City *
             <input required className={input} value={card.city} onChange={(e) => set("city", e.target.value)} maxLength={120} />
@@ -334,14 +375,25 @@ export default function AddCompanyForm() {
               <label className="block text-sm font-medium text-slate-700">
                 Mobile *
                 <div className="mt-1 flex">
-                  <span className="flex items-center rounded-l-md border border-r-0 border-slate-300 bg-slate-50 px-3 text-sm text-slate-500">+91</span>
+                  <select
+                    aria-label="Country dial code"
+                    value={dialOf}
+                    onChange={(e) => setDialOf(e.target.value)}
+                    className="w-28 shrink-0 rounded-l-md border border-r-0 border-slate-300 bg-slate-50 px-2 py-2 text-sm text-slate-700 outline-none focus:border-brand-navy"
+                  >
+                    {COUNTRIES.filter((c) => c.dial).map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.label} ({c.dial})
+                      </option>
+                    ))}
+                  </select>
                   <input
                     required
                     inputMode="numeric"
                     className={`${input.replace("mt-1 ", "")} rounded-l-none${bad("phone")}`}
                     value={contact.phone}
                     onChange={(e) => setContact({ ...contact, phone: e.target.value })}
-                    placeholder="10-digit mobile number"
+                    placeholder={dialOf === "IN" ? "10-digit mobile number" : "Phone number"}
                     autoComplete="tel-national"
                   />
                 </div>
@@ -349,7 +401,7 @@ export default function AddCompanyForm() {
             </>
           )}
         </div>
-        {!session && <p className="text-xs text-slate-500">We send a code to this email and an SMS code to this mobile number to confirm both are real. No account or payment is needed.</p>}
+        {!session && <p className="text-xs text-slate-500">We send a code to this email{dialOf === "IN" ? " and an SMS code to this mobile number" : ""} to confirm {dialOf === "IN" ? "both are" : "it is"} real. No account or payment is needed.</p>}
       </section>
 
       <label className="flex items-start gap-2.5 text-sm text-slate-700">

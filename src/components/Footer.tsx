@@ -56,24 +56,16 @@ export default function Footer() {
       ],
     },
     {
-      title: "Marketplace",
-      links: [
-        { label: "Marketplace overview", href: "/supply" },
-        { label: "Find Products", href: "/supply/products" },
-        { label: "Find Suppliers & Manufacturers", href: "/supply/companies?type=Supplier" },
-        { label: "Find Equipment Providers", href: "/supply/categories/equipment-rental" },
-        { label: "List Your Construction Services", href: "/supply/list-your-company" },
-      ],
-    },
-    {
       title: "Explore",
       links: [
         { label: "Public Tenders", href: "/tenders" },
         { label: "Find Contractors", href: "/contractors" },
         { label: "Find Services", href: "/supply/services" },
-        { label: "Find Vendors", href: "/supply/companies?type=Supplier" },
+        { label: "Find Vendors and Suppliers", href: "/supply/companies?type=Supplier" },
+        { label: "Find Products", href: "/supply/products" },
         { label: "Professionals", href: "/professionals" },
         { label: "Equipment", href: "/equipment" },
+        { label: "List Your Construction Services", href: "/supply/list-your-company" },
       ],
     },
     {
@@ -84,7 +76,7 @@ export default function Footer() {
         { label: "Contact us", href: `mailto:${contactEmail}` },
         { label: "FAQ", href: "/faq" },
         // The BidcoreAI (India) Training Videos playlist on YouTube.
-        { label: "Indian Training Videos", href: "https://www.youtube.com/playlist?list=PLNOjSgwlR1aM" },
+        { label: "Training Videos", href: "https://www.youtube.com/playlist?list=PLNOjSgwlR1aM" },
       ],
     },
   ];
@@ -122,7 +114,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-6">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-5">
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
             <h2 className="text-base font-bold text-brand-navy">{col.title}</h2>

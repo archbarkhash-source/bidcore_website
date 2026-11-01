@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { COMPANY_TYPES, STATES } from "@/lib/data";
+import { COUNTRIES } from "@/lib/roles";
 import { SESSION_COOKIE, readSessionUserId } from "@/lib/session";
 import { payloadFor, pushContractor } from "@/lib/contractor-sync";
 import { syncMemberDirectory } from "@/lib/directory";
@@ -19,7 +20,7 @@ export async function GET() {
   const user = await currentUser();
   if (!user) return NextResponse.json({ error: "Please sign in first." }, { status: 401 });
   const saved = await db.memberCompany.findUnique({ where: { userId: user.id } }).catch(() => null);
-  const contact = (await readMemberContact(user.id)) ?? { contactName: null, designation: null };
+  const contact = (await readMemberContact(user.id)) ?? { contactName: null, designation: null, country: null };
   return NextResponse.json({
     contact,
     company: saved ?? {
@@ -52,6 +53,7 @@ export async function POST(req: NextRequest) {
 
   const companyName = clean(body.companyName, 300);
   const companyType = clean(body.companyType, 100) || null;
+  const country = COUNTRIES.some((c) => c.code === body.country) ? (body.country as string) : "IN";   // India unless another country is chosen
   const state = clean(body.state, 100) || null;
   const city = clean(body.city, 120) || null;
   const about = clean(body.about, 4000) || null;
@@ -68,7 +70,7 @@ export async function POST(req: NextRequest) {
   if (!companyName) return NextResponse.json({ error: "Enter your company name.", field: "companyName" }, { status: 400 });
   if (companyType && !COMPANY_TYPES.includes(companyType as (typeof COMPANY_TYPES)[number]))
     return NextResponse.json({ error: "Choose a company type from the list.", field: "companyType" }, { status: 400 });
-  if (state && !STATES.some((s) => s.name === state)) return NextResponse.json({ error: "Choose a state from the list.", field: "state" }, { status: 400 });
+  if (country === "IN" && state && !STATES.some((s) => s.name === state)) return NextResponse.json({ error: "Choose a state from the list.", field: "state" }, { status: 400 });
   if (website) {
     if (!/^https?:\/\//i.test(website)) website = `https://${website}`;
     try {
@@ -89,8 +91,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Your company details could not be saved right now. Please try again shortly." }, { status: 503 });
   }
 
-  await saveMemberContact(user.id, { contactName, designation });
-  const listedInDirectory = await syncMemberDirectory(user.id, { companyName, companyType, city, state, trades, website, listed });
+  await saveMemberContact(user.id, { contactName, designation, country });
+  const listedInDirectory = await syncMemberDirectory(user.id, { companyName, companyType, city, state, trades, website, listed, country });
   const synced = await pushContractor({
     ...payloadFor({ id: user.id, email: user.email, companyName, role: companyType ?? user.role, city, name: contactName ?? user.name, phone: user.phone }),
     contact_designation: designation,

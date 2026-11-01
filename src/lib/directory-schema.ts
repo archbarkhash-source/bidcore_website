@@ -19,6 +19,7 @@ export const DIRECTORY_SCHEMA_SQL: string[] = [
      listed      BOOLEAN NOT NULL DEFAULT TRUE,
      updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
    )`,
+  `ALTER TABLE directory_companies ADD COLUMN IF NOT EXISTS country TEXT NOT NULL DEFAULT 'India'`,
   `CREATE INDEX IF NOT EXISTS directory_companies_city_type ON directory_companies (city, type)`,
   `CREATE TABLE IF NOT EXISTS directory_contact_views (
      member_id  TEXT NOT NULL,
