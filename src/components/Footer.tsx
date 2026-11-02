@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN } from "@/lib/app-links";
 import { SOLUTIONS } from "@/lib/solutions";
+import { GUIDE_PAGES, GUIDE_NAV } from "@/lib/guide-pages";
 
 interface FooterLink {
   label: string;
@@ -43,6 +44,10 @@ export default function Footer() {
     {
       title: "Solutions",
       links: SOLUTIONS.map((x) => ({ label: x.name, href: `/solutions/${x.slug}` })),
+    },
+    {
+      title: "Guides",
+      links: GUIDE_PAGES.map((g) => ({ label: GUIDE_NAV[g.slug] ?? g.h1, href: `/software/${g.slug}` })),
     },
     {
       title: "How to buy",
@@ -114,7 +119,7 @@ export default function Footer() {
           </ul>
         </div>
       </div>
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-3 xl:grid-cols-6">
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
             <h2 className="text-base font-bold text-brand-navy">{col.title}</h2>
