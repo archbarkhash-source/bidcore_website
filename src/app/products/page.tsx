@@ -113,9 +113,10 @@ export default function ProductsIndex() {
 const COMPARE_ROWS: [string, boolean, boolean, boolean][] = [
   ["Publish public and private tenders, invite contractors, compare quotations", true, false, true],
   ["Go / No-Go eligibility check", true, false, true],
-  ["Quantity takeoff and BOQ", false, true, true],
+  ["AI-powered and auto takeoff, and AI agents", false, true, true],
+  ["BOQ", false, true, true],
   ["Cost estimation on CPWD, CPWD E&M and MoRTH cost models, or your own", false, true, true],
-  ["Tender cost and bid cost estimate", false, true, true],
+  ["Tender cost and bid cost estimate", false, false, true],
   ["Tender document analysis with page references", false, false, true],
   ["Tender schedule, WBS and productivity", false, false, true],
   ["Project budget, schedule, daily progress and risk", false, false, true],

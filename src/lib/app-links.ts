@@ -19,7 +19,7 @@ export interface Product {
 // Scale and Sync keep the internal keys "tender-management" and "all-in-one", which are the sign-up product names the BidcoreAI application knows.
 export const PRODUCTS: Product[] = [
   { key: "tender-connect", name: "Tender Connect", demoInterest: "Tender Connect", href: "/products/tender-connect", tagline: "Publish tenders, find contractors and manage quotations." },
-  { key: "tender-management", name: "Scale", demoInterest: "BidcoreAI Scale", href: "/products/scale", tagline: "Takeoff, BOQ and cost estimation on CPWD, CPWD E&M and MoRTH cost models." },
+  { key: "tender-management", name: "Scale", demoInterest: "BidcoreAI Scale", href: "/products/scale", tagline: "AI-powered takeoff, auto takeoff, agents and cost estimation on CPWD, CPWD E&M and MoRTH cost models." },
   { key: "all-in-one", name: "Sync", demoInterest: "BidcoreAI Sync", href: "/products/sync", tagline: "The whole lifecycle: tender, estimate, schedule, budget, procurement and site." },
 ];
 
