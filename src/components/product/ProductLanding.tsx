@@ -175,11 +175,32 @@ function Capabilities({ page, showLegend }: { page: ProductPage; showLegend: boo
             <strong className="font-semibold text-slate-800">Planned</strong> features are not built yet and are not available.
           </p>
         )}
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {page.capabilities.map((c) => (
-            <FeatureCard key={c.title} c={c} />
-          ))}
-        </div>
+        {page.capabilityGroups ? (
+          page.capabilityGroups.map((g, gi) => (
+            <div key={g.name} className="mt-10">
+              <div className="flex items-start gap-4">
+                <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-500 text-sm font-bold text-white">{gi + 1}</span>
+                <div>
+                  <h3 className="text-2xl font-bold tracking-tight text-brand-navy">{g.name}</h3>
+                  <p className="mt-1 max-w-3xl text-slate-600">{g.lead}</p>
+                </div>
+              </div>
+              <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {page.capabilities
+                  .filter((c) => c.group === g.name)
+                  .map((c) => (
+                    <FeatureCard key={c.title} c={c} />
+                  ))}
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {page.capabilities.map((c) => (
+              <FeatureCard key={c.title} c={c} />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

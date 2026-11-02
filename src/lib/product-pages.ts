@@ -52,6 +52,8 @@ export interface Capability {
   problem: string;
   body: string;
   status: FeatureStatus;
+  /** Which of the page's capabilityGroups this belongs to (only on pages that group their capabilities). */
+  group?: string;
 }
 
 export interface Workflow {
@@ -81,6 +83,8 @@ export interface ProductPage {
   audiences: { title: string; points: string[] }[];
   capabilitiesHeading: string;
   capabilities: Capability[];
+  /** When set, the capabilities are shown under these named groups (in this order), each with its key products beneath. */
+  capabilityGroups?: { name: string; lead: string }[];
   workflows: Workflow[];
   benefitsHeading: string;
   benefits: string[];
@@ -564,12 +568,18 @@ export const PRODUCT_PAGES: ProductPage[] = [
       },
     ],
     capabilitiesHeading: "BidcoreAI Sync capabilities",
+    capabilityGroups: [
+      { name: "Tender Management", lead: "Win the work: read the tender, decide whether to bid, price it and bring subcontractors in." },
+      { name: "Project Management", lead: "Run it on the numbers you bid with: budget, schedule, progress and procurement." },
+      { name: "Site Operations", lead: "Put crews and equipment on the plan and release the work." },
+    ],
     capabilities: [
       {
         icon: FileSearch,
         title: "Tender Document Analysis",
         problem: "Key conditions are buried in hundreds of pages.",
         body: "Scan issued tender documents for clauses on bid security, insurance, damages, milestones and more. Each finding shows its document and page, and a topic that is not found is reported as not found, never as not required.",
+        group: "Tender Management",
         status: "coming-soon",
       },
       {
@@ -577,6 +587,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         title: "Eligibility and Go / No-Go",
         problem: "Bidding on a tender you do not qualify for wastes effort.",
         body: "Assess a tender against your Company Intelligence (turnover, net worth, credentials, commitments). Results are pass, fail, review or conditional; missing data is a review, and a restriction is a red flag but never an automatic No-Go.",
+        group: "Tender Management",
         status: "coming-soon",
       },
       {
@@ -584,6 +595,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         title: "Bid Pack Checklist and Submission Review",
         problem: "It is easy to miss a required form or annexure.",
         body: "A checklist for the bid pack, ticked from your documents, takeoff, estimate and schedule, currently built around MoRTH / NHIDCL highway EPC RFPs, with a draft .docx. Signatures and seals are always left for you to confirm.",
+        group: "Tender Management",
         status: "coming-soon",
       },
       {
@@ -591,6 +603,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         title: "Everything in BidcoreAI Scale",
         problem: "Estimating tools that stop at the BOQ leave the rest to spreadsheets.",
         body: "Quantity takeoff, BOQ, cost estimation on CPWD Civil, CPWD E&M and MoRTH cost models or your own rates, and the Tender Cost workspace.",
+        group: "Tender Management",
         status: "coming-soon",
       },
       {
@@ -598,41 +611,7 @@ export const PRODUCT_PAGES: ProductPage[] = [
         title: "Tender Schedule, WBS and Productivity",
         problem: "A bid needs a credible programme, not a guess.",
         body: "Build a tender schedule from a Work Breakdown Structure and standard productivity rates, view it as a Gantt chart, and keep a separate Project Schedule for the job you win.",
-        status: "coming-soon",
-      },
-      {
-        icon: Banknote,
-        title: "Budget and Cost Control",
-        problem: "Overruns are noticed late.",
-        body: "Sync the budget from the estimate, then track project cost against it in rupees, with approved changes and the forecast.",
-        status: "coming-soon",
-      },
-      {
-        icon: CalendarClock,
-        title: "Project Schedule, Calendars and Risk",
-        problem: "A single-date schedule hides uncertainty.",
-        body: "A project Gantt with actual dates and baselines, a Preconstruction Calendar for tender dates, a Project Management Calendar for the job, and schedule risk with P50 / P80 / P90 outcomes.",
-        status: "coming-soon",
-      },
-      {
-        icon: HardHat,
-        title: "Daily Progress and Site Records",
-        problem: "Site records arrive late and in different formats.",
-        body: "Daily progress reports of manpower, work done, materials and issues, plus site visits and existing-conditions surveys with photos.",
-        status: "coming-soon",
-      },
-      {
-        icon: ShoppingCart,
-        title: "Procurement: Orders, Log and Change Orders",
-        problem: "Orders tracked in chats and sheets lose their status.",
-        body: "Purchase orders from draft to closed, a procurement log with supplier, lead time and onsite status, and change orders recorded against the project cost.",
-        status: "coming-soon",
-      },
-      {
-        icon: Wrench,
-        title: "Site Operations: Crews, Equipment and Work Packages",
-        problem: "Crews and machines get double-booked.",
-        body: "A day-level calendar with conflict checks, a workforce directory, work packages with work orders, subcontractor capacity and a dashboard that shows where each figure comes from.",
+        group: "Tender Management",
         status: "coming-soon",
       },
       {
@@ -640,20 +619,63 @@ export const PRODUCT_PAGES: ProductPage[] = [
         title: "Tender Connect Included",
         problem: "Subcontractor quotations arrive as mismatched files.",
         body: "Publish public or private tenders, invite contractors from the Bidcore directory and compare item-wise quotations on one BOQ. See BidcoreAI Tender Connect.",
+        group: "Tender Management",
         status: "live",
+      },
+      {
+        icon: Banknote,
+        title: "Budget and Cost Control",
+        problem: "Overruns are noticed late.",
+        body: "Sync the budget from the estimate, then track project cost against it in rupees, with approved changes and the forecast.",
+        group: "Project Management",
+        status: "coming-soon",
+      },
+      {
+        icon: CalendarClock,
+        title: "Project Schedule, Calendars and Risk",
+        problem: "A single-date schedule hides uncertainty.",
+        body: "A project Gantt with actual dates and baselines, a Preconstruction Calendar for tender dates, a Project Management Calendar for the job, and schedule risk with P50 / P80 / P90 outcomes.",
+        group: "Project Management",
+        status: "coming-soon",
+      },
+      {
+        icon: HardHat,
+        title: "Daily Progress and Site Records",
+        problem: "Site records arrive late and in different formats.",
+        body: "Daily progress reports of manpower, work done, materials and issues, plus site visits and existing-conditions surveys with photos.",
+        group: "Project Management",
+        status: "coming-soon",
+      },
+      {
+        icon: ShoppingCart,
+        title: "Procurement: Orders, Log and Change Orders",
+        problem: "Orders tracked in chats and sheets lose their status.",
+        body: "Purchase orders from draft to closed, a procurement log with supplier, lead time and onsite status, and change orders recorded against the project cost.",
+        group: "Project Management",
+        status: "coming-soon",
       },
       {
         icon: Truck,
         title: "Material Requirements, RFQs and Delivery Tracking",
         problem: "Requirements, quotations and deliveries sit in separate places.",
         body: "Generating material requirements from the BOQ, comparing supplier quotations and tracking deliveries as one linked workflow is not available yet.",
+        group: "Project Management",
         status: "planned",
+      },
+      {
+        icon: Wrench,
+        title: "Site Operations: Crews, Equipment and Work Packages",
+        problem: "Crews and machines get double-booked.",
+        body: "A day-level calendar with conflict checks, a workforce directory, work packages with work orders, subcontractor capacity and a dashboard that shows where each figure comes from.",
+        group: "Site Operations",
+        status: "coming-soon",
       },
       {
         icon: Boxes,
         title: "Productivity-based Crew Planning, Material Tracking and Billing",
         problem: "Plans and measured site output are not linked.",
         body: "Shift calendars, productivity-based crew planning, material integration, subcontractor measurement and billing, and variations and claims are on the roadmap and are not available yet.",
+        group: "Site Operations",
         status: "planned",
       },
     ],
