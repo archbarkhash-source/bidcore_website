@@ -117,9 +117,6 @@ export default function Header() {
           <img src="/images/favicon.png" alt="Bidcore" className="h-8 w-8 rounded-lg" />
           Bidcore
         </Link>
-        <span className="hidden shrink-0 rounded-full border border-slate-300 bg-slate-50 px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-slate-600 sm:inline-block" title="Bidcore serves contractors in India and across Asia">
-          India &amp; Asia
-        </span>
 
         <form onSubmit={handleSearch} role="search" className="relative hidden max-w-xl flex-1 md:block">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
