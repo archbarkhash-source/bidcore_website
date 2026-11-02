@@ -100,7 +100,7 @@ export const productHref = (slug: ProductSlug) => `/products/${slug}`;
 const explore = (label: string): Cta => ({ label, href: "#capabilities" });
 const pricing: Cta = { label: "View Pricing", href: "/pricing" };
 const demo: Cta = { label: "Request a Demo", href: "/request-demo" };
-/** Only Tender Connect has a free trial; every other product goes through Request a Demo, with the product pre-selected on the form. */
+/** Every product has a 30-day free trial; Scale and Sync start through Request a Demo, with the product pre-selected on the form. */
 const DEMO_PRODUCT: Partial<Record<ProductKey, string>> = {
   "tender-management": "BidcoreAI Scale",
   "all-in-one": "BidcoreAI Sync",
@@ -127,7 +127,7 @@ const TENDER_CONNECT_ACCESS: ProductPage["access"] = {
 
 const COMING_SOON_NOTE = (name: string, key: ProductKey): ProductPage["access"] => ({
   heading: "See it in a live demo",
-  body: `Request a demo and a Bidcore team member will show you ${name} and share the pricing. The 30-day free trial is for Tender Connect (Starter Lite).`,
+  body: `Request a demo and a Bidcore team member will show you ${name} and share the pricing. Every product starts with a 30-day free trial, no credit card required; request a demo to start yours.`,
   rows: [
     ["Live demo", "Pick a date and time (IST)"],
     ["Pricing", "Shared in the demo"],
