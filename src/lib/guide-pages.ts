@@ -109,7 +109,7 @@ export const GUIDE_PAGES: GuidePage[] = [
       { q: "Can I use it for highway EPC tenders?", a: "Yes. Tender Documents supports MoRTH / NHIDCL highway EPC bid packs, including security rules and bid capacity." },
     ],
     related: [
-      { label: "Tender Management", href: "/products/tender-management" },
+      { label: "BidcoreAI Scale", href: "/products/scale" },
       { label: "Construction estimation software", href: "/software/construction-estimation-software" },
       { label: "Construction bidding software", href: "/software/construction-bidding-software" },
       { label: "Bid proposal software", href: "/software/bid-proposal-software" },
@@ -148,8 +148,8 @@ export const GUIDE_PAGES: GuidePage[] = [
     related: [
       { label: "Tender management software", href: "/software/tender-management-software" },
       { label: "Compare estimating software", href: "/software/compare-estimating-software" },
-      { label: "Tender Management", href: "/products/tender-management" },
-      { label: "Project Management", href: "/products/project-management" },
+      { label: "BidcoreAI Scale", href: "/products/scale" },
+      { label: "BidcoreAI Sync", href: "/products/sync" },
     ],
     cta: { heading: "Price a BOQ against the cost models", body: "Bring a BOQ and drawings. We will price it and show which lines still need a decision." },
   },

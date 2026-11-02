@@ -49,7 +49,7 @@ function Hero() {
     <section className="relative overflow-hidden bg-brand-navy text-white">
       <div className="relative mx-auto grid max-w-7xl gap-8 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:items-center lg:py-20">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400 sm:text-sm">For EPC contractors, general contractors and subcontractors</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-400 sm:text-sm">India &amp; Asia · For EPC contractors, general contractors and subcontractors</p>
           {/* One colour for the whole headline: white on the dark hero. Orange is kept for buttons, icons and small accents only. */}
           <h1 className="mt-4 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">Complete AI-Integrated Construction Life Cycle Solution</h1>
           <p className="mt-5 text-xl font-semibold leading-snug text-slate-100 sm:text-2xl">
@@ -104,35 +104,35 @@ const STAGES = [
   },
   {
     n: "02",
-    products: [{ name: "Tender Management", href: "/products/tender-management" }],
+    products: [{ name: "BidcoreAI Sync", href: "/products/sync" }],
     title: "Analyse tender documents",
     body: "RFP, datasheet, schedules and corrigenda in one place, with the bid security, performance security and key dates read out.",
     ai: "AI tender analysis: every finding keeps its document and page, so you can check it in one click.",
   },
   {
     n: "03",
-    products: [{ name: "Tender Management", href: "/products/tender-management" }],
+    products: [{ name: "BidcoreAI Scale", href: "/products/scale" }],
     title: "Take off and estimate",
     body: "Digital quantity takeoff from PDF drawings and cost estimation with CPWD Civil, CPWD E&M, MoRTH and your own cost models.",
     ai: "AI assistance: symbol counts on drawings and automatic assignment of rate analyses to BOQ lines.",
   },
   {
     n: "04",
-    products: [{ name: "Tender Management", href: "/products/tender-management" }],
+    products: [{ name: "BidcoreAI Scale", href: "/products/scale" }, { name: "BidcoreAI Sync", href: "/products/sync" }],
     title: "Tender cost and schedule",
     body: "Overheads, GST and profit on one bid cost estimate; EMD and securities calculated; a schedule, WBS and productivity built from the BOQ.",
     ai: "Agent X, the AI assistant, answers questions on the tender and the project in plain language.",
   },
   {
     n: "05",
-    products: [{ name: "Tender Connect", href: "/products/tender-connect" }, { name: "Procurement", href: "/products/procurement-management" }],
+    products: [{ name: "Tender Connect", href: "/products/tender-connect" }, { name: "BidcoreAI Sync", href: "/products/sync" }],
     title: "Subcontract and procure",
     body: "Invite subcontractors, compare item-wise quotations, then purchase orders, change orders and material delivery.",
     ai: "Matching subcontractors are found in the Bidcore contractor directory by trade and location.",
   },
   {
     n: "06",
-    products: [{ name: "Project Management", href: "/products/project-management" }, { name: "Site Operations", href: "/products/site-management" }],
+    products: [{ name: "BidcoreAI Sync", href: "/products/sync" }],
     title: "Build, control and hand over",
     body: "Budget against actual cost, the project schedule with actual dates, daily progress reports, RA bills, monthly MIS and site crews.",
     ai: "Forecasts follow the site: quantities logged in daily progress reports move the schedule forecast.",
@@ -182,34 +182,28 @@ function LifeCycle() {
 const VALUE_PROPS = [
   {
     icon: FileSearch,
-    title: "Tender Connect",
+    title: "BidcoreAI Tender Connect",
     body: "Invite subcontractors from the Bidcore contractor directory, receive and compare their quotations, and check Go / No-Go eligibility on public tenders.",
     cta: { label: "Tender Connect", href: "/products/tender-connect" },
   },
   {
     icon: Calculator,
-    title: "Tender Management",
-    body: "Tender document analysis with page references, digital quantity takeoff, cost estimation with CPWD, CPWD E&M and MoRTH cost models, tender cost, schedule and WBS.",
-    cta: { label: "Tender Management", href: "/products/tender-management" },
+    title: "BidcoreAI Scale",
+    body: "Takeoff and estimating: digital quantity takeoff, BOQ, and cost estimation with CPWD, CPWD E&M and MoRTH cost models or your own rates, with the tender cost.",
+    cta: { label: "BidcoreAI Scale", href: "/products/scale" },
   },
   {
     icon: ClipboardList,
-    title: "Project Management & Procurement",
-    body: "Budget and cost control, project schedule and Gantt, purchase orders, change orders, daily progress reports, RA bills and monthly MIS.",
-    cta: { label: "Project Management", href: "/products/project-management" },
-  },
-  {
-    icon: HardHat,
-    title: "Site Operations",
-    body: "Plan crews, equipment and work packages, schedule your workforce and subcontractor crews, and track the site day to day.",
-    cta: { label: "Site Operations", href: "/products/site-management" },
+    title: "BidcoreAI Sync",
+    body: "The end-to-end lifecycle: tender analysis, estimating, schedule, budget, procurement and site operations on one platform, with Scale and Tender Connect included.",
+    cta: { label: "BidcoreAI Sync", href: "/products/sync" },
   },
 ];
 
 function ValueProps() {
   return (
     <section className="border-b border-slate-200">
-      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-5 px-4 py-14 sm:px-6 md:grid-cols-3">
         {VALUE_PROPS.map((v) => (
           <div key={v.title} className="flex flex-col rounded-lg border border-slate-200 bg-white p-6">
             <span className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-navy text-orange-400">

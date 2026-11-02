@@ -158,10 +158,8 @@ export function SiteGraphic() {
 export function SuiteGraphic() {
   const rows: [typeof FileText, string, string, Tone, string][] = [
     [FileText, "Tender Connect", "72%", "green", "Publish"],
-    [FileSearch, "Tender Management", "58%", "blue", "Estimate"],
-    [CalendarClock, "Project Management", "66%", "green", "Plan"],
-    [PackageCheck, "Procurement", "46%", "amber", "Buy"],
-    [HardHat, "Site Operations", "54%", "blue", "Build"],
+    [FileSearch, "BidcoreAI Scale", "58%", "blue", "Estimate"],
+    [CalendarClock, "BidcoreAI Sync", "66%", "green", "Plan and build"],
   ];
   return (
     <Frame>
@@ -192,8 +190,8 @@ export function SuiteGraphic() {
 
 /** A small banner picture for a product card: the product's icon beside a mini screen. */
 export function CardArt({ product }: { product: string }) {
-  const Icon = { "tender-connect": FileText, "tender-management": FileSearch, "project-management": CalendarClock, procurement: PackageCheck, "site-management": HardHat }[product] ?? FileText;
-  const widths = { "tender-connect": ["72%", "55%", "64%"], "tender-management": ["68%", "46%", "60%"], "project-management": ["40%", "62%", "50%"], procurement: ["70%", "52%", "44%"], "site-management": ["58%", "66%", "48%"] }[product] ?? ["60%", "50%", "40%"];
+  const Icon = { "tender-connect": FileText, "tender-management": FileSearch, "project-management": CalendarClock, procurement: PackageCheck, "site-management": HardHat, "all-in-one": CalendarClock }[product] ?? FileText;
+  const widths = { "tender-connect": ["72%", "55%", "64%"], "tender-management": ["68%", "46%", "60%"], "project-management": ["40%", "62%", "50%"], "all-in-one": ["40%", "62%", "50%"], procurement: ["70%", "52%", "44%"], "site-management": ["58%", "66%", "48%"] }[product] ?? ["60%", "50%", "40%"];
   return (
     <div aria-hidden className="relative flex h-28 items-center gap-4 overflow-hidden rounded-t-lg bg-brand-navy px-5">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_40%,rgba(251,191,36,0.14),transparent_60%)]" />

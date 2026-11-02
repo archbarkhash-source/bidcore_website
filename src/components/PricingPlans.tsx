@@ -116,7 +116,7 @@ export default function PricingPlans() {
                 </a>
               ) : (
                 <Link
-                  href={`/request-demo?product=${encodeURIComponent(plan.key === "starter" ? "Tender Management" : "Project Management")}`}
+                  href={`/request-demo?product=${encodeURIComponent(plan.key === "starter" ? "BidcoreAI Scale" : "BidcoreAI Sync")}`}
                   className="mt-6 block rounded-full bg-brand-accent px-5 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-brand-accent-light"
                 >
                   Request a Demo

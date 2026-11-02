@@ -9,16 +9,18 @@ export type ProductKey = "tender-connect" | "tender-management" | "project-manag
 export interface Product {
   key: ProductKey;
   name: string;
+  /** What the demo form calls it (the "Interested in" choice). */
+  demoInterest: string;
   href: string; // the product's page on www.bidcore.in
   tagline: string;
 }
 
+// The Products menu and page show three products: Tender Connect, BidcoreAI Scale (takeoff and estimating) and BidcoreAI Sync (the end-to-end lifecycle).
+// Scale and Sync keep the internal keys "tender-management" and "all-in-one", which are the sign-up product names the BidcoreAI application knows.
 export const PRODUCTS: Product[] = [
-  { key: "tender-connect", name: "Tender Connect", href: "/products/tender-connect", tagline: "Publish tenders, find contractors and manage quotations." },
-  { key: "tender-management", name: "Tender Management", href: "/products/tender-management", tagline: "Takeoff, cost estimation and tender cost preparation." },
-  { key: "project-management", name: "Project Management", href: "/products/project-management", tagline: "Budgeting, scheduling, DPRs, submittals and RFIs." },
-  { key: "procurement", name: "Procurement Management", href: "/products/procurement-management", tagline: "Purchase orders, vendors, material delivery and change orders." },
-  { key: "site-management", name: "Site Operations", href: "/products/site-management", tagline: "Plan crews, equipment and work packages, and run the site day to day." },
+  { key: "tender-connect", name: "Tender Connect", demoInterest: "Tender Connect", href: "/products/tender-connect", tagline: "Publish tenders, find contractors and manage quotations." },
+  { key: "tender-management", name: "Scale", demoInterest: "BidcoreAI Scale", href: "/products/scale", tagline: "Takeoff, BOQ and cost estimation on CPWD, CPWD E&M and MoRTH cost models." },
+  { key: "all-in-one", name: "Sync", demoInterest: "BidcoreAI Sync", href: "/products/sync", tagline: "The whole lifecycle: tender, estimate, schedule, budget, procurement and site." },
 ];
 
 /** While the downloadable Starter Lite programs are not published on the website, no page offers a "Start Free Trial": visitors are sent to Request a Demo instead.

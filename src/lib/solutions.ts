@@ -24,11 +24,11 @@ export interface Solution {
   custom?: { eyebrow: string; itemsHeading: string; cta: { label: string; href: string }; examples: { title: string; body: string }[] };
 }
 
-const TM = "/products/tender-management";
+const TM = "/products/scale";
 const TC = "/products/tender-connect";
-const PM = "/products/project-management";
-const PROC = "/products/procurement-management";
-const SITE = "/products/site-management";
+const PM = "/products/sync";
+const PROC = "/products/sync";
+const SITE = "/products/sync";
 
 export const SOLUTIONS: Solution[] = [
   {
@@ -44,12 +44,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Read the tender and decide whether to bid",
         body: "Scan tender documents for key conditions with document and page references, check eligibility against your company profile, and run a Go / No-Go assessment.",
-        link: { label: "Tender Management", href: TM },
+        link: { label: "BidcoreAI Scale", href: TM },
       },
       {
         title: "Prepare the bid",
         body: "Digital quantity takeoff using PDFs, cost estimation with CPWD, E&M and MoRTH cost models, tender cost and schedule, and a bid-pack checklist built around MoRTH / NHIDCL highway EPC RFPs.",
-        link: { label: "Tender Management", href: TM },
+        link: { label: "BidcoreAI Scale", href: TM },
       },
       {
         title: "Source and compare subcontractors",
@@ -59,12 +59,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Plan and control the project",
         body: "WBS templates, productivity-based scheduling and Gantt, budget and cost control, schedule risk assessment and reports.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Buy and run the site",
         body: "Purchase orders, a procurement log and change orders; resource planning, work packages and subcontractor capacity; daily progress reports.",
-        link: { label: "Procurement and Site Operations", href: SITE },
+        link: { label: "BidcoreAI Sync", href: SITE },
       },
       {
         title: "Find suppliers and manufacturers",
@@ -96,22 +96,22 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Estimate and price",
         body: "Digital quantity takeoff using PDFs and BOQ-based cost estimation with CPWD, E&M and MoRTH cost models.",
-        link: { label: "Tender Management", href: TM },
+        link: { label: "BidcoreAI Scale", href: TM },
       },
       {
         title: "Schedule and budget",
         body: "Generate a schedule from a WBS using standard productivity rates, track cost against budget, and review schedule risk.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Record site progress",
         body: "Daily progress reports with manpower, work done, materials and issues, plus site visits and existing-conditions surveys.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Order materials and manage changes",
         body: "Purchase orders, a procurement log and change orders kept with the project.",
-        link: { label: "Procurement Management", href: PROC },
+        link: { label: "BidcoreAI Sync", href: PROC },
       },
     ],
   },
@@ -128,12 +128,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Price early",
         body: "Digital quantity takeoff using PDFs, BOQ-based cost estimation with CPWD, E&M and MoRTH cost models, and a tender cost workspace.",
-        link: { label: "Tender Management", href: TM },
+        link: { label: "BidcoreAI Scale", href: TM },
       },
       {
         title: "Plan the work",
         body: "WBS templates by project type, productivity-based durations, and a schedule you can view as a Gantt chart.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Bring in specialist trades",
@@ -148,12 +148,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Control cost through delivery",
         body: "Budget and cost control, purchase orders and change orders.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Report and review risk",
         body: "Daily progress reports and schedule risk assessment with exportable reports.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
     ],
     note: "BidcoreAI supports the estimating, sourcing, planning and delivery side of design-build. It is not design or modelling software.",
@@ -191,12 +191,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Plan crews and equipment",
         body: "A subcontractor workspace for crew and resource planning, with jobs and work orders you receive from contractors.",
-        link: { label: "Site Operations", href: SITE },
+        link: { label: "BidcoreAI Sync", href: SITE },
       },
       {
         title: "Track job cost and billing",
         body: "Job costing and progress billing for the work you take on.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
     ],
   },
@@ -218,12 +218,12 @@ export const SOLUTIONS: Solution[] = [
       {
         title: "Agree what data moves, and in which direction",
         body: "For example BOQs and estimates, schedules, tenders and quotations, or daily progress reports, flowing between your system and BidcoreAI.",
-        link: { label: "Tender Management", href: TM },
+        link: { label: "BidcoreAI Scale", href: TM },
       },
       {
         title: "Workflows that fit how you work",
         body: "Tailor how tendering, project management, procurement and site operations work alongside the systems you already depend on.",
-        link: { label: "Project Management", href: PM },
+        link: { label: "BidcoreAI Sync", href: PM },
       },
       {
         title: "Own a construction product or service?",

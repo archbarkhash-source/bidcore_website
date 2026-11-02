@@ -5,8 +5,8 @@ import { CardArt, SuiteGraphic } from "@/components/graphics/ProductGraphics";
 import { PRODUCTS, signUpHref, FREE_TRIAL_OPEN } from "@/lib/app-links";
 
 export const metadata: Metadata = {
-  title: "BidcoreAI Construction Software Products | Bidcore",
-  description: "BidcoreAI construction software for Indian contractors: Tender Connect, Tender Management, Project Management and more.",
+  title: "BidcoreAI Scale, BidcoreAI Sync and Tender Connect | Construction Software for India and Asia",
+  description: "BidcoreAI Scale for takeoff and estimating, BidcoreAI Sync for the end-to-end construction lifecycle, and Tender Connect for tenders and quotations. Built for India and the Asian market.",
   alternates: { canonical: "/products" },
 };
 
@@ -23,10 +23,10 @@ export default function ProductsIndex() {
             <img src="/images/bidcoreai-logo.png" alt="BidcoreAI" width={395} height={100} className="h-8 w-auto rounded-md" />
             <h1 className="mt-4 text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl">
               <span className="mb-3 block text-lg font-semibold tracking-normal text-amber-300 sm:text-xl">Construction software</span>
-              BidcoreAI software products
+              BidcoreAI products for India &amp; Asia
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-slate-200">
-              Software for estimating, tendering, planning and running construction projects, from the first tender to the last site report. Looking for construction products and
+              BidcoreAI Scale is takeoff and estimating. BidcoreAI Sync is the whole lifecycle, from the first tender to the last site report, and includes Scale and Tender Connect. Tender Connect publishes tenders and manages quotations on its own. Looking for construction products and
               suppliers instead? Visit the{" "}
               <Link href="/supply" className="font-semibold text-white underline underline-offset-2 hover:text-amber-300">
                 supplier and vendor directory
@@ -48,7 +48,7 @@ export default function ProductsIndex() {
 
       <div className="bg-[#F6F7F9]">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6">
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {PRODUCTS.map((p) => (
               <div key={p.key} className="flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white">
                 <CardArt product={p.key} />
@@ -64,7 +64,7 @@ export default function ProductsIndex() {
                         Start free trial
                       </Link>
                     ) : (
-                      <Link href={`/request-demo?product=${encodeURIComponent(p.name)}`} className="text-brand-accent hover:underline">
+                      <Link href={`/request-demo?product=${encodeURIComponent(p.demoInterest)}`} className="text-brand-accent hover:underline">
                         Request a demo
                       </Link>
                     )}
@@ -73,8 +73,52 @@ export default function ProductsIndex() {
               </div>
             ))}
           </div>
+
+          <h2 className="mt-14 text-2xl font-bold tracking-tight text-brand-navy sm:text-3xl">Which one do you need?</h2>
+          <p className="mt-2 max-w-3xl text-slate-600">Sync includes everything in Scale and Tender Connect. Scale and Tender Connect can each be used on their own.</p>
+          <div className="mt-6 overflow-x-auto rounded-lg border border-slate-200 bg-white">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+              <thead className="bg-slate-50">
+                <tr>
+                  <th scope="col" className="px-4 py-3 font-bold text-brand-navy"></th>
+                  <th scope="col" className="px-4 py-3 font-bold text-brand-navy">Tender Connect</th>
+                  <th scope="col" className="px-4 py-3 font-bold text-brand-navy">BidcoreAI Scale</th>
+                  <th scope="col" className="px-4 py-3 font-bold text-brand-navy">BidcoreAI Sync</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARE_ROWS.map(([label, tc, scale, sync]) => (
+                  <tr key={label} className="border-t border-slate-200">
+                    <th scope="row" className="px-4 py-3 font-semibold text-brand-navy">
+                      {label}
+                    </th>
+                    {[tc, scale, sync].map((v, i) => (
+                      <td key={i} className={`px-4 py-3 ${v ? "font-medium text-emerald-700" : "text-slate-400"}`}>
+                        {v ? "Included" : "—"}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-xs text-slate-500">Some features are still being released to every account. Request a demo to see what is available today.</p>
         </div>
       </div>
     </div>
   );
 }
+
+// [what, Tender Connect, Scale, Sync]
+const COMPARE_ROWS: [string, boolean, boolean, boolean][] = [
+  ["Publish public and private tenders, invite contractors, compare quotations", true, false, true],
+  ["Go / No-Go eligibility check", true, false, true],
+  ["Quantity takeoff and BOQ", false, true, true],
+  ["Cost estimation on CPWD, CPWD E&M and MoRTH cost models, or your own", false, true, true],
+  ["Tender cost and bid cost estimate", false, true, true],
+  ["Tender document analysis with page references", false, false, true],
+  ["Tender schedule, WBS and productivity", false, false, true],
+  ["Project budget, schedule, daily progress and risk", false, false, true],
+  ["Procurement: purchase orders, log and change orders", false, false, true],
+  ["Site operations: crews, equipment and work packages", false, false, true],
+];

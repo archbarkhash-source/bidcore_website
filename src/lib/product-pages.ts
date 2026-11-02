@@ -31,7 +31,7 @@ import {
 } from "lucide-react";
 import { signUpHref, type ProductKey, FREE_TRIAL_OPEN, TENDER_CONNECT_DEMO } from "@/lib/app-links";
 
-// Content for the five BidcoreAI product landing pages (/products/<slug>), rendered by components/product/ProductLanding.tsx.
+// Content for the three BidcoreAI product landing pages (Tender Connect, BidcoreAI Scale = takeoff and estimating, BidcoreAI Sync = the end-to-end lifecycle) (/products/<slug>), rendered by components/product/ProductLanding.tsx.
 //
 // Truthfulness rules for this file:
 //  - "live" / "coming-soon" = built in the BidcoreAI application. The website shows no label for either: only "planned" features get a visible marker.
@@ -89,7 +89,7 @@ export interface ProductPage {
   finalCta: { heading: string; body: string; ctas: Cta[] };
 }
 
-export type ProductSlug = "tender-connect" | "tender-management" | "project-management" | "procurement-management" | "site-management";
+export type ProductSlug = "tender-connect" | "scale" | "sync";
 
 export const productHref = (slug: ProductSlug) => `/products/${slug}`;
 
@@ -98,10 +98,8 @@ const pricing: Cta = { label: "View Pricing", href: "/pricing" };
 const demo: Cta = { label: "Request a Demo", href: "/request-demo" };
 /** Only Tender Connect has a free trial; every other product goes through Request a Demo, with the product pre-selected on the form. */
 const DEMO_PRODUCT: Partial<Record<ProductKey, string>> = {
-  "tender-management": "Tender Management",
-  "project-management": "Project Management",
-  procurement: "Procurement Management",
-  "site-management": "Site Operations",
+  "tender-management": "BidcoreAI Scale",
+  "all-in-one": "BidcoreAI Sync",
 };
 const demoFor = (key: ProductKey): Cta => ({ label: "Request a Demo", href: `/request-demo?product=${encodeURIComponent(DEMO_PRODUCT[key] ?? "")}` });
 const tenderConnectLive: Cta = { label: "See Tender Connect", href: productHref("tender-connect") };
@@ -331,6 +329,10 @@ export const PRODUCT_PAGES: ProductPage[] = [
         a: "No. It is per company, so colleagues share one trial and creating another login does not start another.",
       },
       {
+        q: "How is Tender Connect related to BidcoreAI Scale and Sync?",
+        a: "Tender Connect is its own product for publishing tenders, inviting contractors and quoting. BidcoreAI Scale is takeoff and estimating, and BidcoreAI Sync is the end-to-end lifecycle. Sync includes Tender Connect and Scale, so a contractor on Sync prices the package in Scale and sources it through Tender Connect.",
+      },
+      {
         q: "Can I keep a tender private?",
         a: "Yes. A private tender goes only to the companies you invite and never appears on Bidcore.in. You can also publish a package publicly to reach more contractors.",
       },
@@ -352,173 +354,185 @@ export const PRODUCT_PAGES: ProductPage[] = [
     },
   },
 
-  // ────────────────────────────────────────────────────────────────────────────────────────── Tender Management
+  // ────────────────────────────────────────────────────────────────────────────────────────────────── BidcoreAI Scale
   {
-    slug: "tender-management",
+    slug: "scale",
     visual: "tender-management",
     key: "tender-management",
-    name: "BidcoreAI Tender Management",
+    name: "BidcoreAI Scale",
     availability: "coming-soon",
-    metaTitle: "BidcoreAI Tender Management | Tender Preparation for Indian Contractors",
+    metaTitle: "BidcoreAI Scale | Takeoff and Estimating Software for Indian Contractors",
     metaDescription:
-      "Prepare tenders, check eligibility, assess Go / No-Go and organise tender documents with BidcoreAI Tender Management for Indian contractors.",
-    headline: "Manage Tender Preparation, Compliance and Bid Decisions in One Workspace",
+      "BidcoreAI Scale: digital takeoff, BOQ and cost estimation with CPWD Civil, CPWD E&M and MoRTH cost models and your own rates, for Indian EPC and general contractors.",
+    headline: "Take Off, Price and Build the Tender Cost on Indian Cost Models",
     intro:
-      "A workspace for General Contractors, EPC companies, infrastructure contractors and tendering teams to read tender documents, check eligibility, decide whether to bid, and prepare the bid.",
+      "BidcoreAI Scale is takeoff and estimating for India and the Asian market: measure the drawings, build the BOQ, price it against CPWD Civil, CPWD E&M and MoRTH cost models or your own company rates, and finish with the bid cost estimate, in rupees.",
     atAGlance: [
-      "Tender document analysis with page references",
-      "Eligibility and Go / No-Go assessment",
-      "Bid-pack preparation checklist",
-      "Quantity takeoff, cost estimation and tender cost",
-      "Tender schedule, WBS and productivity",
+      "Quantity takeoff from PDF drawings with AI-assisted counts",
+      "BOQ and item-rate BOQ for government tenders",
+      "CPWD Civil, CPWD E&M and MoRTH cost models",
+      "Your own Company cost model and rates",
+      "Tender Cost with overheads, GST and profit",
     ],
     ctas: {
-      primary: explore("Explore Tender Management"),
+      primary: explore("Explore Scale"),
       secondary: demoFor("tender-management"),
       tertiary: pricing,
     },
     valueProps: [
       {
-        title: "Decide before you spend",
-        body: "Check a tender against your company profile and its own requirements before committing your team's time to a bid.",
+        title: "Priced from rate analysis, not guesswork",
+        body: "Auto Assign matches BOQ lines to rate analyses in the cost model. A line it cannot price stays empty and is reported, so you decide.",
       },
       {
-        title: "Nothing lost in a long document",
-        body: "Tender findings keep the document and page they came from, so every requirement can be checked against the source.",
+        title: "Your rates as well as the schedule of rates",
+        body: "Copy items from CPWD or MoRTH into your Company cost model and set your own rates. The published rate is never edited.",
       },
       {
-        title: "From documents to a priced bid",
-        body: "Takeoff, estimating, scheduling and the bid pack sit in the same tender workspace.",
+        title: "From drawing to bid cost in one place",
+        body: "Quantities, BOQ, estimate and the tender cost sit in the same project, so a change is made once.",
       },
     ],
     audiences: [
       {
-        title: "General Contractors and EPC Companies",
-        points: ["Assess large tenders against bid capacity and eligibility", "Prepare bid packs and track what is still missing", "Price and schedule the bid in one place"],
+        title: "EPC and General Contractors",
+        points: ["Price building, road and infrastructure BOQs on the cost model the tender uses", "Keep the estimate, the BOQ and the tender cost on one project", "Reuse your own rates across projects"],
       },
       {
-        title: "Infrastructure Contractors",
-        points: ["Work through highway and infrastructure RFPs clause by clause", "Track corrigenda that change earlier values", "Calculate security and estimated project cost"],
+        title: "Estimators and Quantity Surveyors",
+        points: ["Measure PDF drawings and group quantities under Sub Heads or Chapters", "Use BOQ templates for repeat kinds of work", "See which lines are priced and which still need a decision"],
       },
       {
-        title: "Tendering and Estimating Teams",
-        points: ["Share one source of truth for the tender", "Keep documents, rates and the schedule together", "Review the bidder's own prepared documents before submission"],
+        title: "Subcontractors and Specialist Contractors",
+        points: ["Price your own scope on your own rates", "Respond to tender packages with item-wise quotations through Tender Connect"],
       },
     ],
-    capabilitiesHeading: "Tender Management capabilities",
+    capabilitiesHeading: "BidcoreAI Scale capabilities",
     capabilities: [
       {
-        icon: FileSearch,
-        title: "Tender Document Analysis",
-        problem: "Key conditions are buried in hundreds of pages.",
-        body: "Scan issued tender documents for clauses on bid security, insurance, damages, milestones and more. Each finding shows its document and page, and a topic that is not found is reported as not found, never as 'not required'.",
+        icon: Ruler,
+        title: "Quantity Takeoff",
+        problem: "Measuring drawings by hand is slow and hard to check.",
+        body: "Measure counts, lengths and areas on PDF drawings. AI-assisted symbol counting proposes counts for you to review before they are used.",
         status: "coming-soon",
       },
       {
-        icon: ClipboardCheck,
-        title: "Eligibility and Go / No-Go",
-        problem: "Bidding on a tender you do not qualify for wastes effort.",
-        body: "Assess a tender against your Company Intelligence (turnover, net worth, credentials, commitments). Results are pass, fail, review or conditional; missing data is a 'review', and a restriction is a red flag but never an automatic No-Go.",
+        icon: ClipboardList,
+        title: "BOQ Management",
+        problem: "BOQs live in spreadsheets that drift from the estimate.",
+        body: "Build and maintain the project BOQ in the workspace, including item-rate BOQs for government tenders, with template download and upload.",
         status: "coming-soon",
       },
       {
-        icon: ListChecks,
-        title: "Bid Pack Checklist",
-        problem: "It is easy to miss a required form or annexure.",
-        body: "A checklist for the bid pack, ticked from your documents, takeoff, estimate and schedule, currently built around MoRTH / NHIDCL highway EPC RFPs. Exports a draft .docx.",
+        icon: Calculator,
+        title: "Cost Estimation on CPWD and MoRTH Cost Models",
+        problem: "Rate analysis by hand is slow and hard to audit.",
+        body: "Resource-based costing with CPWD Civil, CPWD E&M and MoRTH cost models, with Auto Assign of rate analyses to BOQ lines and a note on every line it priced from another model.",
+        status: "coming-soon",
+      },
+      {
+        icon: Boxes,
+        title: "Company Cost Model",
+        problem: "Published rates are not what your own crews and suppliers cost.",
+        body: "Duplicate items from CPWD or MoRTH into your own Company cost model, set your own rate, and keep several named cost models. The master data is only read, never changed.",
         status: "coming-soon",
       },
       {
         icon: FileStack,
-        title: "Tender Documentation and Amendments",
-        problem: "Corrigenda change earlier values and are easy to overlook.",
-        body: "A corrigendum tracker keeps both the earlier and the superseding value and flags it for review, and the Submission Review checks your prepared documents against the tender's figures. Signatures and seals are always left for you to confirm.",
+        title: "BOQ Intelligence Templates",
+        problem: "Every water main, data centre or road starts from a blank BOQ.",
+        body: "Templates of the BOQ a kind of work needs per standard unit. Enter the size, review the preview and add the lines to the project. These are planning benchmarks to check against your own data.",
         status: "coming-soon",
       },
       {
-        icon: CalendarClock,
-        title: "Submission Deadline Tracking",
-        problem: "Missing a bidding-schedule date can disqualify a bid.",
-        body: "The tender datasheet's bidding schedule is read into the workspace, and the project holds site visit and RFI due dates.",
+        icon: Banknote,
+        title: "Tender Cost and Bid Cost Estimate",
+        problem: "Overheads, GST and profit are worked out on the side.",
+        body: "Project Factors for overheads, profit and GST, itemised general conditions, and a bid cost estimate that carries them, with EMD and security calculators for the tender.",
         status: "coming-soon",
       },
       {
-        icon: Ruler,
-        title: "Takeoff, Cost Estimation and Tender Cost",
-        problem: "Pricing a tender across drawings, rates and overheads is slow.",
-        body: "Quantity takeoff, BOQ-based cost estimation with CPWD cost models, and a Tender Cost workspace with an estimated project cost calculation. Defaults not found in the tender are labelled as assumptions.",
+        icon: Search,
+        title: "Market Rates and Vendor Quotes",
+        problem: "Rate decisions need a reference.",
+        body: "Market-rate, vendor-quote and historical-bid references from the cost-intelligence workspace support your pricing decisions.",
         status: "coming-soon",
       },
       {
         icon: Gauge,
-        title: "Tender Schedule, WBS and Productivity",
-        problem: "A bid needs a credible programme, not a guess.",
-        body: "Build a tender schedule from a Work Breakdown Structure and standard productivity rates, and view it as a Gantt chart.",
+        title: "Agent X Assistant",
+        problem: "Finding a figure in a large estimate takes time.",
+        body: "Ask questions about the tender, the estimate and the project in plain language. You can also connect your own AI assistant with your own key; it proposes, and a person approves.",
         status: "coming-soon",
       },
     ],
     workflows: [
       {
-        audience: "From tender notice to bid decision",
-        steps: ["Upload Tender Documents", "Review Analysis and Clauses", "Check Eligibility", "Make the Go / No-Go Decision", "Prepare Bid Pack and Price", "Review Before Submission"],
-        note: "Tender invitations and opportunity discovery are part of Tender Connect.",
+        audience: "From drawing to bid cost",
+        steps: ["Set Up Project", "Take Off Quantities", "Build the BOQ", "Assign Rate Analyses", "Apply Overheads, GST and Profit", "Review the Bid Cost Estimate"],
+        note: "Review every priced line before you rely on it: the figures depend on the inputs and rates you choose.",
       },
     ],
-    benefitsHeading: "Why tendering teams use a structured workspace",
+    benefitsHeading: "Why estimators use Scale",
     benefits: [
-      "Every finding traces back to a document and page",
-      "Eligibility gaps surface early, not at submission",
-      "Estimating, schedule and bid pack stay connected",
-      "Supports Indian cost models and tender structures",
+      "CPWD Civil, CPWD E&M and MoRTH cost models in the estimate",
+      "Your own rates beside the published ones",
+      "Unpriced lines are shown, not guessed",
+      "Works in rupees, with GST and Indian cost structure",
     ],
-    access: COMING_SOON_NOTE("BidcoreAI Tender Management", "tender-management"),
+    access: COMING_SOON_NOTE("BidcoreAI Scale", "tender-management"),
     faqs: [
       {
+        q: "What is BidcoreAI Scale?",
+        a: "The takeoff and estimating product of BidcoreAI: quantity takeoff, BOQ, cost estimation on Indian cost models and your own rates, and the tender cost.",
+      },
+      {
+        q: "How is Scale different from BidcoreAI Sync?",
+        a: "Scale stops at the priced BOQ and the bid cost estimate. Sync includes everything in Scale and adds tender document analysis, Go / No-Go, schedules, project management, procurement and site operations.",
+      },
+      {
+        q: "Which cost models are supported?",
+        a: "CPWD Civil, CPWD E&M and MoRTH, plus company cost models you create from them. Check results against your own rates and the tender conditions before relying on them.",
+      },
+      {
+        q: "Can I use Scale in the UAE, Singapore or another Asian country?",
+        a: "India is the live market today. The takeoff and your own Company cost model do not depend on a country, so tell us where you work and we will plan it with you.",
+      },
+      {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
-      },
-      {
-        q: "Does it guarantee that I will win a tender?",
-        a: "No. It helps you read, check and prepare a bid. Eligibility results are decision support and missing information is always shown for your review.",
-      },
-      {
-        q: "Which tender documents does the bid pack support?",
-        a: "The bid-pack checklist is currently built around MoRTH / NHIDCL highway EPC RFPs. Other tender structures are not claimed.",
-      },
-      {
-        q: "How is it different from Tender Connect?",
-        a: "Tender Connect connects the party publishing a tender with the contractors responding to it. Tender Management is the preparation work a contractor does on a tender: analysis, eligibility, pricing and the bid pack.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing.",
       },
     ],
     finalCta: {
-      heading: "Prepare better bids, starting with Tender Connect",
-      body: "Request a demo and a Bidcore team member will walk you through it.",
+      heading: "Price your next BOQ on the cost model the tender uses",
+      body: "Bring a BOQ and drawings. We will price it and show which lines still need a decision.",
       ctas: [demoFor("tender-management"), tenderConnectLive],
     },
   },
 
-  // ───────────────────────────────────────────────────────────────────────────────────────── Project Management
+  // ─────────────────────────────────────────────────────────────────────────────────────────────────── BidcoreAI Sync
   {
-    slug: "project-management",
+    slug: "sync",
     visual: "project-management",
-    key: "project-management",
-    name: "BidcoreAI Project Management",
+    key: "all-in-one",
+    name: "BidcoreAI Sync",
     availability: "coming-soon",
-    metaTitle: "BidcoreAI Project Management | BOQ, Estimating and Planning for India",
+    metaTitle: "BidcoreAI Sync | End-to-End Construction Lifecycle Software for India and Asia",
     metaDescription:
-      "Connect BOQ, cost estimation, WBS, scheduling, daily progress reports and schedule risk with BidcoreAI Project Management for Indian contractors.",
-    headline: "Connect Estimating, BOQ, Planning and Project Execution",
+      "BidcoreAI Sync connects tender analysis, takeoff, estimating, scheduling, budgeting, procurement and site operations on one platform for Indian EPC and general contractors.",
+    headline: "One Platform from Tender to Site: the Whole Construction Lifecycle",
     intro:
-      "A project workspace for Indian contractors that links the BOQ and cost estimate to the Work Breakdown Structure, schedule, budget and daily progress.",
+      "BidcoreAI Sync carries one project from the tender notice to the site. It includes everything in BidcoreAI Scale and Tender Connect, and adds tender document analysis, Go / No-Go, the tender schedule, project management, procurement and site operations, so the numbers you bid with are the numbers you build against.",
     atAGlance: [
-      "BOQ and resource-based cost estimation",
-      "CPWD Civil, CPWD E&M and MoRTH cost models",
-      "WBS, productivity-based durations and Gantt",
-      "Budget, daily progress reports and schedule risk",
+      "Tender documents analysed with page references",
+      "Takeoff, BOQ and estimating on CPWD and MoRTH cost models (Scale)",
+      "Tender schedule and a separate project schedule",
+      "Budget, daily progress, procurement and site crews",
+      "Subcontractor invitations through Tender Connect",
     ],
     ctas: {
-      primary: explore("Explore Project Management"),
-      secondary: demoFor("project-management"),
+      primary: explore("Explore Sync"),
+      secondary: demoFor("all-in-one"),
       tertiary: pricing,
     },
     valueProps: [
@@ -527,370 +541,167 @@ export const PRODUCT_PAGES: ProductPage[] = [
         body: "The estimate, schedule and budget are built on the same project, so a change in one is visible in the others.",
       },
       {
-        title: "Built on Indian cost practice",
-        body: "Work in rupees with CPWD and MoRTH cost models, rate analysis and Indian project and WBS templates.",
+        title: "From tender notice to site record",
+        body: "Read the tender, decide to bid, price it, win it, plan it and record the work without re-entering anything.",
       },
       {
-        title: "From plan to progress",
-        body: "Daily progress reports and schedule forecasts keep the plan honest once work starts.",
+        title: "Built for Indian cost practice",
+        body: "Rupees, GST, CPWD and MoRTH cost models, Indian WBS templates and tender structures such as MoRTH / NHIDCL highway EPC RFPs.",
       },
     ],
     audiences: [
       {
-        title: "General Contractors and EPC Companies",
-        points: ["Plan and cost projects from BOQ to schedule", "Track budget against plan", "Report progress consistently"],
+        title: "EPC and General Contractors",
+        points: ["Assess a tender, price it, plan it and run it in one workspace", "Track budget against plan and the schedule against progress", "Source subcontractors through Tender Connect"],
       },
       {
-        title: "Infrastructure and Civil Contractors",
-        points: ["Use road and building WBS templates", "Plan with productivity-based durations", "Assess schedule risk"],
+        title: "Infrastructure and Highway Contractors",
+        points: ["Work through highway RFPs clause by clause and track corrigenda", "Use road and highway WBS templates and productivity-based durations", "Assess schedule risk with P50 / P80 / P90 outcomes"],
       },
       {
-        title: "Subcontractors",
-        points: ["Track job costing and progress billing for work received", "Log daily progress against the job"],
+        title: "Subcontractors and Site Teams",
+        points: ["Track job costing and progress billing for the work you receive", "Plan your own crews and equipment", "Log daily progress, site visits and existing conditions with photos"],
       },
     ],
-    capabilitiesHeading: "Project Management capabilities",
+    capabilitiesHeading: "BidcoreAI Sync capabilities",
     capabilities: [
       {
-        icon: ClipboardList,
-        title: "BOQ Management",
-        problem: "BOQs live in spreadsheets that drift from the estimate.",
-        body: "Build and maintain the project BOQ in the workspace, including item-rate BOQs for government tenders.",
+        icon: FileSearch,
+        title: "Tender Document Analysis",
+        problem: "Key conditions are buried in hundreds of pages.",
+        body: "Scan issued tender documents for clauses on bid security, insurance, damages, milestones and more. Each finding shows its document and page, and a topic that is not found is reported as not found, never as not required.",
         status: "coming-soon",
       },
       {
-        icon: Calculator,
-        title: "Cost Estimation and CPWD Cost Models",
-        problem: "Rate analysis by hand is slow and hard to audit.",
-        body: "Resource-based costing with CPWD Civil, CPWD E&M and MoRTH cost models, rate analysis, and market-rate and vendor-quote references.",
+        icon: ClipboardCheck,
+        title: "Eligibility and Go / No-Go",
+        problem: "Bidding on a tender you do not qualify for wastes effort.",
+        body: "Assess a tender against your Company Intelligence (turnover, net worth, credentials, commitments). Results are pass, fail, review or conditional; missing data is a review, and a restriction is a red flag but never an automatic No-Go.",
         status: "coming-soon",
       },
       {
-        icon: Boxes,
-        title: "Work Breakdown Structure",
-        problem: "Different project types need different work scopes.",
-        body: "Standard WBS templates for project types such as buildings and roads, which you can edit for your project and reset to standard.",
+        icon: ListChecks,
+        title: "Bid Pack Checklist and Submission Review",
+        problem: "It is easy to miss a required form or annexure.",
+        body: "A checklist for the bid pack, ticked from your documents, takeoff, estimate and schedule, currently built around MoRTH / NHIDCL highway EPC RFPs, with a draft .docx. Signatures and seals are always left for you to confirm.",
+        status: "coming-soon",
+      },
+      {
+        icon: Ruler,
+        title: "Everything in BidcoreAI Scale",
+        problem: "Estimating tools that stop at the BOQ leave the rest to spreadsheets.",
+        body: "Quantity takeoff, BOQ, cost estimation on CPWD Civil, CPWD E&M and MoRTH cost models or your own rates, and the Tender Cost workspace.",
         status: "coming-soon",
       },
       {
         icon: Gauge,
-        title: "Productivity-based Duration Planning",
-        problem: "Durations guessed without crew productivity are unreliable.",
-        body: "Standard Indian productivity rates seed durations. You can override any rate for your project or company, and the standard row is never edited.",
-        status: "coming-soon",
-      },
-      {
-        icon: CalendarClock,
-        title: "Schedule and Gantt",
-        problem: "Schedules built apart from cost cannot be reconciled with it.",
-        body: "Generate a schedule from the WBS, view it as a Gantt chart and forecast the finish.",
+        title: "Tender Schedule, WBS and Productivity",
+        problem: "A bid needs a credible programme, not a guess.",
+        body: "Build a tender schedule from a Work Breakdown Structure and standard productivity rates, view it as a Gantt chart, and keep a separate Project Schedule for the job you win.",
         status: "coming-soon",
       },
       {
         icon: Banknote,
         title: "Budget and Cost Control",
         problem: "Overruns are noticed late.",
-        body: "Track project cost against budget in rupees.",
+        body: "Sync the budget from the estimate, then track project cost against it in rupees, with approved changes and the forecast.",
         status: "coming-soon",
       },
-      {
-        icon: HardHat,
-        title: "Daily Progress Reports",
-        problem: "Site records arrive late and in different formats.",
-        body: "Log manpower, work done, materials and issues each day, with photos and an Existing Conditions Survey.",
-        status: "coming-soon",
-      },
-      {
-        icon: ShieldAlert,
-        title: "Schedule Risk Assessment and Reports",
-        problem: "A single-date schedule hides uncertainty.",
-        body: "Time and cost risk with P50 / P80 / P90 outcomes, a risk register and downloadable Excel and PDF reports.",
-        status: "coming-soon",
-      },
-    ],
-    workflows: [
-      {
-        audience: "From estimate to execution",
-        steps: ["Set Up Project", "Build BOQ and Estimate", "Define WBS", "Plan Schedule with Productivity", "Track Budget and Daily Progress", "Report and Review Risk"],
-        note: "We do not claim every cost model or automation is production-ready for your project; review results before relying on them.",
-      },
-    ],
-    benefitsHeading: "What a connected project workflow gives you",
-    benefits: [
-      "Estimate, WBS, schedule and budget on one project record",
-      "Rates and templates suited to Indian projects",
-      "Overrides never edit the standard data",
-      "Reports you can export and share",
-    ],
-    access: COMING_SOON_NOTE("BidcoreAI Project Management", "project-management"),
-    faqs: [
-      {
-        q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
-      },
-      {
-        q: "Which cost models are supported?",
-        a: "The BidcoreAI application supports CPWD Civil, CPWD E&M and MoRTH cost models. Check the results against your own rates and tender conditions before relying on them.",
-      },
-      {
-        q: "Can I use it for road projects?",
-        a: "The workspace includes road and highway characteristics (length, lanes, terrain) and WBS templates. Fit for any particular project should be reviewed.",
-      },
-      {
-        q: "Does it guarantee estimating accuracy?",
-        a: "No. It speeds up and structures estimating; the figures depend on the inputs and rates you choose.",
-      },
-    ],
-    finalCta: {
-      heading: "Plan the project from the same numbers you bid with",
-      body: "Request a demo and a Bidcore team member will walk you through it.",
-      ctas: [demoFor("project-management"), tenderConnectLive],
-    },
-  },
-
-  // ────────────────────────────────────────────────────────────────────────────────────── Procurement Management
-  {
-    slug: "procurement-management",
-    visual: "procurement-management",
-    key: "procurement",
-    name: "BidcoreAI Procurement Management",
-    availability: "coming-soon",
-    metaTitle: "BidcoreAI Procurement Management | Construction Procurement in India",
-    metaDescription:
-      "Track purchase orders, suppliers, material lead times, deliveries and change orders around project requirements with BidcoreAI Procurement Management.",
-    headline: "Organize Construction Procurement Around Project Requirements",
-    intro:
-      "Keep purchase orders, suppliers, material lead times and delivery status together inside the project.",
-    atAGlance: ["Purchase orders from draft to closed", "Procurement log with supplier and lead time", "Change orders against the budget", "Vendor quote references"],
-    ctas: {
-      primary: explore("Explore Procurement Management"),
-      secondary: demoFor("procurement"),
-      tertiary: pricing,
-    },
-    valueProps: [
-      {
-        title: "Orders kept with project costs",
-        body: "Purchase orders and change orders sit in the project's cost workspace, alongside its other costs.",
-      },
-      {
-        title: "Know what is still due on site",
-        body: "A procurement log shows supplier, lead time, quantity status and whether an item is on site.",
-      },
-      {
-        title: "A clear record of orders",
-        body: "Each order moves through a status and keeps its dates and notes.",
-      },
-    ],
-    audiences: [
-      {
-        title: "General Contractors and EPC Companies",
-        points: ["Raise and track purchase orders by vendor or subcontractor", "Record supplier lead times for long-lead items"],
-      },
-      {
-        title: "Purchase and Site Teams",
-        points: ["See which items are ordered, shipped or onsite", "Keep supplier and ball-in-court notes together"],
-      },
-      {
-        title: "Subcontractors",
-        points: ["Track materials and orders for the jobs you hold"],
-      },
-    ],
-    capabilitiesHeading: "Procurement capabilities",
-    capabilities: [
-      {
-        icon: ShoppingCart,
-        title: "Purchase Orders",
-        problem: "Orders tracked in chats and sheets lose their status.",
-        body: "Raise purchase orders with PO number, vendor or subcontractor, issue and delivery dates, and a status from draft through issued, approved, received and closed.",
-        status: "coming-soon",
-      },
-      {
-        icon: Package,
-        title: "Procurement Log",
-        problem: "Nobody knows which long-lead items are late.",
-        body: "A log of items with quantity, unit, supplier, lead time, quantity status, onsite and ball-in-court columns.",
-        status: "coming-soon",
-      },
-      {
-        icon: Receipt,
-        title: "Change Orders",
-        problem: "Changes to an order are hard to trace to cost.",
-        body: "Record change orders against an order in the project's cost workspace.",
-        status: "coming-soon",
-      },
-      {
-        icon: Search,
-        title: "Supplier Rates and Quotes",
-        problem: "Rate decisions need a reference.",
-        body: "Market-rate and vendor-quote references from the cost-intelligence workspace support pricing decisions.",
-        status: "coming-soon",
-      },
-      {
-        icon: Truck,
-        title: "Material Requirements, RFQs and Delivery Tracking",
-        problem: "Requirements, quotations and deliveries sit in separate places.",
-        body: "Generating material requirements from the BOQ, inviting and comparing supplier quotations, and tracking deliveries as one linked workflow is not available yet.",
-        status: "planned",
-      },
-    ],
-    workflows: [
-      {
-        audience: "From requirement to delivery",
-        steps: ["Identify Requirement", "Raise Purchase Order", "Track Lead Time", "Receive on Site", "Record Change Orders", "Close the Order"],
-        note: "Planned, not yet available: automatic material requirements from the BOQ and comparing supplier quotations side by side.",
-      },
-    ],
-    benefitsHeading: "Why link procurement to the project",
-    benefits: ["Orders and change orders kept with the project", "Lead times and onsite status recorded per item", "A single history of each order and change"],
-    access: COMING_SOON_NOTE("BidcoreAI Procurement Management", "procurement"),
-    faqs: [
-      {
-        q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
-      },
-      {
-        q: "Can I compare supplier quotations?",
-        a: "Supplier quotation comparison is planned, not available yet. For tenders, quotations from contractors can already be compared in Tender Connect.",
-      },
-      {
-        q: "Is it linked to my BOQ?",
-        a: "Orders sit inside a project alongside its budget. Generating requirements automatically from the BOQ is planned and is not claimed as live.",
-      },
-    ],
-    finalCta: {
-      heading: "Start with Tender Connect and grow into procurement",
-      body: "Request a demo and a Bidcore team member will walk you through it.",
-      ctas: [demoFor("procurement"), tenderConnectLive],
-    },
-  },
-
-  // ───────────────────────────────────────────────────────────────────────────────────────────── Site Operations
-  {
-    slug: "site-management",
-    visual: "site-management",
-    key: "site-management",
-    name: "BidcoreAI Site Operations",
-    availability: "coming-soon",
-    metaTitle: "BidcoreAI Site Operations | Site Planning and Progress for India",
-    metaDescription:
-      "Plan crews and equipment, manage work packages and subcontractor capacity, and log daily site progress with BidcoreAI Site Operations.",
-    headline: "Connect Site Progress, Resources and Project Planning",
-    intro:
-      "Plan crews and equipment, issue work packages and orders, and record daily progress, connected to the project's budget and schedule.",
-    atAGlance: ["Day-level resource planning with conflicts", "Work packages and work orders", "Subcontractor capacity", "Daily progress reports"],
-    ctas: {
-      primary: explore("Explore Site Operations"),
-      secondary: demoFor("site-management"),
-      tertiary: pricing,
-    },
-    valueProps: [
-      {
-        title: "Spot double bookings early",
-        body: "A day-level calendar flags a crew or machine assigned twice, or capacity exceeded, before work starts.",
-      },
-      {
-        title: "Work orders with a clear lifecycle",
-        body: "Work packages move from draft to approved to released with a work order number, and approved scope is locked.",
-      },
-      {
-        title: "Figures with a source",
-        body: "Dashboard figures show where they come from, and a figure with no data says so instead of guessing.",
-      },
-    ],
-    audiences: [
-      {
-        title: "General Contractors",
-        points: ["Plan resources and subcontractor capacity", "Issue and track work packages and orders"],
-      },
-      {
-        title: "Subcontractors",
-        points: ["Plan your own crews and equipment", "Track jobs and work orders received from contractors"],
-      },
-      {
-        title: "Site Teams",
-        points: ["Log daily progress, manpower and issues", "Record site visits and existing conditions with photos"],
-      },
-    ],
-    capabilitiesHeading: "Site Operations capabilities",
-    capabilities: [
       {
         icon: CalendarClock,
-        title: "Resource Planning",
-        problem: "Crews and machines get double-booked.",
-        body: "A day-level calendar with conflict checks for double booking, over-allocation and unavailability such as leave, maintenance or breakdown.",
-        status: "coming-soon",
-      },
-      {
-        icon: Wrench,
-        title: "Crews and Equipment",
-        problem: "Resource lists scatter across sheets.",
-        body: "Keep crews and equipment in one list with their unavailability windows.",
-        status: "coming-soon",
-      },
-      {
-        icon: ClipboardCheck,
-        title: "Work Packages and Orders",
-        problem: "Scope changes after approval cause disputes.",
-        body: "Draft, submit, approve and release work packages with a work order number, hold or complete them, and lock the approved scope.",
-        status: "coming-soon",
-      },
-      {
-        icon: Users,
-        title: "Subcontractor Capacity",
-        problem: "Capacity is assumed, not known.",
-        body: "See the capacity a subcontractor has declared and what is already committed, never inferred.",
-        status: "coming-soon",
-      },
-      {
-        icon: LayoutDashboard,
-        title: "Operations Dashboard",
-        problem: "Site and office numbers disagree.",
-        body: "A dashboard reading the project budget and schedule forecast, with each figure's source shown.",
+        title: "Project Schedule, Calendars and Risk",
+        problem: "A single-date schedule hides uncertainty.",
+        body: "A project Gantt with actual dates and baselines, a Preconstruction Calendar for tender dates, a Project Management Calendar for the job, and schedule risk with P50 / P80 / P90 outcomes.",
         status: "coming-soon",
       },
       {
         icon: HardHat,
         title: "Daily Progress and Site Records",
-        problem: "Daily records are late or missing.",
+        problem: "Site records arrive late and in different formats.",
         body: "Daily progress reports of manpower, work done, materials and issues, plus site visits and existing-conditions surveys with photos.",
         status: "coming-soon",
+      },
+      {
+        icon: ShoppingCart,
+        title: "Procurement: Orders, Log and Change Orders",
+        problem: "Orders tracked in chats and sheets lose their status.",
+        body: "Purchase orders from draft to closed, a procurement log with supplier, lead time and onsite status, and change orders recorded against the project cost.",
+        status: "coming-soon",
+      },
+      {
+        icon: Wrench,
+        title: "Site Operations: Crews, Equipment and Work Packages",
+        problem: "Crews and machines get double-booked.",
+        body: "A day-level calendar with conflict checks, a workforce directory, work packages with work orders, subcontractor capacity and a dashboard that shows where each figure comes from.",
+        status: "coming-soon",
+      },
+      {
+        icon: Megaphone,
+        title: "Tender Connect Included",
+        problem: "Subcontractor quotations arrive as mismatched files.",
+        body: "Publish public or private tenders, invite contractors from the Bidcore directory and compare item-wise quotations on one BOQ. See BidcoreAI Tender Connect.",
+        status: "live",
+      },
+      {
+        icon: Truck,
+        title: "Material Requirements, RFQs and Delivery Tracking",
+        problem: "Requirements, quotations and deliveries sit in separate places.",
+        body: "Generating material requirements from the BOQ, comparing supplier quotations and tracking deliveries as one linked workflow is not available yet.",
+        status: "planned",
       },
       {
         icon: Boxes,
         title: "Productivity-based Crew Planning, Material Tracking and Billing",
         problem: "Plans and measured site output are not linked.",
-        body: "Shift calendars, productivity-based crew planning, daily-progress and material integration, subcontractor measurement and billing, and variations and claims are on the roadmap and are not available yet.",
+        body: "Shift calendars, productivity-based crew planning, material integration, subcontractor measurement and billing, and variations and claims are on the roadmap and are not available yet.",
         status: "planned",
       },
     ],
     workflows: [
       {
-        audience: "From plan to site record",
-        steps: ["Add Crews and Equipment", "Plan on the Calendar", "Resolve Conflicts", "Release Work Packages", "Log Daily Progress", "Review the Dashboard"],
-        note: "Planned, not yet available: multi-project deployment depth, subcontractor measurement and billing, and richer site-to-office reporting.",
+        audience: "From tender notice to site record",
+        steps: ["Analyse the Tender", "Check Eligibility and Decide", "Take Off and Estimate", "Invite and Compare Subcontractors", "Win, Budget and Schedule", "Procure, Run the Site and Report"],
+        note: "Planned, not yet available: automatic material requirements from the BOQ, comparing supplier quotations, and subcontractor measurement and billing.",
       },
     ],
-    benefitsHeading: "Why connect the site to the plan",
-    benefits: ["Conflicts found before they cost a day", "Approved scope stays fixed", "Every figure shows its source", "Separate views for General Contractors and subcontractors"],
-    access: COMING_SOON_NOTE("BidcoreAI Site Operations", "site-management"),
+    benefitsHeading: "What a connected lifecycle gives you",
+    benefits: [
+      "The estimate you bid with becomes the budget you track",
+      "Every tender finding traces back to a document and page",
+      "Tender schedule and project schedule kept separate and in step",
+      "Separate views for General Contractors and subcontractors",
+    ],
+    access: COMING_SOON_NOTE("BidcoreAI Sync", "all-in-one"),
     faqs: [
       {
+        q: "What is BidcoreAI Sync?",
+        a: "The end-to-end lifecycle product of BidcoreAI: tender analysis, takeoff and estimating, scheduling, budgeting, procurement and site operations on one platform.",
+      },
+      {
+        q: "Does Sync include BidcoreAI Scale and Tender Connect?",
+        a: "Yes. Everything in Scale and Tender Connect is part of Sync. Scale on its own is for teams that only need takeoff and estimating, and Tender Connect on its own is for publishing tenders and quoting.",
+      },
+      {
+        q: "Does it guarantee that I will win a tender?",
+        a: "No. It helps you read, check, price and prepare a bid, then run the job. Eligibility results are decision support and missing information is always shown for your review.",
+      },
+      {
+        q: "Which tender documents does the bid pack support?",
+        a: "The bid-pack checklist is currently built around MoRTH / NHIDCL highway EPC RFPs, with lease-auction and works-contract formats. Other tender structures are not claimed.",
+      },
+      {
+        q: "Can I use Sync outside India?",
+        a: "India is the live market today. For the UAE, Singapore and other Asian countries, tell us where you work and we will plan it with you.",
+      },
+      {
         q: "How do I get started?",
-        a: "Request a demo and a Bidcore team member will show you the product and share the pricing. Only Tender Connect (Starter Lite) has a 30-day free trial.",
-      },
-      {
-        q: "Can a subcontractor see my work packages?",
-        a: "Not yet. A subcontractor workspace works on the subcontractor's own records; sharing work orders across companies is planned.",
-      },
-      {
-        q: "Does it replace daily site reporting?",
-        a: "It includes daily progress reports. Integration of daily progress with material tracking is planned and is not available yet.",
+        a: "Request a demo and a Bidcore team member will show you the product and share the pricing.",
       },
     ],
     finalCta: {
-      heading: "Run the site from the same plan",
-      body: "Request a demo and a Bidcore team member will walk you through it.",
-      ctas: [demoFor("site-management"), tenderConnectLive],
+      heading: "Run the job from the same numbers you bid with",
+      body: "Request a demo and bring a tender. We will take it from the documents to the site plan with you.",
+      ctas: [demoFor("all-in-one"), tenderConnectLive],
     },
   },
 ];

@@ -20,8 +20,8 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Does Bidcore have government tenders?",
-    a: "No. The public tenders on Bidcore are published by EPC companies and general contractors for their own packages, not by government bodies. If you are preparing a bid on a government tender yourself, BidcoreAI Tender Management helps you read the tender documents, check eligibility and prepare the bid.",
-    link: { label: "About Tender Management", href: "/products/tender-management" },
+    a: "No. The public tenders on Bidcore are published by EPC companies and general contractors for their own packages, not by government bodies. If you are preparing a bid on a government tender yourself, BidcoreAI Sync helps you read the tender documents, check eligibility and prepare the bid, and BidcoreAI Scale takes it through takeoff and estimating.",
+    link: { label: "About BidcoreAI Sync", href: "/products/sync" },
   },
   {
     q: "Can I use BidcoreAI for private tenders?",
@@ -30,7 +30,7 @@ export const FAQ: FaqItem[] = [
   },
   {
     q: "Does BidcoreAI help with the project itself after I win?",
-    a: "Yes. BidcoreAI Project Management covers the WBS, productivity-based scheduling, budget and cost control, daily progress reports and schedule risk. Procurement Management covers purchase orders, a procurement log and change orders. Site Operations covers resource planning, work packages and subcontractor capacity. Each product page lists what is available and what is still planned.",
+    a: "Yes. BidcoreAI Sync covers the WBS, productivity-based scheduling, budget and cost control, daily progress reports and schedule risk, plus purchase orders, a procurement log and change orders, and site operations: resource planning, work packages and subcontractor capacity. Each product page lists what is available and what is still planned.",
     link: { label: "See all software products", href: "/products" },
   },
   {

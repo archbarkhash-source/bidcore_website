@@ -36,7 +36,12 @@ const nextConfig: NextConfig = {
       // One address per page for search engines: bidcore.in (no www) goes to www.bidcore.in
       { source: "/:path*", has: [{ type: "host", value: "bidcore.in" }], destination: "https://www.bidcore.in/:path*", permanent: true },
       { source: "/bid-board", destination: "/tenders", permanent: true }, // Tender Connect = the public published tenders
-      { source: "/products/procurement", destination: "/products/procurement-management", permanent: true },
+      // The earlier product pages were folded into BidcoreAI Scale (takeoff and estimating) and BidcoreAI Sync (the whole lifecycle).
+      { source: "/products/tender-management", destination: "/products/scale", permanent: true },
+      { source: "/products/project-management", destination: "/products/sync", permanent: true },
+      { source: "/products/procurement", destination: "/products/sync", permanent: true },
+      { source: "/products/procurement-management", destination: "/products/sync", permanent: true },
+      { source: "/products/site-management", destination: "/products/sync", permanent: true },
       { source: "/company/:slug", destination: "/contractor/:slug", permanent: true },      // the old address of a contractor's page
       // The products & services pages used to live under /marketplace; the public address is /supply (the page files stay in src/app/marketplace, see rewrites)
       { source: "/marketplace/list-your-business", destination: "/supply/list-your-company", permanent: true },

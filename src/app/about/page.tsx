@@ -67,9 +67,9 @@ const BIDCORE_NODES: HubNode[] = [
 ];
 const BIDCOREAI_NODES: HubNode[] = [
   { icon: FileText, label: "Tender Connect" },
-  { icon: Calculator, label: "Tender Management" },
-  { icon: CalendarClock, label: "Project Management" },
-  { icon: Truck, label: "Procurement & Site Operations" },
+  { icon: Calculator, label: "BidcoreAI Scale" },
+  { icon: CalendarClock, label: "BidcoreAI Sync" },
+  { icon: Truck, label: "Procurement & Site Operations (in Sync)" },
 ];
 
 function HubGraphic({ hub, sub, nodes }: { hub: string; sub: string; nodes: HubNode[] }) {
@@ -184,7 +184,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold tracking-tight text-brand-navy">BidcoreAI: our construction software</h2>
             <p className="mt-5 leading-relaxed text-slate-600">
               BidcoreAI is the AI-powered software at the centre of Bidcore, used in both the United States and India. Its products follow the construction workflow from the first tender to the site: Tender
-              Connect, Tender Management, Project Management, Procurement Management and Site Operations.
+              Connect, BidcoreAI Scale (takeoff and estimating) and BidcoreAI Sync (the end-to-end lifecycle, from tender to site).
             </p>
             <Link href="/products" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-accent hover:underline">
               Explore the BidcoreAI software <ArrowRight className="h-3.5 w-3.5" />
